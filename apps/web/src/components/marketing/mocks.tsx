@@ -1,3 +1,5 @@
+import { Garment } from "@/components/marketing/creative-preview";
+
 export function ShopPreview() {
   return (
     <div className="mk-shop" aria-hidden="true">
@@ -41,7 +43,7 @@ export function EditorPreview() {
       <div className="mk-editor-body">
         <div className="mk-editor-canvas">
           <Shirt small />
-          <span className="mk-placed">北岛</span>
+          <span className="mk-placed" />
         </div>
         <div className="mk-library">
           <p>印花素材</p>
@@ -75,10 +77,5 @@ export function SheetPreview() {
 }
 
 function Shirt({ small = false }: { small?: boolean }) {
-  return (
-    <svg className={small ? "mk-shirt is-small" : "mk-shirt"} viewBox="0 0 200 210" fill="none">
-      <path d="M48 34 L74 18 L100 38 L126 18 L152 34 L184 62 L158 78 L158 192 L42 192 L42 78 L16 62 Z" fill="#f7f1e6" stroke="#1c1612" strokeWidth="3" />
-      <path d="M74 18 C82 36 118 36 126 18" stroke="#1c1612" strokeWidth="3" />
-    </svg>
-  );
+  return <div className={small ? "mk-shirt is-small" : "mk-shirt"}><Garment /></div>;
 }

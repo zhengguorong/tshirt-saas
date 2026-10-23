@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { UploadOutlined } from "@ant-design/icons";
-import { App, Button, Card, Col, Empty, Row, Typography, Upload } from "antd";
+import { SearchOutlined, UploadOutlined } from "@ant-design/icons";
+import { App, Button, Card, Col, Empty, Input, Row, Typography, Upload } from "antd";
 
 export function MaterialsView({
   owner,
@@ -15,13 +15,16 @@ export function MaterialsView({
 }) {
   const { message } = App.useApp();
   const [uploading, setUploading] = useState(false);
+  const [query, setQuery] = useState("");
+  const visible = materials.filter(item => item.name.toLowerCase().includes(query.trim().toLowerCase()));
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
+    <div className="admin-page">
+      <div className="admin-page-heading">
         <div>
-          <Typography.Title level={4} style={{ margin: 0 }}>印花素材</Typography.Title>
-          <Typography.Text type="secondary">顾客在设计器里可以直接用这些图案。</Typography.Text>
+          <span className="admin-eyebrow">商品与素材 / MATERIALS</span>
+          <Typography.Title level={3}>印花素材</Typography.Title>
+          <Typography.Text type="secondary">整理常用印花图案，让顾客在设计器中直接选用。</Typography.Text>
         </div>
         {owner ? (
           <Upload
@@ -29,19 +32,18 @@ export function MaterialsView({
             showUploadList={false}
             beforeUpload={async (file) => {
               setUploading(true);
-              const body = new FormData();
-              body.set("file", file);
-              body.set("slug", slug);
-              body.set("source", "material");
-              body.set("name", file.name);
-              const response = await fetch("/api/uploads", { method: "POST", body });
-              const data = (await response.json()) as { error?: string };
-              if (!response.ok) {
-                message.error(data.error || "上传失败");
-                setUploading(false);
-                return false;
-              }
-              window.location.reload();
+              try {
+                const body = new FormData();
+                body.set("file", file);
+                body.set("slug", slug);
+                body.set("source", "material");
+                body.set("name", file.name);
+                const response = await fetch("/api/uploads", { method: "POST", body });
+                const data = (await response.json()) as { error?: string };
+                if (!response.ok) { message.error(data.error || "上传失败"); return false; }
+                window.location.reload();
+              } catch { message.error("上传失败，请检查网络后重试。"); }
+              finally { setUploading(false); }
               return false;
             }}
           >
@@ -49,14 +51,16 @@ export function MaterialsView({
           </Upload>
         ) : null}
       </div>
-      {materials.length === 0 ? (
-        <Card><Empty description="还没有素材。上传 PNG 或 JPG，建议透明底。" /></Card>
+      <div className="admin-material-toolbar"><Input aria-label="搜索素材" prefix={<SearchOutlined />} placeholder="搜索素材名称" value={query} allowClear onChange={e => setQuery(e.target.value)} /><span>共 {materials.length} 个素材 · PNG / JPG</span></div>
+      {visible.length === 0 ? (
+        <Card><Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={query ? "没有找到匹配的素材。" : "还没有素材。上传 PNG 或 JPG，建议使用透明背景图案。"} /></Card>
       ) : (
         <Row gutter={[16, 16]}>
-          {materials.map((material) => (
+          {visible.map((material) => (
             <Col key={material.id} xs={12} sm={8} md={6} xl={4}>
-              <Card cover={<img src={material.image} alt="" style={{ aspectRatio: "1", objectFit: "contain", background: "#fafafa" }} />} styles={{ body: { padding: 12 } }}>
-                <Typography.Text ellipsis>{material.name}</Typography.Text>
+              <Card className="admin-material-card" cover={<img src={material.image} alt="" style={{ aspectRatio: "1", objectFit: "contain", background: "#f7f9fd" }} />} styles={{ body: { padding: 12 } }}>
+                <Typography.Text ellipsis={{ tooltip: material.name }}>{material.name}</Typography.Text>
+                <div className="admin-material-caption">印花素材</div>
               </Card>
             </Col>
           ))}

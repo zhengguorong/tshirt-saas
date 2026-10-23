@@ -6,17 +6,17 @@ import "./marketing.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "印坊 — 开一间自己的 T 恤定制店",
+    default: "印坊 — 服装定制商家的经营管理系统",
     template: "%s · 印坊",
   },
-  description: "顾客在线选底衫、做印花、下单。商家收订单、下载生产图、打印工艺单。",
+  description: "为服装定制商家打造的 SaaS。独立店铺、在线设计、订单管理与生产交付，一套系统全部打通。",
 };
 
 export default function MarketingLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="mkt">
       <SiteHeader />
-      {children}
+      <div id="main-content" tabIndex={-1}>{children}</div>
       <SiteFooter dev={allowDevOtp()} />
     </div>
   );

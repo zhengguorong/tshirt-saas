@@ -1,49 +1,13 @@
 "use client";
-
 import Link from "next/link";
-import { Table, Tag, Typography } from "antd";
-
-export function SheetsView({
-  sheets,
-}: {
-  sheets: { id: string; code: string; orderId: string; orderCode: string; productName: string; colorName: string; colorHex: string; sizes: string; image: "ready" | "pending" | "failed"; time: string }[];
-}) {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-      <div>
-        <Typography.Title level={4} style={{ margin: 0 }}>工艺单</Typography.Title>
-        <Typography.Text type="secondary">支付后按同一底衫、同一颜色合并尺码。正背面印刷图随生产图一起生成。</Typography.Text>
-      </div>
-      <Table
-        rowKey="id"
-        dataSource={sheets}
-        pagination={false}
-        locale={{ emptyText: "还没有工艺单。订单支付后会自动生成。" }}
-        columns={[
-          { title: "工艺单号", dataIndex: "code", render: (code: string, row) => <Link href={`/admin/sheets/${row.id}`}>{code}</Link> },
-          { title: "订单", dataIndex: "orderCode", render: (code: string, row) => <Link href={`/admin/orders/${row.orderId}`}>{code}</Link> },
-          { title: "底衫", dataIndex: "productName", ellipsis: true },
-          {
-            title: "颜色",
-            dataIndex: "colorName",
-            render: (name: string, row) => (
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-                <span style={{ width: 12, height: 12, borderRadius: 999, background: row.colorHex, border: "1px solid rgba(0,0,0,0.12)" }} />
-                {name}
-              </span>
-            ),
-          },
-          { title: "尺码", dataIndex: "sizes" },
-          {
-            title: "生产图",
-            dataIndex: "image",
-            render: (image: "ready" | "pending" | "failed") => (
-              <Tag color={image === "ready" ? "success" : image === "failed" ? "error" : "default"}>{image === "ready" ? "已生成" : image === "failed" ? "生成失败" : "生成中"}</Tag>
-            ),
-          },
-          { title: "时间", dataIndex: "time" },
-        ]}
-      />
-    </div>
-  );
+import { useState } from "react";
+import { FileTextOutlined, SearchOutlined } from "@ant-design/icons";
+import { Card, Empty, Input, Select, Table, Tag, Typography } from "antd";
+export function SheetsView({ sheets }: { sheets: { id: string; code: string; orderId: string; orderCode: string; productName: string; colorName: string; colorHex: string; sizes: string; image: "ready" | "pending" | "failed"; time: string }[] }) {
+  const [query, setQuery] = useState("");
+  const [image, setImage] = useState("all");
+  const filtered = sheets.filter(s => (image === "all" || s.image === image) && `${s.code} ${s.orderCode} ${s.productName} ${s.colorName}`.toLowerCase().includes(query.trim().toLowerCase()));
+  return <div className="admin-page"><div className="admin-page-heading"><div><span className="admin-eyebrow">经营管理 / PRODUCTION</span><Typography.Title level={3}>生产工艺单</Typography.Title><Typography.Text type="secondary">按底衫与颜色合并尺码，清楚交接每一份生产任务。</Typography.Text></div><span className="admin-page-note"><FileTextOutlined />最近 50 张工艺单</span></div><Card className="admin-table-card" styles={{ body: { padding: 0 } }}><div className="admin-table-toolbar"><Input aria-label="搜索最近工艺单" prefix={<SearchOutlined />} placeholder="搜索当前列表的工艺单、订单或商品" allowClear value={query} onChange={e => setQuery(e.target.value)} /><Select aria-label="生产图状态" value={image} onChange={setImage} options={[{ value: "all", label: "全部生产图" }, { value: "ready", label: "已生成" }, { value: "pending", label: "生成中" }, { value: "failed", label: "生成失败" }]} /><span>共 {filtered.length} 张工艺单</span></div><Table rowKey="id" dataSource={filtered} scroll={{ x: 1050 }} pagination={{ pageSize: 10, showSizeChanger: false, showTotal: total => `当前列表共 ${total} 张` }} locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={query || image !== "all" ? "没有符合条件的工艺单。" : "还没有工艺单，订单支付后会自动生成。"} /> }} columns={[
+    { title: "工艺单号", dataIndex: "code", width: 200, render: (code: string, row) => <div className="admin-order-code"><span className="admin-order-icon"><FileTextOutlined /></span><div><Link href={`/admin/sheets/${row.id}`}>{code}</Link><small>{row.time}</small></div></div> }, { title: "关联订单", dataIndex: "orderCode", width: 180, render: (code: string, row) => <Link href={`/admin/orders/${row.orderId}`}>{code}</Link> }, { title: "底衫", dataIndex: "productName", width: 140, ellipsis: true }, { title: "颜色", dataIndex: "colorName", width: 100, render: (name: string, row) => <span className="admin-color"><i style={{ background: row.colorHex }} />{name}</span> }, { title: "尺码 / 数量", dataIndex: "sizes", width: 210 }, { title: "生产图", dataIndex: "image", width: 110, render: (value: "ready" | "pending" | "failed") => <Tag variant="filled" color={value === "ready" ? "success" : value === "failed" ? "error" : "processing"}>{value === "ready" ? "● 已生成" : value === "failed" ? "● 生成失败" : "● 生成中"}</Tag> }, { title: "操作", width: 90, render: (_, row) => <Link href={`/admin/sheets/${row.id}`} className="admin-action-link">查看工艺单</Link> },
+  ]} /></Card></div>;
 }

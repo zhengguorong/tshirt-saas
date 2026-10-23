@@ -25,9 +25,9 @@ export function ShopSettingsForm({
 }) {
   const [state, submit, pending] = useActionState(saveSettingsAction, null);
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16, maxWidth: 720 }}>
+    <div className="admin-page admin-form-page">
       <div>
-        <Typography.Title level={4} style={{ margin: 0 }}>店铺设置</Typography.Title>
+        <Typography.Title level={3} style={{ margin: 0 }}>店铺设置</Typography.Title>
         <Typography.Text type="secondary">顾客通过分配的地址进入这间店。独立域名可以之后再绑。</Typography.Text>
       </div>
       <Card title="店铺资料">

@@ -54,8 +54,9 @@ export function OtpLogin({
   }
 
   return (
-    <div style={{ display: "grid", minHeight: "100vh", placeItems: "center", background: "#f5f5f5", padding: 24 }}>
-      <Card style={{ width: 400 }} styles={{ body: { padding: 32 } }}>
+    <div className={purpose === "staff" ? "merchant-login" : undefined} style={{ display: "grid", minHeight: "100vh", placeItems: "center", background: "#f5f5f5", padding: 24 }}>
+      <Card style={{ width: 400, maxWidth: "100%" }} styles={{ body: { padding: 32 } }}>
+        {purpose === "staff" && <Link href="/" className="merchant-login-brand"><span>印</span>印坊<small>商家管理系统</small></Link>}
         <Space orientation="vertical" size={4} style={{ marginBottom: 24 }}>
           <Typography.Title level={3} style={{ margin: 0 }}>{title}</Typography.Title>
           <Typography.Text type="secondary">{description}</Typography.Text>
@@ -64,10 +65,10 @@ export function OtpLogin({
           <Form.Item label="手机号" name="phone" rules={[{ required: true, pattern: /^1\d{10}$/, message: "请输入 11 位手机号" }]}>
             <Input size="large" inputMode="numeric" autoComplete="tel" placeholder="11 位手机号" />
           </Form.Item>
-          <Form.Item label="验证码" required>
+          <Form.Item label="验证码" htmlFor="login-code" required>
             <Space.Compact style={{ width: "100%" }}>
               <Form.Item name="code" noStyle rules={[{ required: true, message: "请输入验证码" }]}>
-                <Input size="large" inputMode="numeric" autoComplete="one-time-code" />
+                <Input id="login-code" size="large" inputMode="numeric" autoComplete="one-time-code" />
               </Form.Item>
               <Form.Item noStyle shouldUpdate>
                 {({ getFieldValue }) => (

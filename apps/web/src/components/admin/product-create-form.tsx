@@ -7,9 +7,9 @@ import { createProductAction } from "@/server/actions";
 export function ProductCreateForm() {
   const [state, submit, pending] = useActionState(createProductAction, null);
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16, maxWidth: 720 }}>
+    <div className="admin-page admin-form-page">
       <div>
-        <Typography.Title level={4} style={{ margin: 0 }}>新建底衫</Typography.Title>
+        <Typography.Title level={3} style={{ margin: 0 }}>新建底衫</Typography.Title>
         <Typography.Text type="secondary">创建后可以继续调整颜色、尺码和印刷加价。</Typography.Text>
       </div>
       <Card title="基本信息">
@@ -45,7 +45,7 @@ export function ProductCreateForm() {
           <Form.Item label="尺码" name="sizes" extra="用逗号分隔，例如 S,M,L,XL。">
             <Input />
           </Form.Item>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          <div className="admin-form-grid">
             <Form.Item label="颜色名" name="colorName"><Input /></Form.Item>
             <Form.Item label="色值" name="colorHex"><Input /></Form.Item>
             <Form.Item label="第二颜色" name="color2Name"><Input placeholder="可空" /></Form.Item>

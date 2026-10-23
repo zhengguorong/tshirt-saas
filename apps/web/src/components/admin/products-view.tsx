@@ -1,55 +1,17 @@
 "use client";
 
+import Link from "next/link";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button, Card, Space, Table, Tag, Typography } from "antd";
-
-export function ProductsView({
-  owner,
-  slug,
-  products,
-}: {
-  owner: boolean;
-  slug: string;
-  products: { id: string; name: string; image: string | null; colors: string; sizes: string; status: "ON" | "OFF"; price: string }[];
-}) {
+import { PlusOutlined, SearchOutlined, SkinOutlined } from "@ant-design/icons";
+import { Button, Card, Empty, Input, Select, Table, Tag, Typography } from "antd";
+export function ProductsView({ owner, slug, products }: { owner: boolean; slug: string; products: { id: string; name: string; image: string | null; colors: string; sizes: string; status: "ON" | "OFF"; price: string }[] }) {
   const router = useRouter();
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
-        <div>
-          <Typography.Title level={4} style={{ margin: 0 }}>底衫</Typography.Title>
-          <Typography.Text type="secondary">颜色、尺码和正反面印刷加价。</Typography.Text>
-        </div>
-        {owner ? <Button type="primary" onClick={() => router.push("/admin/products/new")}>新建底衫</Button> : null}
-      </div>
-      <Card styles={{ body: { padding: 0 } }}>
-        <Table
-          rowKey="id"
-          dataSource={products}
-          pagination={{ pageSize: 10, showTotal: (total) => `共 ${total} 件` }}
-          locale={{ emptyText: "还没有底衫。先创建一件，顾客才能开始设计。" }}
-          onRow={(record) => ({
-            onClick: () => router.push(owner ? `/admin/products/${record.id}` : `/s/${slug}/products/${record.id}`),
-            style: { cursor: "pointer" },
-          })}
-          columns={[
-            {
-              title: "底衫",
-              dataIndex: "name",
-              render: (name: string, record) => (
-                <Space>
-                  {record.image ? <img src={record.image} alt="" width={40} height={40} style={{ objectFit: "cover", borderRadius: 6, border: "1px solid #f0f0f0" }} /> : null}
-                  <Typography.Text strong>{name}</Typography.Text>
-                </Space>
-              ),
-            },
-            { title: "颜色", dataIndex: "colors", ellipsis: true },
-            { title: "尺码", dataIndex: "sizes", ellipsis: true },
-            { title: "状态", dataIndex: "status", render: (status: "ON" | "OFF") => <Tag color={status === "ON" ? "success" : "default"}>{status === "ON" ? "在售" : "下架"}</Tag> },
-            { title: "售价", dataIndex: "price", align: "right" },
-          ]}
-        />
-      </Card>
-    </div>
-  );
+  const [query, setQuery] = useState("");
+  const [status, setStatus] = useState("all");
+  const filtered = products.filter(p => (status === "all" || p.status === status) && `${p.name} ${p.colors} ${p.sizes}`.toLowerCase().includes(query.trim().toLowerCase()));
+  const href = (id: string) => owner ? `/admin/products/${id}` : `/s/${slug}/products/${id}`;
+  return <div className="admin-page"><div className="admin-page-heading"><div><span className="admin-eyebrow">商品与素材 / PRODUCTS</span><Typography.Title level={3}>商品管理</Typography.Title><Typography.Text type="secondary">管理底衫、颜色与尺码，配置每件商品的定制方式。</Typography.Text></div>{owner && <Button type="primary" icon={<PlusOutlined />} href="/admin/products/new">新建底衫</Button>}</div><div className="admin-catalog-summary"><span>全部商品 <strong>{products.length}</strong></span><span><i className="admin-dot green" />在售 <strong>{products.filter(p => p.status === "ON").length}</strong></span><span><i className="admin-dot" />已下架 <strong>{products.filter(p => p.status === "OFF").length}</strong></span></div><Card className="admin-table-card" styles={{ body: { padding: 0 } }}><div className="admin-table-toolbar"><Input aria-label="搜索商品" prefix={<SearchOutlined />} placeholder="搜索商品名称、颜色或尺码" value={query} allowClear onChange={e => setQuery(e.target.value)} /><Select aria-label="商品状态" value={status} onChange={setStatus} options={[{ value: "all", label: "全部状态" }, { value: "ON", label: "在售商品" }, { value: "OFF", label: "已下架" }]} /><span>共 {filtered.length} 件商品</span></div><Table rowKey="id" dataSource={filtered} scroll={{ x: 800 }} pagination={{ pageSize: 10, showSizeChanger: false, showTotal: total => `共 ${total} 件商品` }} locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={query || status !== "all" ? "没有找到符合条件的商品。" : "还没有底衫，创建第一件商品后即可开始接单。"} /> }} onRow={record => ({ onClick: () => router.push(href(record.id)), className: "admin-clickable-row" })} columns={[
+    { title: "商品", dataIndex: "name", width: 260, render: (name: string, record) => <div className="admin-product-cell"><span className="admin-product-image">{record.image ? <img src={record.image} alt="" /> : <SkinOutlined />}</span><div><Link href={href(record.id)}>{name}</Link><small>可定制服装</small></div></div> }, { title: "可选颜色", dataIndex: "colors", ellipsis: true, width: 180 }, { title: "可选尺码", dataIndex: "sizes", width: 180, render: (sizes: string) => <span className="admin-size-list">{sizes}</span> }, { title: "上架状态", dataIndex: "status", width: 110, render: (value: "ON" | "OFF") => <Tag variant="filled" color={value === "ON" ? "success" : "default"}>{value === "ON" ? "● 在售" : "● 已下架"}</Tag> }, { title: "基础售价", dataIndex: "price", align: "right", width: 100, render: (price: string) => <span className="admin-money">{price}</span> }, { title: "操作", align: "center", width: 90, render: (_, record) => <Link className="admin-action-link" href={href(record.id)}>{owner ? "编辑商品" : "查看商品"}</Link> },
+  ]} /></Card></div>;
 }

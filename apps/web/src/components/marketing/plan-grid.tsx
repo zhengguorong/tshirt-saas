@@ -6,7 +6,7 @@ export function PlanGrid() {
     <div className="mk-plans">
       {plans.map((plan) => (
         <article key={plan.id} className={plan.featured ? "mk-plan is-featured" : "mk-plan"}>
-          {plan.featured ? <p className="mk-plan-flag">多数店从这里开始问</p> : <p className="mk-plan-flag is-empty" aria-hidden="true">占位</p>}
+          {plan.featured ? <p className="mk-plan-flag">更从容的开店支持</p> : <p className="mk-plan-flag is-empty" aria-hidden="true">占位</p>}
           <p className="mk-plan-audience">{plan.audience}</p>
           <h3>{plan.name}</h3>
           <p className="mk-price">

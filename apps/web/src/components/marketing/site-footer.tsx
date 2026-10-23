@@ -9,7 +9,8 @@ export function SiteFooter({ dev }: { dev: boolean }) {
             <span className="mk-mark" aria-hidden="true">印</span>
             印坊
           </Link>
-          <p>开一间自己的 T 恤定制店。顾客做印花，你出生产图和工艺单。</p>
+          <p>服装定制商家的经营管理系统。
+            连接独立店铺、在线设计、订单管理与生产交付，让定制生意更有条理。</p>
         </div>
         <div>
           <p className="mk-footer-label">看看</p>

@@ -24,9 +24,9 @@ export function ProductEditor({
   const [adding, setAdding] = useState(false);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16, maxWidth: 800 }}>
+    <div className="admin-page admin-form-page">
       <div>
-        <Typography.Title level={4} style={{ margin: 0 }}>{product.name}</Typography.Title>
+        <Typography.Title level={3} style={{ margin: 0 }}>{product.name}</Typography.Title>
         <Typography.Text type="secondary">{product.summary}</Typography.Text>
       </div>
       <Card title="基本信息">
@@ -57,7 +57,7 @@ export function ProductEditor({
           <Form.Item label="名称" name="name" rules={[{ required: true, message: "请填写名称" }]}><Input /></Form.Item>
           <Form.Item label="售价（元）" name="priceYuan"><InputNumber min={0} step={0.01} style={{ width: "100%" }} /></Form.Item>
           <Form.Item label="说明" name="detail"><Input.TextArea rows={3} /></Form.Item>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          <div className="admin-form-grid">
             <Form.Item label="正面加价（元）" name="frontSurchargeYuan"><InputNumber min={0} step={0.01} style={{ width: "100%" }} /></Form.Item>
             <Form.Item label="背面加价（元）" name="backSurchargeYuan"><InputNumber min={0} step={0.01} style={{ width: "100%" }} /></Form.Item>
           </div>

@@ -22,5 +22,5 @@ const color: Record<OrderStatus, string> = {
 };
 
 export function OrderStatusBadge({ status }: { status: OrderStatus }) {
-  return <Tag color={color[status]}>{label[status]}</Tag>;
+  return <Tag className="admin-status-tag" variant="filled" color={color[status]}>{label[status]}</Tag>;
 }
