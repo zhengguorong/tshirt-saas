@@ -1,0 +1,12 @@
+node_modules
+.next
+dist
+data
+.env
+.env.local
+apps/web/.env
+apps/web/.env.local
+packages/db/.env
+*.tsbuildinfo
+coverage
+.DS_Store

@@ -1,0 +1,21 @@
+{
+  "name": "@tshirt/production",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "@tshirt/db": "workspace:*",
+    "@tshirt/design": "workspace:*",
+    "@tshirt/order": "workspace:*",
+    "bullmq": "^5.58.5",
+    "ioredis": "^5.7.0",
+    "sharp": "^0.34.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

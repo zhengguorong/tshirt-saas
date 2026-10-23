@@ -1,0 +1,457 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TenantStatus {
+  ACTIVE
+  SUSPENDED
+}
+
+enum ShippingType {
+  FLAT
+  FREE_OVER
+}
+
+enum StaffRole {
+  OWNER
+  STAFF
+}
+
+enum StaffStatus {
+  ACTIVE
+  DISABLED
+}
+
+enum ShelfStatus {
+  ON
+  OFF
+}
+
+enum Surface {
+  FRONT
+  BACK
+}
+
+enum AssetSource {
+  MATERIAL
+  UPLOAD
+}
+
+enum OrderStatus {
+  WAIT_PAY
+  WAIT_MANUFACTURE
+  WAIT_RECEIVE
+  FINISH
+  CANCEL
+  CLOSE
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum PaymentChannel {
+  FAKE
+  WECHAT_JSAPI
+  WECHAT_H5
+}
+
+enum FileStatus {
+  PENDING
+  READY
+  FAILED
+}
+
+enum ActorType {
+  CONSUMER
+  STAFF
+  PLATFORM
+  SYSTEM
+}
+
+model PlatformAdmin {
+  id        String   @id @default(cuid())
+  phone     String   @unique
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("platform_admin")
+}
+
+model Tenant {
+  id                         String       @id @default(cuid())
+  slug                       String       @unique
+  name                       String
+  description                String       @default("")
+  contact                    String       @default("")
+  customDomain               String?      @unique @map("custom_domain")
+  status                     TenantStatus @default(ACTIVE)
+  shippingType               ShippingType @default(FLAT) @map("shipping_type")
+  flatShippingCents          Int          @default(800) @map("flat_shipping_cents")
+  freeShippingThresholdCents Int?         @map("free_shipping_threshold_cents")
+  createdAt                  DateTime     @default(now()) @map("created_at")
+  updatedAt                  DateTime     @updatedAt @map("updated_at")
+  staff                      Staff[]
+  products                   Product[]
+  assets                     Asset[]
+  categories                 MaterialCategory[]
+  designs                    Design[]
+  cartItems                  CartItem[]
+  orders                     Order[]
+  processSheets              ProcessSheet[]
+
+  @@map("tenant")
+}
+
+model Staff {
+  id        String      @id @default(cuid())
+  tenantId  String      @map("tenant_id")
+  phone     String
+  name      String
+  role      StaffRole
+  status    StaffStatus @default(ACTIVE)
+  createdAt DateTime    @default(now()) @map("created_at")
+  tenant    Tenant      @relation(fields: [tenantId], references: [id])
+
+  @@unique([tenantId, phone])
+  @@index([tenantId])
+  @@map("staff")
+}
+
+model Consumer {
+  id        String     @id @default(cuid())
+  phone     String     @unique
+  createdAt DateTime   @default(now()) @map("created_at")
+  designs   Design[]
+  cartItems CartItem[]
+  addresses Address[]
+  orders    Order[]
+
+  @@map("consumer")
+}
+
+model VerificationCode {
+  id        String   @id @default(cuid())
+  phone     String
+  purpose   String
+  codeHash  String   @map("code_hash")
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([phone, purpose, createdAt])
+  @@map("verification_code")
+}
+
+model Product {
+  id         String         @id @default(cuid())
+  tenantId   String         @map("tenant_id")
+  name         String
+  detail       String         @default("")
+  detailBlocks Json           @default("[]") @map("detail_blocks")
+  galleryKeys  Json           @default("[]") @map("gallery_keys")
+  priceCents   Int            @map("price_cents")
+  status     ShelfStatus    @default(OFF)
+  createdAt  DateTime       @default(now()) @map("created_at")
+  updatedAt  DateTime       @updatedAt @map("updated_at")
+  tenant     Tenant         @relation(fields: [tenantId], references: [id])
+  colors     ProductColor[]
+  sizes      ProductSize[]
+  printAreas PrintArea[]
+  designs    Design[]
+  cartItems  CartItem[]
+
+  @@index([tenantId, status])
+  @@map("product")
+}
+
+model ProductColor {
+  id             String  @id @default(cuid())
+  productId      String  @map("product_id")
+  tenantId       String  @map("tenant_id")
+  name           String
+  hex            String
+  frontMockupKey String  @map("front_mockup_key")
+  backMockupKey  String? @map("back_mockup_key")
+  sort           Int     @default(0)
+  product        Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@index([tenantId])
+  @@map("product_color")
+}
+
+model ProductSize {
+  id        String  @id @default(cuid())
+  productId String  @map("product_id")
+  tenantId  String  @map("tenant_id")
+  name      String
+  available Boolean @default(true)
+  sort      Int     @default(0)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, name])
+  @@index([tenantId])
+  @@map("product_size")
+}
+
+model PrintArea {
+  id             String  @id @default(cuid())
+  productId      String  @map("product_id")
+  tenantId       String  @map("tenant_id")
+  surface        Surface
+  x              Float
+  y              Float
+  w              Float
+  h              Float
+  exportWidth    Int     @map("export_width")
+  exportHeight   Int     @map("export_height")
+  surchargeCents Int     @default(0) @map("surcharge_cents")
+  product        Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, surface])
+  @@index([tenantId])
+  @@map("print_area")
+}
+
+model MaterialCategory {
+  id       String  @id @default(cuid())
+  tenantId String  @map("tenant_id")
+  name     String
+  sort     Int     @default(0)
+  tenant   Tenant  @relation(fields: [tenantId], references: [id])
+  assets   Asset[]
+
+  @@index([tenantId])
+  @@map("material_category")
+}
+
+model Asset {
+  id         String            @id @default(cuid())
+  tenantId   String            @map("tenant_id")
+  source     AssetSource
+  name       String            @default("")
+  objectKey  String            @map("object_key")
+  width      Int
+  height     Int
+  categoryId String?           @map("category_id")
+  status     ShelfStatus       @default(ON)
+  sort       Int               @default(0)
+  createdAt  DateTime          @default(now()) @map("created_at")
+  tenant     Tenant            @relation(fields: [tenantId], references: [id])
+  category   MaterialCategory? @relation(fields: [categoryId], references: [id])
+
+  @@index([tenantId, source, status])
+  @@map("asset")
+}
+
+model Design {
+  id         String   @id @default(cuid())
+  tenantId   String   @map("tenant_id")
+  consumerId String   @map("consumer_id")
+  productId  String   @map("product_id")
+  colorId    String   @map("color_id")
+  document   Json
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  tenant     Tenant   @relation(fields: [tenantId], references: [id])
+  consumer   Consumer @relation(fields: [consumerId], references: [id])
+  product    Product  @relation(fields: [productId], references: [id])
+
+  @@index([tenantId, consumerId])
+  @@map("design")
+}
+
+model CartItem {
+  id         String   @id @default(cuid())
+  tenantId   String   @map("tenant_id")
+  consumerId String   @map("consumer_id")
+  productId  String   @map("product_id")
+  colorId    String   @map("color_id")
+  sizeId     String   @map("size_id")
+  quantity   Int
+  document   Json
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  tenant     Tenant   @relation(fields: [tenantId], references: [id])
+  consumer   Consumer @relation(fields: [consumerId], references: [id])
+  product    Product  @relation(fields: [productId], references: [id])
+
+  @@index([tenantId, consumerId])
+  @@map("cart_item")
+}
+
+model Address {
+  id         String   @id @default(cuid())
+  consumerId String   @map("consumer_id")
+  name       String
+  phone      String
+  province   String
+  city       String
+  district   String
+  detail     String
+  isDefault  Boolean  @default(false) @map("is_default")
+  createdAt  DateTime @default(now()) @map("created_at")
+  consumer   Consumer @relation(fields: [consumerId], references: [id])
+
+  @@index([consumerId])
+  @@map("address")
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  tenantId      String      @map("tenant_id")
+  consumerId    String      @map("consumer_id")
+  code          String      @unique
+  status        OrderStatus @default(WAIT_PAY)
+  baseCents     Int         @map("base_cents")
+  printCents    Int         @map("print_cents")
+  shippingCents Int         @map("shipping_cents")
+  totalCents    Int         @map("total_cents")
+  receiverName  String      @map("receiver_name")
+  receiverPhone String      @map("receiver_phone")
+  province      String
+  city          String
+  district      String
+  detail        String
+  expiresAt     DateTime    @map("expires_at")
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+  tenant        Tenant      @relation(fields: [tenantId], references: [id])
+  consumer      Consumer    @relation(fields: [consumerId], references: [id])
+  items         OrderItem[]
+  payment       Payment?
+  shipment      Shipment?
+  events        OrderEvent[]
+  processSheets ProcessSheet[]
+
+  @@index([tenantId, status, createdAt])
+  @@index([consumerId, tenantId])
+  @@map("order")
+}
+
+model OrderItem {
+  id             String           @id @default(cuid())
+  orderId        String           @map("order_id")
+  tenantId       String           @map("tenant_id")
+  productId      String           @map("product_id")
+  productName    String           @map("product_name")
+  colorName      String           @map("color_name")
+  colorHex       String           @map("color_hex")
+  sizeName       String           @map("size_name")
+  quantity       Int
+  unitBaseCents  Int              @map("unit_base_cents")
+  unitPrintCents Int              @map("unit_print_cents")
+  document       Json
+  snapshot       Json
+  fileStatus     FileStatus       @default(PENDING) @map("file_status")
+  order          Order            @relation(fields: [orderId], references: [id])
+  files          ProductionFile[]
+
+  @@index([orderId])
+  @@index([tenantId])
+  @@map("order_item")
+}
+
+model Payment {
+  id                    String         @id @default(cuid())
+  orderId               String         @unique @map("order_id")
+  tenantId              String         @map("tenant_id")
+  channel               PaymentChannel
+  status                PaymentStatus  @default(PENDING)
+  amountCents           Int            @map("amount_cents")
+  providerTransactionId String?        @unique @map("provider_transaction_id")
+  createdAt             DateTime       @default(now()) @map("created_at")
+  updatedAt             DateTime       @updatedAt @map("updated_at")
+  order                 Order          @relation(fields: [orderId], references: [id])
+
+  @@index([tenantId])
+  @@map("payment")
+}
+
+model Shipment {
+  id         String   @id @default(cuid())
+  orderId    String   @unique @map("order_id")
+  tenantId   String   @map("tenant_id")
+  carrier    String
+  trackingNo String   @map("tracking_no")
+  shippedAt  DateTime @default(now()) @map("shipped_at")
+  order      Order    @relation(fields: [orderId], references: [id])
+
+  @@index([tenantId])
+  @@map("shipment")
+}
+
+model OrderEvent {
+  id        String    @id @default(cuid())
+  orderId   String    @map("order_id")
+  tenantId  String    @map("tenant_id")
+  actorType ActorType @map("actor_type")
+  actorId   String?   @map("actor_id")
+  event     String
+  note      String    @default("")
+  createdAt DateTime  @default(now()) @map("created_at")
+  order     Order     @relation(fields: [orderId], references: [id])
+
+  @@index([orderId])
+  @@map("order_event")
+}
+
+model ProductionFile {
+  id          String     @id @default(cuid())
+  orderItemId String     @map("order_item_id")
+  tenantId    String     @map("tenant_id")
+  surface     Surface
+  kind        String
+  objectKey   String?    @map("object_key")
+  status      FileStatus @default(PENDING)
+  error       String     @default("")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+  orderItem   OrderItem  @relation(fields: [orderItemId], references: [id])
+
+  @@unique([orderItemId, surface, kind])
+  @@index([tenantId])
+  @@map("production_file")
+}
+
+model ProcessSheet {
+  id           String   @id @default(cuid())
+  tenantId     String   @map("tenant_id")
+  orderId      String   @map("order_id")
+  code         String   @unique
+  productName  String   @map("product_name")
+  colorName    String   @map("color_name")
+  colorHex     String   @map("color_hex")
+  sizes        Json
+  orderItemIds Json     @map("order_item_ids")
+  createdAt    DateTime @default(now()) @map("created_at")
+  tenant       Tenant   @relation(fields: [tenantId], references: [id])
+  order        Order    @relation(fields: [orderId], references: [id])
+
+  @@index([tenantId, createdAt])
+  @@index([orderId])
+  @@map("process_sheet")
+}
+
+model DemoRequest {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String
+  company   String
+  role      String
+  volume    String
+  plan      String
+  note      String   @default("")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([createdAt])
+  @@index([phone, createdAt])
+  @@map("demo_request")
+}

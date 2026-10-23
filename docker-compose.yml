@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: tshirt
+      POSTGRES_PASSWORD: tshirt
+      POSTGRES_DB: tshirt
+    ports:
+      - "54329:5432"
+    volumes:
+      - tshirt_pg:/var/lib/postgresql/data
+  redis:
+    image: redis:7
+    ports:
+      - "63799:6379"
+
+volumes:
+  tshirt_pg:

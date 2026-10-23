@@ -1,0 +1,16 @@
+{
+  "name": "tshirt-saas",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter @tshirt/web dev",
+    "worker": "pnpm --filter @tshirt/worker dev",
+    "test": "pnpm -r --if-present test",
+    "db:up": "docker compose up -d",
+    "db:migrate": "pnpm --filter @tshirt/db migrate",
+    "db:seed": "pnpm --filter @tshirt/db seed",
+    "db:setup": "pnpm db:up && pnpm db:migrate && pnpm db:seed"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
