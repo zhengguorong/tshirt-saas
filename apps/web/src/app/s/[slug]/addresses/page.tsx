@@ -22,7 +22,7 @@ export default async function AddressListPage({
   const addresses = await prisma.address.findMany({ where: { consumerId: consumer.id }, orderBy: [{ isDefault: "desc" }, { createdAt: "desc" }] });
   const adding = `/s/${slug}/addresses/new${next ? `?next=${encodeURIComponent(next)}` : ""}`;
   return (
-    <div className="flex h-full min-h-0 flex-col bg-muted">
+    <div className="mx-auto flex h-full min-h-0 w-full max-w-3xl flex-col bg-muted lg:border-x">
       <div className="min-h-0 flex-1 overflow-y-auto">
         {addresses.length === 0 ? (
           <Empty className="m-3 border bg-background">

@@ -22,7 +22,7 @@ export default async function OrderDetailPage({ params }: { params: Promise<{ sl
   });
   if (!order || order.tenant.slug !== slug) notFound();
   return (
-    <div className="flex flex-col gap-4 p-4">
+    <div className="mx-auto flex w-full max-w-4xl flex-col gap-4 p-4 lg:p-8">
       <div className="flex items-center justify-between gap-3">
         <div className="flex flex-col gap-1">
           <h1 className="text-2xl font-semibold tracking-tight">{order.code}</h1>

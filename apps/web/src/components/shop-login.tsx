@@ -111,7 +111,7 @@ function LoginDialog({
         role="dialog"
         aria-modal="true"
         aria-labelledby="shop-login-title"
-        className="sheet-up fixed inset-x-0 bottom-0 z-50 mx-auto flex w-full max-w-[430px] flex-col gap-4 rounded-t-3xl bg-background px-5 pt-3 pb-[max(20px,env(safe-area-inset-bottom))] shadow-[0_-16px_40px_rgba(0,0,0,0.16)]"
+        className="sheet-up fixed inset-x-0 bottom-0 z-50 mx-auto flex w-full max-w-[430px] flex-col gap-4 rounded-t-3xl bg-background px-5 pt-3 pb-[max(20px,env(safe-area-inset-bottom))] shadow-[0_-16px_40px_rgba(0,0,0,0.16)] lg:inset-y-1/2 lg:bottom-auto lg:max-w-md lg:-translate-y-1/2 lg:rounded-3xl lg:p-6"
       >
         <div className="mx-auto h-1 w-10 rounded-full bg-muted" />
         <div className="flex items-start justify-between gap-3">

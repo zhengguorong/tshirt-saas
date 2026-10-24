@@ -31,9 +31,9 @@ export default async function StoreLayout({ children, params }: { children: Reac
   }));
   return (
     <div className="min-h-screen bg-muted">
-      <div className="relative mx-auto flex h-dvh w-full max-w-[430px] flex-col bg-background shadow-sm">
+      <div className="relative mx-auto flex h-dvh w-full flex-col bg-background shadow-sm lg:max-w-7xl lg:shadow-none">
         <ShopLogin slug={slug} devOtp={allowDevOtp()}>
-          <StoreHeader slug={slug} name={shop.name} />
+          <StoreHeader slug={slug} name={shop.name} products={blanks} />
           <div className="min-h-0 flex-1 overflow-hidden">
             <StoreMotion slug={slug}>{children}</StoreMotion>
           </div>

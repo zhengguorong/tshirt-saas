@@ -21,7 +21,7 @@ export default async function OrdersPage({ params }: { params: Promise<{ slug: s
     include: { items: true },
   });
   return (
-    <div className="flex flex-col gap-3 px-3 py-3">
+    <div className="mx-auto flex w-full max-w-4xl flex-col gap-3 px-4 py-5 lg:px-8 lg:py-8">
       <h1 className="text-2xl font-semibold tracking-tight">我的订单</h1>
       {orders.length === 0 ? (
         <Empty className="border">
