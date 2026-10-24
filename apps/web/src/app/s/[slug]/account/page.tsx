@@ -26,8 +26,8 @@ export default async function AccountPage({ params }: { params: Promise<{ slug: 
     : [];
   const countOf = (status: OrderStatus) => grouped.find((row) => row.status === status)?._count._all ?? 0;
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-col gap-3 px-4 py-5 lg:py-8">
-      <div className="flex items-center gap-3 rounded-xl bg-muted px-4 py-4">
+    <div className="mx-auto flex w-full max-w-5xl flex-col gap-5 bg-[#f5f3f0] px-4 py-5 lg:grid lg:grid-cols-[1fr_1.4fr] lg:gap-6 lg:px-12 lg:py-10">
+      <div className="flex items-center gap-3 rounded-2xl bg-white px-6 py-6 shadow-[0_8px_28px_rgba(30,24,18,0.06)] lg:row-span-2 lg:flex-col lg:items-start">
         <div className="flex size-12 items-center justify-center rounded-full bg-background text-sm font-semibold">
           {consumer ? consumer.phone.slice(-2) : "客"}
         </div>
@@ -39,7 +39,7 @@ export default async function AccountPage({ params }: { params: Promise<{ slug: 
           <LoginButton next={`/s/${slug}/account`}>登录</LoginButton>
         )}
       </div>
-      <Card size="sm" className="py-0">
+      <Card size="sm" className="rounded-2xl border-0 bg-white py-0 shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
         <CardContent className="flex flex-col px-0">
           <GuardedLink authed={Boolean(consumer)} href={`/s/${slug}/orders`} className="flex w-full items-center justify-between gap-3 px-3 py-3 text-left">
             <span className="flex items-center gap-2 text-sm font-medium">
@@ -59,7 +59,7 @@ export default async function AccountPage({ params }: { params: Promise<{ slug: 
           </div>
         </CardContent>
       </Card>
-      <Card size="sm" className="py-0">
+      <Card size="sm" className="rounded-2xl border-0 bg-white py-0 shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
         <CardContent className="px-0">
           <GuardedLink authed={Boolean(consumer)} href={`/s/${slug}/cart`} className="flex w-full items-center justify-between gap-3 px-3 py-3 text-left">
             <span className="flex items-center gap-2 text-sm font-medium">

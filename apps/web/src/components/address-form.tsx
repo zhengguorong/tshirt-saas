@@ -20,12 +20,12 @@ export function AddressForm({
 }) {
   const [state, action, pending] = useActionState(saveAddress, null);
   return (
-    <div className="mx-auto flex h-full min-h-0 w-full max-w-3xl flex-col bg-background lg:border-x">
-      <form action={action} className="flex min-h-0 flex-1 flex-col">
+    <div className="mx-auto flex h-full min-h-0 w-full max-w-3xl flex-col bg-[#f5f3f0] p-4 lg:p-10">
+      <form action={action} className="flex min-h-0 flex-1 flex-col rounded-2xl bg-white p-5 shadow-[0_8px_28px_rgba(30,24,18,0.06)] lg:p-8">
         <input type="hidden" name="slug" value={slug} />
         <input type="hidden" name="next" value={next} />
         <input type="hidden" name="id" value={address?.id ?? ""} />
-        <div className="flex flex-col px-4">
+        <div className="flex flex-col rounded-xl border px-4">
           <label className="flex min-h-12 items-center gap-3 border-b text-sm">
             <span className="w-28 shrink-0">收货姓名</span>
             <input name="name" defaultValue={address?.name ?? ""} maxLength={25} placeholder="请输入收货姓名" className="min-w-0 flex-1 bg-transparent text-right outline-none placeholder:text-muted-foreground" />

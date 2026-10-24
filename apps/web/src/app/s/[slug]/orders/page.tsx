@@ -21,8 +21,8 @@ export default async function OrdersPage({ params }: { params: Promise<{ slug: s
     include: { items: true },
   });
   return (
-    <div className="mx-auto flex w-full max-w-4xl flex-col gap-3 px-4 py-5 lg:px-8 lg:py-8">
-      <h1 className="text-2xl font-semibold tracking-tight">我的订单</h1>
+    <div className="mx-auto flex w-full max-w-5xl flex-col gap-5 bg-[#f5f3f0] px-4 py-5 lg:px-12 lg:py-10">
+      <div><h1 className="text-2xl font-semibold tracking-tight">我的订单</h1><p className="mt-1 text-sm text-muted-foreground">查看订单状态与物流进度</p></div>
       {orders.length === 0 ? (
         <Empty className="border">
           <EmptyHeader>
@@ -32,16 +32,13 @@ export default async function OrdersPage({ params }: { params: Promise<{ slug: s
         </Empty>
       ) : orders.map((order) => (
         <Link key={order.id} href={`/s/${slug}/orders/${order.id}`}>
-          <Card size="sm">
-            <CardHeader>
-              <CardTitle className="flex items-center justify-between gap-2">
-                <span>{order.code}</span>
+          <Card size="sm" className="rounded-2xl border-0 bg-white py-5 shadow-[0_8px_28px_rgba(30,24,18,0.06)] transition hover:-translate-y-0.5">
+            <CardHeader className="pb-1"><CardTitle className="flex items-center justify-between gap-2"><span className="text-base">{order.code}</span>
                 <OrderStatusBadge status={order.status} />
               </CardTitle>
+              <p className="text-xs text-muted-foreground">{new Date(order.createdAt).toLocaleString("zh-CN", { dateStyle: "medium", timeStyle: "short" })}</p>
             </CardHeader>
-            <CardContent className="flex items-center justify-between gap-3 text-sm">
-              <span className="truncate text-muted-foreground">{order.items.map((item) => item.productName).join("、")}</span>
-              <span className="shrink-0 tabular-nums">{formatYuan(order.totalCents)}</span>
+            <CardContent className="flex items-center justify-between gap-3 text-sm"><span className="truncate text-muted-foreground">{order.items.map((item) => item.productName).join("、")}</span><span className="shrink-0 font-medium tabular-nums">{formatYuan(order.totalCents)} <span className="ml-2 text-muted-foreground">查看详情 →</span></span>
             </CardContent>
           </Card>
         </Link>

@@ -34,9 +34,9 @@ export function CartSheet({ slug, lines, shipping }: { slug: string; lines: Cart
   }
 
   return (
-    <div className="mx-auto flex h-full min-h-0 w-full max-w-5xl flex-col bg-muted lg:border-x">
-      <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto p-3">
-        <div className="flex flex-col gap-4 rounded-xl bg-background p-4">
+    <div className="mx-auto flex h-full min-h-0 w-full max-w-6xl flex-col bg-[#f5f3f0] lg:p-8">
+      <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto p-3 lg:grid lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start lg:gap-6 lg:p-0">
+        <div className="flex flex-col gap-4 rounded-2xl bg-white p-6 shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
           {lines.map((line) => (
             <OrderLine
               key={line.id}
@@ -59,8 +59,15 @@ export function CartSheet({ slug, lines, shipping }: { slug: string; lines: Cart
             />
           ))}
         </div>
+        <aside className="hidden rounded-2xl bg-white p-6 shadow-[0_8px_28px_rgba(30,24,18,0.06)] lg:flex lg:flex-col lg:gap-5">
+          <h2 className="text-lg font-semibold">订单摘要</h2>
+          <div className="flex justify-between text-sm"><span className="text-muted-foreground">商品小计</span><span>{formatYuan(goodsCents)}</span></div>
+          <div className="flex justify-between text-sm"><span className="text-muted-foreground">运费</span><span>{chosen.length ? (shippingFee(goodsCents, shipping) ? formatYuan(shippingFee(goodsCents, shipping)) : "免邮") : "—"}</span></div>
+          <div className="flex justify-between border-t pt-4 text-base font-semibold"><span>合计</span><span>{formatYuan(totalCents)}</span></div>
+          {chosen.length === 0 ? <Button size="lg" disabled>去结算</Button> : <Button size="lg" className="bg-neutral-950" nativeButton={false} render={<Link href={href} />}>去结算</Button>}
+        </aside>
       </div>
-      <div className="flex shrink-0 items-center gap-3 border-t bg-background px-3 py-2">
+      <div className="flex shrink-0 items-center gap-3 border-t bg-background px-3 py-2 lg:hidden">
         <div className="flex items-center gap-2">
           <Checkbox checked={all} onCheckedChange={(checked) => setSelected(checked ? lines.map((line) => line.id) : [])} aria-label="全选" />
           <span className="text-sm text-muted-foreground">全选</span>

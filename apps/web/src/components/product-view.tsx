@@ -55,15 +55,15 @@ export function ProductView({
     router.push(`/s/${slug}/design/${productId}?${query.toString()}`);
   }
   return (
-    <div className="flex h-full min-h-0 flex-col">
-      <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-4 overflow-y-auto lg:mx-auto lg:grid lg:max-w-6xl lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)] lg:gap-10 lg:px-8 lg:py-8">
+    <div className="flex h-full min-h-0 flex-col bg-[#f5f3f0]">
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-4 overflow-y-auto lg:mx-auto lg:grid lg:max-w-6xl lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)] lg:gap-10 lg:px-8 lg:py-10">
         <Gallery images={images} label={name} />
-        <div className="flex flex-col gap-4 px-4 pb-4 lg:px-0">
-          <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-5 px-4 pb-4 lg:rounded-2xl lg:bg-white lg:p-7 lg:shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
+          <div className="flex flex-col gap-2 border-b pb-5">
+            <h1 className="text-2xl font-semibold tracking-tight">{name}</h1>
             <p className="text-2xl font-semibold tabular-nums">{price}</p>
             <p className="text-xs text-muted-foreground">底衫价格，有图案的印面另加价{printNote ? ` · ${printNote}` : ""}</p>
           </div>
-          <h1 className="text-base leading-snug font-medium">{name}</h1>
           {colors.length > 0 ? (
             <div className="flex flex-col gap-2">
               <p className="text-sm text-muted-foreground">颜色{color ? ` · ${color.name}` : ""}</p>
@@ -109,7 +109,7 @@ export function ProductView({
           ) : null}
         </div>
       </div>
-      <div className="flex shrink-0 items-center gap-3 border-t bg-background px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] lg:mx-auto lg:w-full lg:max-w-6xl lg:justify-end lg:gap-4 lg:border-t-0 lg:px-8 lg:py-4">
+      <div className="flex shrink-0 items-center gap-3 border-t bg-background px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] lg:mx-auto lg:w-full lg:max-w-6xl lg:justify-end lg:gap-4 lg:border-t-0 lg:bg-transparent lg:px-8 lg:py-4">
         <Link href={`/s/${slug}`} className="pressable flex w-10 flex-col items-center gap-0.5 text-[10px] text-muted-foreground lg:hidden">
           <HouseIcon className="size-5" />
           首页
@@ -118,7 +118,7 @@ export function ProductView({
           <ShoppingBagIcon className="size-5" />
           购物车
         </Link>
-        <Button className="pressable flex-1 lg:w-auto lg:min-w-56 lg:flex-none" size="lg" type="button" onClick={customize}>去定制</Button>
+        <Button className="pressable flex-1 bg-neutral-950 lg:w-auto lg:min-w-56 lg:flex-none" size="lg" type="button" onClick={customize}>去定制</Button>
       </div>
     </div>
   );
@@ -129,8 +129,6 @@ const garment = "aspect-square w-full shrink-0 snap-center object-contain p-6 dr
 function Gallery({ images, label }: { images: string[]; label: string }) {
   const scroller = useRef<HTMLDivElement>(null);
   const frameRef = useRef(images);
-  const imagesRef = useRef(images);
-  imagesRef.current = images;
   const [frame, setFrame] = useState(images);
   const [incoming, setIncoming] = useState<string[] | null>(null);
   const [index, setIndex] = useState(0);
@@ -146,7 +144,7 @@ function Gallery({ images, label }: { images: string[]; label: string }) {
     return () => el.removeEventListener("scroll", onScroll);
   }, []);
   useEffect(() => {
-    const next = imagesRef.current;
+    const next = images;
     if (next.join("\n") === frameRef.current.join("\n")) return;
     const apply = () => {
       frameRef.current = next;
@@ -172,7 +170,7 @@ function Gallery({ images, label }: { images: string[]; label: string }) {
   const dots = incoming ?? frame;
   const dotIndex = incoming ? 0 : index;
   return (
-    <div className="relative shrink-0 bg-[#e8e4dc] lg:rounded-2xl lg:shadow-sm">
+    <div className="relative shrink-0 bg-[#e8e4dc] lg:rounded-2xl lg:shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
       <div ref={scroller} className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {frame.map((url, imageIndex) => (
           <img key={`${url}-${imageIndex}`} src={url} alt={imageIndex === 0 ? label : ""} className={garment} />

@@ -16,8 +16,8 @@ export default async function CartPage({ params }: { params: Promise<{ slug: str
   const items = await getCart(shop.id, consumer.id);
   if (items.length === 0) {
     return (
-      <div className="flex flex-col gap-3 bg-muted p-3">
-        <Empty className="border bg-background">
+      <div className="mx-auto flex h-full w-full max-w-6xl flex-col gap-3 bg-[#f5f3f0] p-4 lg:p-10">
+        <Empty className="rounded-2xl border-0 bg-white shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
           <EmptyHeader>
             <EmptyTitle>购物车是空的</EmptyTitle>
             <EmptyDescription>选一件底衫，加上图案后再来结算。</EmptyDescription>
