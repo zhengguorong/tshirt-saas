@@ -436,7 +436,7 @@ export default function EditorCanvas({ slug, loggedIn, product, materials, initi
   const selectedImage = imageTarget ? library.find((item) => item.id === imageTarget.assetId) : undefined;
 
   return (
-    <div className="fixed inset-y-0 left-1/2 z-40 flex h-dvh w-full max-w-[430px] -translate-x-1/2 flex-col bg-[#f3efe6] text-neutral-900">
+    <div className="fixed inset-y-0 left-1/2 z-40 flex h-dvh w-full max-w-[430px] -translate-x-1/2 flex-col bg-[#f3efe6] text-neutral-900 lg:left-0 lg:max-w-none lg:translate-x-0">
       <header className="bg-white px-3 pt-[max(8px,env(safe-area-inset-top))] pb-2">
         <div className="flex items-center gap-2">
           <Link href={`/s/${slug}/products/${product.id}`} aria-label="返回" className="flex size-8 items-center justify-center rounded-full">
@@ -466,7 +466,7 @@ export default function EditorCanvas({ slug, loggedIn, product, materials, initi
         </div>
       </header>
 
-      <div className="relative min-h-0 flex-1">
+      <div className="relative min-h-0 flex-1 lg:mx-auto lg:w-full lg:max-w-5xl">
         {area && mockup ? (
           <EditorStage
             design={design}

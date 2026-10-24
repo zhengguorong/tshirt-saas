@@ -20,7 +20,7 @@ export function AddressForm({
 }) {
   const [state, action, pending] = useActionState(saveAddress, null);
   return (
-    <div className="flex h-full min-h-0 flex-col bg-background">
+    <div className="mx-auto flex h-full min-h-0 w-full max-w-3xl flex-col bg-background lg:border-x">
       <form action={action} className="flex min-h-0 flex-1 flex-col">
         <input type="hidden" name="slug" value={slug} />
         <input type="hidden" name="next" value={next} />

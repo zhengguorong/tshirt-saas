@@ -26,7 +26,7 @@ export default async function AccountPage({ params }: { params: Promise<{ slug: 
     : [];
   const countOf = (status: OrderStatus) => grouped.find((row) => row.status === status)?._count._all ?? 0;
   return (
-    <div className="flex flex-col gap-3 px-3 py-3">
+    <div className="mx-auto flex w-full max-w-3xl flex-col gap-3 px-4 py-5 lg:py-8">
       <div className="flex items-center gap-3 rounded-xl bg-muted px-4 py-4">
         <div className="flex size-12 items-center justify-center rounded-full bg-background text-sm font-semibold">
           {consumer ? consumer.phone.slice(-2) : "客"}

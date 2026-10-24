@@ -11,9 +11,18 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
   if (!shop) notFound();
   const products = await listProducts(shop.id, true);
   return (
-    <div className="flex flex-col gap-3 px-3 py-3">
-      {shop.description ? <p className="text-sm text-muted-foreground">{shop.description}</p> : null}
-      <p className="text-sm font-medium">精选底衫</p>
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-5 px-4 py-5 lg:px-8 lg:py-8">
+      {shop.description ? (
+        <div className="rounded-2xl bg-muted/70 px-4 py-4 lg:px-8 lg:py-8">
+          <p className="hidden text-xl font-semibold tracking-tight lg:block">{shop.name}</p>
+          <p className="max-w-2xl text-sm leading-6 text-muted-foreground lg:mt-2">{shop.description}</p>
+        </div>
+      ) : (
+        <div className="hidden rounded-2xl bg-muted/70 px-8 py-8 lg:block">
+          <p className="text-xl font-semibold tracking-tight">{shop.name}</p>
+        </div>
+      )}
+      <p id="products" className="text-base font-medium">精选底衫</p>
       {products.length === 0 ? (
         <Empty className="border">
           <EmptyHeader>
@@ -22,7 +31,7 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
           </EmptyHeader>
         </Empty>
       ) : (
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 lg:gap-5">
           {products.map((product) => {
             const color = product.colors[0];
             return (

@@ -28,7 +28,7 @@ export function CheckoutForm({
   const [open, setOpen] = useState(true);
   const detail = address ? `${address.province}${address.city}${address.district}${address.detail}` : "";
   return (
-    <form action={action} className="flex h-full min-h-0 flex-col bg-muted">
+    <form action={action} className="mx-auto flex h-full min-h-0 w-full max-w-5xl flex-col bg-muted lg:border-x">
       <input type="hidden" name="slug" value={slug} />
       <input type="hidden" name="ids" value={ids} />
       <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto p-3">

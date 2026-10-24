@@ -3,7 +3,16 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ChevronLeftIcon, ChevronRightIcon, HouseIcon, ShirtIcon, UserRoundIcon, XIcon } from "lucide-react";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ClipboardListIcon,
+  HouseIcon,
+  ShirtIcon,
+  ShoppingBagIcon,
+  UserRoundIcon,
+  XIcon,
+} from "lucide-react";
 import { cn } from "cn";
 import { Button } from "@/components/ui/button";
 
@@ -21,31 +30,114 @@ export function StoreMotion({ slug, children }: { slug: string; children: React.
   );
 }
 
-export function StoreHeader({ slug, name }: { slug: string; name: string }) {
+export function StoreHeader({
+  slug,
+  name,
+  products,
+}: {
+  slug: string;
+  name: string;
+  products: BlankProduct[];
+}) {
   const pathname = usePathname();
   const search = useSearchParams();
   const router = useRouter();
+  const [open, setOpen] = useState(false);
   const home = pathname === `/s/${slug}` || pathname === `/s/${slug}/`;
   const title = headerTitle(pathname, Boolean(search.get("next")), name);
+  const base = `/s/${slug}`;
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
   return (
-    <header className="grid h-12 shrink-0 grid-cols-[2.5rem_1fr_2.5rem] items-center border-b bg-background px-1">
-      {home ? <span /> : (
-        <Button
-          variant="ghost"
-          size="icon"
-          type="button"
-          aria-label="返回"
-          onClick={() => {
-            if (window.history.length > 1) router.back();
-            else router.push(`/s/${slug}`);
-          }}
-        >
-          <ChevronLeftIcon />
-        </Button>
+    <>
+      <header className="shrink-0 border-b bg-background px-1 lg:px-8">
+        {/* Mobile header */}
+        <div className="grid h-12 grid-cols-[2.5rem_1fr_2.5rem] items-center lg:hidden">
+          {home ? (
+            <span />
+          ) : (
+            <Button
+              variant="ghost"
+              size="icon"
+              type="button"
+              aria-label="返回"
+              onClick={() => {
+                if (window.history.length > 1) router.back();
+                else router.push(base);
+              }}
+            >
+              <ChevronLeftIcon />
+            </Button>
+          )}
+          <p className="truncate text-center text-sm font-medium">{title}</p>
+          <span />
+        </div>
+
+        {/* Desktop header */}
+        <div className="mx-auto hidden h-16 max-w-7xl items-center gap-8 lg:flex">
+          <Link href={base} className="shrink-0 text-lg font-semibold tracking-tight">
+            {name}
+          </Link>
+          <nav className="flex items-center gap-6" aria-label="店铺导航">
+            <DesktopLink href={base} active={home}>
+              首页
+            </DesktopLink>
+            <button
+              type="button"
+              className={cn(
+                "flex items-center gap-1.5 text-sm transition-colors",
+                open || pathname.includes("/design") || pathname.includes("/products")
+                  ? "font-medium text-primary"
+                  : "text-muted-foreground hover:text-foreground",
+              )}
+              onClick={() => setOpen(true)}
+            >
+              <ShirtIcon className="size-4" />
+              定制选品
+            </button>
+            <DesktopLink href={`${base}/cart`} active={pathname.includes("/cart")} icon={ShoppingBagIcon}>
+              购物车
+            </DesktopLink>
+            <DesktopLink href={`${base}/orders`} active={pathname.includes("/orders")} icon={ClipboardListIcon}>
+              订单
+            </DesktopLink>
+            <DesktopLink href={`${base}/account`} active={pathname.includes("/account")} icon={UserRoundIcon}>
+              我的
+            </DesktopLink>
+          </nav>
+          {!home ? <p className="ml-auto truncate text-sm text-muted-foreground">{title}</p> : null}
+        </div>
+      </header>
+      {open ? <BlankSheet slug={slug} products={products} onClose={() => setOpen(false)} /> : null}
+    </>
+  );
+}
+
+function DesktopLink({
+  href,
+  active,
+  children,
+  icon: Icon,
+}: {
+  href: string;
+  active: boolean;
+  children: React.ReactNode;
+  icon?: typeof ShoppingBagIcon;
+}) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "flex items-center gap-1.5 text-sm transition-colors",
+        active ? "font-medium text-primary" : "text-muted-foreground hover:text-foreground",
       )}
-      <p className="truncate text-center text-sm font-medium">{title}</p>
-      <span />
-    </header>
+    >
+      {Icon ? <Icon className="size-4" /> : null}
+      {children}
+    </Link>
   );
 }
 
@@ -53,7 +145,12 @@ export function StoreTabBar({ slug, products }: { slug: string; products: BlankP
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const base = `/s/${slug}`;
-  const visible = pathname === base || pathname === `${base}/` || pathname === `${base}/cart` || pathname === `${base}/orders` || pathname === `${base}/account`;
+  const visible =
+    pathname === base ||
+    pathname === `${base}/` ||
+    pathname === `${base}/cart` ||
+    pathname === `${base}/orders` ||
+    pathname === `${base}/account`;
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
@@ -63,10 +160,15 @@ export function StoreTabBar({ slug, products }: { slug: string; products: BlankP
   return (
     <>
       {open ? <BlankSheet slug={slug} products={products} onClose={() => setOpen(false)} /> : null}
-      <nav className="relative z-30 shrink-0 border-t bg-background pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_24px_rgba(0,0,0,0.05)]">
+      <nav className="relative z-30 shrink-0 border-t bg-background pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_24px_rgba(0,0,0,0.05)] lg:hidden">
         <div className="grid h-14 grid-cols-3 items-end">
           <TabLink href={base} active={home} icon={HouseIcon} label="首页" />
-          <button type="button" className="tab-ink -translate-y-2 flex flex-col items-center gap-1 text-primary" aria-expanded={open} onClick={() => setOpen(true)}>
+          <button
+            type="button"
+            className="tab-ink -translate-y-2 flex flex-col items-center gap-1 text-primary"
+            aria-expanded={open}
+            onClick={() => setOpen(true)}
+          >
             <span className="pressable flex size-11 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md">
               <ShirtIcon className="size-5" />
             </span>
@@ -83,10 +185,15 @@ function BlankSheet({ slug, products, onClose }: { slug: string; products: Blank
   return (
     <>
       <button type="button" aria-label="关闭" className="store-fade absolute inset-0 z-40 bg-black/40" onClick={onClose} />
-      <section className="sheet-up absolute inset-x-0 bottom-0 z-50 flex max-h-[70%] flex-col overflow-hidden rounded-t-2xl bg-background pb-[max(12px,env(safe-area-inset-bottom))] shadow-[0_-12px_32px_rgba(0,0,0,0.12)]">
+      <section className="sheet-up absolute inset-x-0 bottom-0 z-50 flex max-h-[70%] flex-col overflow-hidden rounded-t-2xl bg-background pb-[max(12px,env(safe-area-inset-bottom))] shadow-[0_-12px_32px_rgba(0,0,0,0.12)] lg:inset-x-auto lg:bottom-auto lg:left-1/2 lg:top-1/2 lg:max-h-[min(70vh,640px)] lg:w-full lg:max-w-lg lg:-translate-x-1/2 lg:-translate-y-1/2 lg:rounded-2xl lg:pb-3">
         <div className="flex shrink-0 items-center justify-between px-4 py-3">
           <p className="text-sm font-medium">选择要定制的底衫</p>
-          <button type="button" className="pressable flex size-8 items-center justify-center rounded-full text-muted-foreground" aria-label="关闭" onClick={onClose}>
+          <button
+            type="button"
+            className="pressable flex size-8 items-center justify-center rounded-full text-muted-foreground"
+            aria-label="关闭"
+            onClick={onClose}
+          >
             <XIcon className="size-4" />
           </button>
         </div>
@@ -95,9 +202,19 @@ function BlankSheet({ slug, products, onClose }: { slug: string; products: Blank
         ) : (
           <div className="min-h-0 flex-1 overflow-y-auto">
             {products.map((product) => (
-              <Link key={product.id} href={`/s/${slug}/design/${product.id}`} className="pressable flex items-center gap-3 border-t px-4 py-2.5">
+              <Link
+                key={product.id}
+                href={`/s/${slug}/design/${product.id}`}
+                className="pressable flex items-center gap-3 border-t px-4 py-2.5"
+              >
                 <span className="size-16 shrink-0 overflow-hidden rounded-lg bg-[#e8e4dc]">
-                  {product.image ? <img src={product.image} alt="" className="size-full object-contain p-1 drop-shadow-[0_6px_6px_rgba(40,32,24,0.2)]" /> : null}
+                  {product.image ? (
+                    <img
+                      src={product.image}
+                      alt=""
+                      className="size-full object-contain p-1 drop-shadow-[0_6px_6px_rgba(40,32,24,0.2)]"
+                    />
+                  ) : null}
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="line-clamp-2 text-sm leading-5">{product.name}</span>
@@ -138,7 +255,10 @@ function TabLink({
     <Link
       href={href}
       aria-current={active ? "page" : undefined}
-      className={cn("pressable tab-ink flex flex-col items-center gap-0.5 pb-1.5 text-[10px]", active ? "text-primary" : "text-muted-foreground")}
+      className={cn(
+        "pressable tab-ink flex flex-col items-center gap-0.5 pb-1.5 text-[10px]",
+        active ? "text-primary" : "text-muted-foreground",
+      )}
     >
       <Icon className="size-5" />
       {label}
