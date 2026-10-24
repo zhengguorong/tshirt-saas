@@ -10,3 +10,4 @@ packages/db/.env
 *.tsbuildinfo
 coverage
 .DS_Store
+.design-refs/

@@ -6,7 +6,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
-  ClipboardListIcon,
   HouseIcon,
   ShirtIcon,
   ShoppingBagIcon,
@@ -53,7 +52,7 @@ export function StoreHeader({
 
   return (
     <>
-      <header className="shrink-0 border-b bg-background px-1 lg:px-8">
+      <header className="sticky top-0 z-30 shrink-0 border-b bg-background/95 px-1 backdrop-blur lg:px-8">
         {/* Mobile header */}
         <div className="grid h-12 grid-cols-[2.5rem_1fr_2.5rem] items-center lg:hidden">
           {home ? (
@@ -78,10 +77,10 @@ export function StoreHeader({
 
         {/* Desktop header */}
         <div className="mx-auto hidden h-16 max-w-7xl items-center gap-8 lg:flex">
-          <Link href={base} className="shrink-0 text-lg font-semibold tracking-tight">
+          <Link href={base} className="shrink-0 text-[22px] font-bold tracking-tight">
             {name}
           </Link>
-          <nav className="flex items-center gap-6" aria-label="店铺导航">
+          <nav className="mx-auto flex items-center gap-10" aria-label="店铺导航">
             <DesktopLink href={base} active={home}>
               首页
             </DesktopLink>
@@ -95,20 +94,18 @@ export function StoreHeader({
               )}
               onClick={() => setOpen(true)}
             >
-              <ShirtIcon className="size-4" />
-              定制选品
+              全部底衫
             </button>
-            <DesktopLink href={`${base}/cart`} active={pathname.includes("/cart")} icon={ShoppingBagIcon}>
-              购物车
+            <DesktopLink href={`${base}/orders`} active={pathname.includes("/orders")}>
+              我的订单
             </DesktopLink>
-            <DesktopLink href={`${base}/orders`} active={pathname.includes("/orders")} icon={ClipboardListIcon}>
-              订单
-            </DesktopLink>
-            <DesktopLink href={`${base}/account`} active={pathname.includes("/account")} icon={UserRoundIcon}>
-              我的
+            <DesktopLink href={`${base}/account`} active={pathname.includes("/account")}>
+              账户
             </DesktopLink>
           </nav>
-          {!home ? <p className="ml-auto truncate text-sm text-muted-foreground">{title}</p> : null}
+          <Link href={`${base}/cart`} aria-label="购物车" className="relative ml-auto flex size-9 items-center justify-center rounded-full text-neutral-900 transition hover:bg-neutral-100">
+            <ShoppingBagIcon className="size-5" />
+          </Link>
         </div>
       </header>
       {open ? <BlankSheet slug={slug} products={products} onClose={() => setOpen(false)} /> : null}

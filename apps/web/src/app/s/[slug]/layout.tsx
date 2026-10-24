@@ -30,8 +30,8 @@ export default async function StoreLayout({ children, params }: { children: Reac
     image: product.colors[0] ? mediaUrl(product.colors[0].frontMockupKey) : null,
   }));
   return (
-    <div className="min-h-screen bg-muted">
-      <div className="relative mx-auto flex h-dvh w-full flex-col bg-background shadow-sm lg:max-w-7xl lg:shadow-none">
+    <div className="min-h-screen bg-muted lg:bg-[#f5f3f0]">
+      <div className="relative mx-auto flex h-dvh w-full flex-col bg-background shadow-sm lg:max-w-[1440px] lg:shadow-none">
         <ShopLogin slug={slug} devOtp={allowDevOtp()}>
           <StoreHeader slug={slug} name={shop.name} products={blanks} />
           <div className="min-h-0 flex-1 overflow-hidden">

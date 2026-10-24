@@ -131,6 +131,9 @@
   }
 }
 
+.store-home { color: #171717; }
+.store-hero { background: linear-gradient(115deg, #f1eee8 0%, #ebe5da 52%, #e0d9cd 100%); }
+
 @media (prefers-reduced-motion: no-preference) {
   .pressable {
     transition: transform 80ms ease-out;
