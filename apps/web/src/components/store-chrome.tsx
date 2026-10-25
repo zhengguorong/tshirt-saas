@@ -20,7 +20,7 @@ export type BlankProduct = { id: string; name: string; price: string; image: str
 // Only the design workspace keeps a viewport-sized desktop shell.
 export function StoreFrame({ slug, children }: { slug: string; children: React.ReactNode }) {
   const editor = usePathname().startsWith(`/s/${slug}/design/`);
-  return <div className={cn("relative mx-auto flex h-dvh w-full flex-col bg-background shadow-sm", editor ? "lg:shadow-none" : "lg:h-auto lg:min-h-dvh lg:bg-[#f5f3f0] lg:shadow-none")}>{children}</div>;
+  return <div className={cn("relative mx-auto flex h-dvh w-full flex-col bg-background shadow-sm", editor ? "lg:shadow-none" : "lg:h-auto lg:min-h-dvh lg:bg-white lg:shadow-none")}>{children}</div>;
 }
 
 export function StoreMotion({ slug, children }: { slug: string; children: React.ReactNode }) {
@@ -32,7 +32,7 @@ export function StoreMotion({ slug, children }: { slug: string; children: React.
   const member = rest === "/account" || rest.startsWith("/orders") || rest.startsWith("/addresses");
   const links = [{ path: "/account", label: "账户概览" }, { path: "/orders", label: "我的订单" }, { path: "/addresses", label: "收货地址" }, { path: "/cart", label: "购物车" }];
   return (
-    <div key={pathname} className={cn("h-full min-h-0 overflow-y-auto", motion, editor ? "lg:h-[calc(100dvh-4rem)]" : "store-document lg:flex lg:h-auto lg:min-h-[calc(100dvh-4rem)] lg:flex-col lg:overflow-visible")}>
+    <div key={pathname} className={cn("h-full min-h-0 overflow-y-auto", motion, editor ? "lg:h-[calc(100dvh-4rem)]" : "store-document lg:flex lg:h-auto lg:min-h-[calc(100dvh-5.5rem)] lg:flex-col lg:overflow-visible")}>
       <div className={cn("h-full lg:h-auto", !editor && "lg:flex-1", editor && "lg:h-full", member && "lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-[200px_minmax(0,1fr)] lg:items-start lg:gap-8 lg:px-8 lg:py-10")}>
         {member ? <aside className="hidden lg:sticky lg:top-24 lg:flex lg:flex-col lg:gap-1 lg:rounded-2xl lg:bg-white lg:p-4">
           <p className="px-3 py-3 text-xs text-muted-foreground">个人中心</p>
@@ -41,7 +41,7 @@ export function StoreMotion({ slug, children }: { slug: string; children: React.
         </aside> : null}
         <main className={cn("h-full min-w-0", !editor && "lg:h-auto")}>{children}</main>
       </div>
-      {!editor ? <footer className="mx-auto hidden w-full max-w-7xl items-center justify-between border-t px-8 py-8 text-xs text-muted-foreground lg:flex"><span>用创意，定制你的日常。</span><div className="flex gap-6"><Link href={`/s/${slug}`}>继续选购</Link><Link href={`/s/${slug}/orders`}>查看订单</Link></div></footer> : null}
+      {!editor ? <footer className="mx-auto hidden w-full max-w-[1600px] items-center justify-between border-t px-12 py-12 text-xs text-muted-foreground lg:flex"><span>用创意，定制你的日常。</span><div className="flex gap-6"><Link href={`/s/${slug}`}>继续选购</Link><Link href={`/s/${slug}/orders`}>查看订单</Link></div></footer> : null}
     </div>
   );
 }
@@ -62,7 +62,7 @@ export function StoreHeader({
 
   return (
     <>
-      <header className="sticky top-0 z-30 shrink-0 border-b bg-background/95 px-1 backdrop-blur lg:h-16 lg:px-8">
+      <header className={cn("sticky top-0 z-30 shrink-0 border-b bg-background/95 px-1 backdrop-blur lg:px-12", pathname.startsWith(`${base}/design/`) ? "lg:h-16" : "lg:h-[88px]")}>
         {/* Mobile header */}
         <div className="grid h-12 grid-cols-[2.5rem_1fr_2.5rem] items-center lg:hidden">
           {home ? (
@@ -86,11 +86,11 @@ export function StoreHeader({
         </div>
 
         {/* Desktop header */}
-        <div className="mx-auto hidden h-full max-w-7xl items-center gap-8 lg:flex">
-          <Link href={base} className="max-w-64 shrink-0 truncate text-[22px] font-bold tracking-tight">
+        <div className="relative mx-auto hidden h-full max-w-[1504px] grid-cols-[1fr_auto_1fr] items-center gap-8 lg:grid">
+          <Link href={base} className="col-start-2 row-start-1 max-w-64 truncate font-serif text-4xl font-normal tracking-[0.12em]">
             {name}
           </Link>
-          <nav className="mx-auto flex items-center gap-10" aria-label="店铺导航">
+          <nav className="col-start-1 row-start-1 flex items-center gap-8" aria-label="店铺导航">
             <DesktopLink href={base} active={home}>
               首页
             </DesktopLink>
@@ -98,13 +98,13 @@ export function StoreHeader({
             <DesktopLink href={`${base}/orders`} active={pathname.includes("/orders")}>
               我的订单
             </DesktopLink>
-            <DesktopLink href={`${base}/account`} active={pathname.includes("/account") || pathname.includes("/addresses")}>
-              账户
-            </DesktopLink>
           </nav>
-          <Link href={`${base}/cart`} aria-label="购物车" className="relative ml-auto flex size-9 items-center justify-center rounded-full text-neutral-900 transition hover:bg-neutral-100">
-            <ShoppingBagIcon className="size-5" />
-          </Link>
+          <div className="col-start-3 row-start-1 flex items-center justify-end gap-5">
+            <Link href={`${base}/account`} aria-label="账户" className="flex size-9 items-center justify-center text-neutral-900 transition hover:bg-neutral-100"><UserRoundIcon className="size-[22px]" strokeWidth={1.4} /></Link>
+            <Link href={`${base}/cart`} aria-label="购物车" className="relative flex size-9 items-center justify-center rounded-full text-neutral-900 transition hover:bg-neutral-100">
+              <ShoppingBagIcon className="size-[22px]" strokeWidth={1.4} />
+            </Link>
+          </div>
         </div>
       </header>
     </>
@@ -127,7 +127,7 @@ function DesktopLink({
       href={href}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "flex items-center gap-1.5 text-sm transition-colors",
+        "flex items-center gap-1.5 text-sm tracking-[0.08em] transition-colors",
         active ? "font-medium text-primary" : "text-muted-foreground hover:text-foreground",
       )}
     >
