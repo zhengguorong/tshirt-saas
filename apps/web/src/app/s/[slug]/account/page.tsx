@@ -26,8 +26,9 @@ export default async function AccountPage({ params }: { params: Promise<{ slug: 
     : [];
   const countOf = (status: OrderStatus) => grouped.find((row) => row.status === status)?._count._all ?? 0;
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col gap-5 bg-[#f5f3f0] px-4 py-5 lg:grid lg:grid-cols-[1fr_1.4fr] lg:gap-6 lg:px-12 lg:py-10">
-      <div className="flex items-center gap-3 rounded-2xl bg-white px-6 py-6 shadow-[0_8px_28px_rgba(30,24,18,0.06)] lg:row-span-2 lg:flex-col lg:items-start">
+    <div className="mx-auto flex w-full max-w-5xl flex-col gap-5 bg-[#f5f3f0] px-4 py-5 lg:max-w-none lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.8fr)] lg:items-start lg:gap-6 lg:px-0 lg:py-0">
+      <div className="hidden lg:col-span-2 lg:block"><h1 className="text-3xl font-semibold">账户概览</h1><p className="mt-2 text-sm text-muted-foreground">管理订单、购物车与常用收货信息</p></div>
+      <div className="flex items-center gap-3 rounded-2xl bg-white px-6 py-6 shadow-[0_8px_28px_rgba(30,24,18,0.06)] lg:row-span-2 lg:flex-col lg:items-start lg:gap-5">
         <div className="flex size-12 items-center justify-center rounded-full bg-background text-sm font-semibold">
           {consumer ? consumer.phone.slice(-2) : "客"}
         </div>
