@@ -34,9 +34,11 @@ export function CartSheet({ slug, lines, shipping }: { slug: string; lines: Cart
   }
 
   return (
-    <div className="mx-auto flex h-full min-h-0 w-full max-w-6xl flex-col bg-[#f5f3f0] lg:p-8">
-      <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto p-3 lg:grid lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start lg:gap-6 lg:p-0">
+    <div className="mx-auto flex h-full min-h-0 w-full max-w-6xl flex-col bg-[#f5f3f0] lg:h-auto lg:max-w-7xl lg:px-8 lg:py-10">
+      <div className="mb-6 hidden items-end justify-between lg:flex"><div><h1 className="text-3xl font-semibold">购物车</h1><p className="mt-2 text-sm text-muted-foreground">共 {lines.length} 款商品，选择要结算的定制作品</p></div><Link href={`/s/${slug}#products`} className="text-sm text-muted-foreground hover:text-foreground">继续选购 →</Link></div>
+      <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto p-3 lg:overflow-visible lg:grid lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start lg:gap-6 lg:p-0">
         <div className="flex flex-col gap-4 rounded-2xl bg-white p-6 shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
+          <label className="hidden items-center gap-3 border-b pb-4 text-sm lg:flex"><Checkbox checked={all} onCheckedChange={(checked) => setSelected(checked ? lines.map((line) => line.id) : [])} aria-label="全选商品" />全选商品<span className="ml-auto text-muted-foreground">已选 {pieces} 件</span></label>
           {lines.map((line) => (
             <OrderLine
               key={line.id}
@@ -59,7 +61,7 @@ export function CartSheet({ slug, lines, shipping }: { slug: string; lines: Cart
             />
           ))}
         </div>
-        <aside className="hidden rounded-2xl bg-white p-6 shadow-[0_8px_28px_rgba(30,24,18,0.06)] lg:flex lg:flex-col lg:gap-5">
+        <aside className="hidden rounded-2xl bg-white p-6 shadow-[0_8px_28px_rgba(30,24,18,0.06)] lg:sticky lg:top-24 lg:flex lg:flex-col lg:gap-5">
           <h2 className="text-lg font-semibold">订单摘要</h2>
           <div className="flex justify-between text-sm"><span className="text-muted-foreground">商品小计</span><span>{formatYuan(goodsCents)}</span></div>
           <div className="flex justify-between text-sm"><span className="text-muted-foreground">运费</span><span>{chosen.length ? (shippingFee(goodsCents, shipping) ? formatYuan(shippingFee(goodsCents, shipping)) : "免邮") : "—"}</span></div>

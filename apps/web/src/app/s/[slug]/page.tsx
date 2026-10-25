@@ -12,7 +12,7 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
   const products = await listProducts(shop.id, true);
   const heroImage = products[0]?.colors[0] ? mediaUrl(products[0].colors[0].frontMockupKey) : null;
   return (
-    <div className="store-home mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-4 py-5 lg:px-12 lg:py-8">
+    <div className="store-home mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-4 py-5 lg:max-w-7xl lg:px-8 lg:py-8">
       <section className="store-hero overflow-hidden rounded-[28px] lg:grid lg:grid-cols-[0.9fr_1.1fr]">
         <div className="flex flex-col justify-center px-6 py-12 sm:px-10 lg:px-14 lg:py-16">
           <p className="mb-4 text-xs font-medium tracking-[0.24em] text-neutral-500">{shop.name}</p>
@@ -28,8 +28,8 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
           {heroImage ? <img src={heroImage} alt="" className="absolute inset-0 h-full w-full object-contain p-6 drop-shadow-[0_24px_24px_rgba(51,42,31,0.2)] lg:p-10" /> : <div className="h-full w-full bg-gradient-to-br from-[#ddd4c6] to-[#f2eee7]" />}
         </div>
       </section>
-      <section id="products" className="flex flex-col gap-4">
-        <div className="flex items-end justify-between"><div><h2 className="text-2xl font-semibold tracking-tight">精选底衫</h2><p className="mt-1 text-sm text-neutral-500">优质面料与版型，适合各种印刷工艺，让你的创意更出彩。</p></div><span className="hidden text-sm text-neutral-500 sm:block">查看全部&nbsp; →</span></div>
+      <section id="products" className="flex scroll-mt-24 flex-col gap-4">
+        <div className="flex items-end justify-between"><div><h2 className="text-2xl font-semibold tracking-tight">精选底衫</h2><p className="mt-1 text-sm text-neutral-500">优质面料与版型，适合各种印刷工艺，让你的创意更出彩。</p></div><span className="hidden text-sm text-neutral-500 sm:block">共 {products.length} 款底衫</span></div>
       {products.length === 0 ? (
         <Empty className="border">
           <EmptyHeader>

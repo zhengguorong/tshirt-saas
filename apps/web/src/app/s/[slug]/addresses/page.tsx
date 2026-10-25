@@ -22,9 +22,9 @@ export default async function AddressListPage({
   const addresses = await prisma.address.findMany({ where: { consumerId: consumer.id }, orderBy: [{ isDefault: "desc" }, { createdAt: "desc" }] });
   const adding = `/s/${slug}/addresses/new${next ? `?next=${encodeURIComponent(next)}` : ""}`;
   return (
-    <div className="mx-auto flex h-full min-h-0 w-full max-w-5xl flex-col bg-[#f5f3f0] p-4 lg:p-10">
-      <div className="mb-5 flex items-center justify-between"><div><h1 className="text-2xl font-semibold tracking-tight">收货地址</h1><p className="mt-1 text-sm text-muted-foreground">管理你的常用收货信息</p></div><Button className="hidden bg-neutral-950 lg:inline-flex" size="lg" nativeButton={false} render={<Link href={adding} />}>添加地址</Button></div>
-      <div className="min-h-0 flex-1 overflow-y-auto lg:rounded-2xl lg:bg-white lg:p-2 lg:shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
+    <div className="mx-auto flex h-full min-h-0 w-full max-w-5xl flex-col bg-[#f5f3f0] p-4 lg:h-auto lg:max-w-none lg:p-0">
+      <div className="mb-5 flex items-center justify-between"><div><h1 className="text-2xl font-semibold tracking-tight">{next ? "选择收货地址" : "收货地址"}</h1><p className="mt-1 text-sm text-muted-foreground">{next ? "选择地址后返回订单确认" : "管理你的常用收货信息"}</p></div><Button className="hidden bg-neutral-950 lg:inline-flex" size="lg" nativeButton={false} render={<Link href={adding} />}>添加地址</Button></div>
+      <div className="min-h-0 flex-1 overflow-y-auto lg:overflow-visible lg:rounded-2xl lg:bg-white lg:p-2 lg:shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
         {addresses.length === 0 ? (
           <Empty className="m-3 border bg-background">
             <EmptyHeader>

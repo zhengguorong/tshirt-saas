@@ -1,0 +1,8 @@
+/* Storefront only: mobile keeps the App shell and its route animations. */
+@media (min-width: 1024px) {
+  .store-document.store-fade,
+  .store-document.page-push,
+  .store-login-dialog.sheet-up {
+    animation: none;
+  }
+}

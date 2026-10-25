@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
@@ -17,14 +17,31 @@ import { Button } from "@/components/ui/button";
 
 export type BlankProduct = { id: string; name: string; price: string; image: string | null };
 
+// Only the design workspace keeps a viewport-sized desktop shell.
+export function StoreFrame({ slug, children }: { slug: string; children: React.ReactNode }) {
+  const editor = usePathname().startsWith(`/s/${slug}/design/`);
+  return <div className={cn("relative mx-auto flex h-dvh w-full flex-col bg-background shadow-sm", editor ? "lg:shadow-none" : "lg:h-auto lg:min-h-dvh lg:bg-[#f5f3f0] lg:shadow-none")}>{children}</div>;
+}
+
 export function StoreMotion({ slug, children }: { slug: string; children: React.ReactNode }) {
   const pathname = usePathname();
   const rest = pathname.startsWith(`/s/${slug}`) ? pathname.slice(`/s/${slug}`.length) : pathname;
   const tab = rest === "" || rest === "/" || rest === "/cart" || rest === "/orders" || rest === "/account";
   const motion = rest.startsWith("/design") || rest === "/login" ? "" : tab ? "store-fade" : "page-push";
+  const editor = rest.startsWith("/design/");
+  const member = rest === "/account" || rest.startsWith("/orders") || rest.startsWith("/addresses");
+  const links = [{ path: "/account", label: "账户概览" }, { path: "/orders", label: "我的订单" }, { path: "/addresses", label: "收货地址" }, { path: "/cart", label: "购物车" }];
   return (
-    <div key={pathname} className={cn("h-full min-h-0 overflow-y-auto", motion)}>
-      {children}
+    <div key={pathname} className={cn("h-full min-h-0 overflow-y-auto", motion, editor ? "lg:h-[calc(100dvh-4rem)]" : "store-document lg:flex lg:h-auto lg:min-h-[calc(100dvh-4rem)] lg:flex-col lg:overflow-visible")}>
+      <div className={cn("h-full lg:h-auto", !editor && "lg:flex-1", editor && "lg:h-full", member && "lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-[200px_minmax(0,1fr)] lg:items-start lg:gap-8 lg:px-8 lg:py-10")}>
+        {member ? <aside className="hidden lg:sticky lg:top-24 lg:flex lg:flex-col lg:gap-1 lg:rounded-2xl lg:bg-white lg:p-4">
+          <p className="px-3 py-3 text-xs text-muted-foreground">个人中心</p>
+          {links.map(({ path, label }) => <Link key={path} href={`/s/${slug}${path}`} aria-current={rest.startsWith(path) ? "page" : undefined} className={cn("rounded-lg px-3 py-3 text-sm transition hover:bg-muted", rest.startsWith(path) && "bg-muted font-semibold")}>{label}</Link>)}
+          <Link href={`/s/${slug}`} className="mt-4 border-t px-3 pt-5 text-sm text-muted-foreground">继续选购 →</Link>
+        </aside> : null}
+        <main className={cn("h-full min-w-0", !editor && "lg:h-auto")}>{children}</main>
+      </div>
+      {!editor ? <footer className="mx-auto hidden w-full max-w-7xl items-center justify-between border-t px-8 py-8 text-xs text-muted-foreground lg:flex"><span>用创意，定制你的日常。</span><div className="flex gap-6"><Link href={`/s/${slug}`}>继续选购</Link><Link href={`/s/${slug}/orders`}>查看订单</Link></div></footer> : null}
     </div>
   );
 }
@@ -32,27 +49,20 @@ export function StoreMotion({ slug, children }: { slug: string; children: React.
 export function StoreHeader({
   slug,
   name,
-  products,
 }: {
   slug: string;
   name: string;
-  products: BlankProduct[];
 }) {
   const pathname = usePathname();
   const search = useSearchParams();
   const router = useRouter();
-  const [open, setOpen] = useState(false);
   const home = pathname === `/s/${slug}` || pathname === `/s/${slug}/`;
   const title = headerTitle(pathname, Boolean(search.get("next")), name);
   const base = `/s/${slug}`;
 
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
   return (
     <>
-      <header className="sticky top-0 z-30 shrink-0 border-b bg-background/95 px-1 backdrop-blur lg:px-8">
+      <header className="sticky top-0 z-30 shrink-0 border-b bg-background/95 px-1 backdrop-blur lg:h-16 lg:px-8">
         {/* Mobile header */}
         <div className="grid h-12 grid-cols-[2.5rem_1fr_2.5rem] items-center lg:hidden">
           {home ? (
@@ -76,30 +86,19 @@ export function StoreHeader({
         </div>
 
         {/* Desktop header */}
-        <div className="mx-auto hidden h-16 max-w-7xl items-center gap-8 lg:flex">
-          <Link href={base} className="shrink-0 text-[22px] font-bold tracking-tight">
+        <div className="mx-auto hidden h-full max-w-7xl items-center gap-8 lg:flex">
+          <Link href={base} className="max-w-64 shrink-0 truncate text-[22px] font-bold tracking-tight">
             {name}
           </Link>
           <nav className="mx-auto flex items-center gap-10" aria-label="店铺导航">
             <DesktopLink href={base} active={home}>
               首页
             </DesktopLink>
-            <button
-              type="button"
-              className={cn(
-                "flex items-center gap-1.5 text-sm transition-colors",
-                open || pathname.includes("/design") || pathname.includes("/products")
-                  ? "font-medium text-primary"
-                  : "text-muted-foreground hover:text-foreground",
-              )}
-              onClick={() => setOpen(true)}
-            >
-              全部底衫
-            </button>
+            <DesktopLink href={`${base}#products`} active={pathname.includes("/design") || pathname.includes("/products")}>全部底衫</DesktopLink>
             <DesktopLink href={`${base}/orders`} active={pathname.includes("/orders")}>
               我的订单
             </DesktopLink>
-            <DesktopLink href={`${base}/account`} active={pathname.includes("/account")}>
+            <DesktopLink href={`${base}/account`} active={pathname.includes("/account") || pathname.includes("/addresses")}>
               账户
             </DesktopLink>
           </nav>
@@ -108,7 +107,6 @@ export function StoreHeader({
           </Link>
         </div>
       </header>
-      {open ? <BlankSheet slug={slug} products={products} onClose={() => setOpen(false)} /> : null}
     </>
   );
 }
@@ -127,6 +125,7 @@ function DesktopLink({
   return (
     <Link
       href={href}
+      aria-current={active ? "page" : undefined}
       className={cn(
         "flex items-center gap-1.5 text-sm transition-colors",
         active ? "font-medium text-primary" : "text-muted-foreground hover:text-foreground",
@@ -138,8 +137,12 @@ function DesktopLink({
   );
 }
 
-export function StoreTabBar({ slug, products }: { slug: string; products: BlankProduct[] }) {
+export function StoreTabBar(props: { slug: string; products: BlankProduct[] }) {
   const pathname = usePathname();
+  return <StoreTabs key={pathname} {...props} pathname={pathname} />;
+}
+
+function StoreTabs({ slug, products, pathname }: { slug: string; products: BlankProduct[]; pathname: string }) {
   const [open, setOpen] = useState(false);
   const base = `/s/${slug}`;
   const visible =
@@ -148,9 +151,6 @@ export function StoreTabBar({ slug, products }: { slug: string; products: BlankP
     pathname === `${base}/cart` ||
     pathname === `${base}/orders` ||
     pathname === `${base}/account`;
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
   if (!visible) return null;
   const home = pathname === base || pathname === `${base}/`;
   const mine = pathname === `${base}/account`;

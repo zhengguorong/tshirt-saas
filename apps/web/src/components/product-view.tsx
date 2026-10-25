@@ -55,10 +55,10 @@ export function ProductView({
     router.push(`/s/${slug}/design/${productId}?${query.toString()}`);
   }
   return (
-    <div className="flex h-full min-h-0 flex-col bg-[#f5f3f0]">
-      <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-4 overflow-y-auto lg:mx-auto lg:grid lg:max-w-6xl lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)] lg:gap-10 lg:px-8 lg:py-10">
+    <div className="flex h-full min-h-0 flex-col bg-[#f5f3f0] lg:h-auto">
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-4 overflow-y-auto lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:overflow-visible lg:items-start lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)] lg:gap-10 lg:px-8 lg:py-10">
         <Gallery images={images} label={name} />
-        <div className="flex flex-col gap-5 px-4 pb-4 lg:rounded-2xl lg:bg-white lg:p-7 lg:shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
+        <div className="flex flex-col gap-5 px-4 pb-4 lg:sticky lg:top-24 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:rounded-2xl lg:bg-white lg:p-7 lg:shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
           <div className="flex flex-col gap-2 border-b pb-5">
             <h1 className="text-2xl font-semibold tracking-tight">{name}</h1>
             <p className="text-2xl font-semibold tabular-nums">{price}</p>
@@ -89,8 +89,13 @@ export function ProductView({
               </div>
             </div>
           ) : null}
+          <div className="hidden flex-col gap-3 border-t pt-5 lg:flex">
+            <p className="text-sm text-muted-foreground">选好颜色和尺码，下一步上传图案，预览定制效果。</p>
+            <Button size="lg" className="w-full bg-neutral-950" type="button" onClick={customize}>去定制</Button>
+          </div>
+        </div>
           {description.length > 0 ? (
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 px-4 pb-4 lg:col-start-1 lg:rounded-2xl lg:bg-white lg:p-7">
               <div className="flex items-center gap-3">
                 <Separator className="flex-1" />
                 <span className="text-xs text-muted-foreground">详情</span>
@@ -107,9 +112,8 @@ export function ProductView({
               </div>
             </div>
           ) : null}
-        </div>
       </div>
-      <div className="flex shrink-0 items-center gap-3 border-t bg-background px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] lg:mx-auto lg:w-full lg:max-w-6xl lg:justify-end lg:gap-4 lg:border-t-0 lg:bg-transparent lg:px-8 lg:py-4">
+      <div className="flex shrink-0 items-center gap-3 border-t bg-background px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] lg:hidden">
         <Link href={`/s/${slug}`} className="pressable flex w-10 flex-col items-center gap-0.5 text-[10px] text-muted-foreground lg:hidden">
           <HouseIcon className="size-5" />
           首页
@@ -170,7 +174,7 @@ function Gallery({ images, label }: { images: string[]; label: string }) {
   const dots = incoming ?? frame;
   const dotIndex = incoming ? 0 : index;
   return (
-    <div className="relative shrink-0 bg-[#e8e4dc] lg:rounded-2xl lg:shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
+    <div className="relative min-w-0 shrink-0 bg-[#e8e4dc] lg:col-start-1 lg:row-start-1 lg:overflow-hidden lg:rounded-2xl lg:shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
       <div ref={scroller} className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {frame.map((url, imageIndex) => (
           <img key={`${url}-${imageIndex}`} src={url} alt={imageIndex === 0 ? label : ""} className={garment} />
@@ -182,16 +186,18 @@ function Gallery({ images, label }: { images: string[]; label: string }) {
         </div>
       ) : null}
       {dots.length > 1 ? (
-        <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
+        <div className="absolute bottom-3 left-1/2 z-10 flex max-w-full -translate-x-1/2 gap-1.5 lg:static lg:translate-x-0 lg:flex-wrap lg:justify-center lg:p-3">
           {dots.map((url, dot) => (
             <button
               key={`${url}-${dot}`}
               type="button"
               aria-label={`第 ${dot + 1} 张`}
-              className="flex size-4 items-center justify-center"
+              aria-pressed={dot === dotIndex}
+              className="flex size-4 items-center justify-center lg:size-14 lg:overflow-hidden lg:rounded-lg lg:border lg:bg-white/70"
               onClick={() => go(dot)}
             >
-              <span className={cn("size-1.5 rounded-full", dot === dotIndex ? "bg-neutral-900" : "bg-neutral-900/25")} />
+              <span className={cn("size-1.5 rounded-full lg:hidden", dot === dotIndex ? "bg-neutral-900" : "bg-neutral-900/25")} />
+              <img src={url} alt="" className={cn("hidden size-full object-contain p-1 lg:block", dot === dotIndex && "ring-2 ring-inset ring-neutral-900")} />
             </button>
           ))}
         </div>

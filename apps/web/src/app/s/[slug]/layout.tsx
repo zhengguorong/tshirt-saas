@@ -1,7 +1,8 @@
+import "./storefront.css";
 import { notFound } from "next/navigation";
 import { formatYuan } from "@tshirt/design";
 import { ShopLogin } from "@/components/shop-login";
-import { StoreHeader, StoreMotion, StoreTabBar } from "@/components/store-chrome";
+import { StoreFrame, StoreHeader, StoreMotion, StoreTabBar } from "@/components/store-chrome";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { allowDevOtp } from "@/server/auth";
 import { getShop, listProducts, mediaUrl } from "@/server/catalog";
@@ -31,15 +32,15 @@ export default async function StoreLayout({ children, params }: { children: Reac
   }));
   return (
     <div className="min-h-screen bg-muted lg:bg-[#f5f3f0]">
-      <div className="relative mx-auto flex h-dvh w-full flex-col bg-background shadow-sm lg:max-w-[1440px] lg:shadow-none">
+      <StoreFrame slug={slug}>
         <ShopLogin slug={slug} devOtp={allowDevOtp()}>
-          <StoreHeader slug={slug} name={shop.name} products={blanks} />
-          <div className="min-h-0 flex-1 overflow-hidden">
+          <StoreHeader slug={slug} name={shop.name} />
+          <div className="min-h-0 flex-1 overflow-hidden lg:overflow-visible">
             <StoreMotion slug={slug}>{children}</StoreMotion>
           </div>
           <StoreTabBar slug={slug} products={blanks} />
         </ShopLogin>
-      </div>
+      </StoreFrame>
     </div>
   );
 }

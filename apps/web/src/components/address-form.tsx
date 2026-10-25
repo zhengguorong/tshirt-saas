@@ -20,7 +20,8 @@ export function AddressForm({
 }) {
   const [state, action, pending] = useActionState(saveAddress, null);
   return (
-    <div className="mx-auto flex h-full min-h-0 w-full max-w-3xl flex-col bg-[#f5f3f0] p-4 lg:p-10">
+    <div className="mx-auto flex h-full min-h-0 w-full max-w-3xl flex-col bg-[#f5f3f0] p-4 lg:h-auto lg:max-w-none lg:p-0">
+      <div className="mb-6 hidden lg:block"><h1 className="text-3xl font-semibold">{address ? "编辑收货地址" : "添加收货地址"}</h1><p className="mt-2 text-sm text-muted-foreground">请填写准确的联系方式和收货地址</p></div>
       <form action={action} className="flex min-h-0 flex-1 flex-col rounded-2xl bg-white p-5 shadow-[0_8px_28px_rgba(30,24,18,0.06)] lg:p-8">
         <input type="hidden" name="slug" value={slug} />
         <input type="hidden" name="next" value={next} />
@@ -28,16 +29,16 @@ export function AddressForm({
         <div className="flex flex-col rounded-xl border px-4">
           <label className="flex min-h-12 items-center gap-3 border-b text-sm">
             <span className="w-28 shrink-0">收货姓名</span>
-            <input name="name" defaultValue={address?.name ?? ""} maxLength={25} placeholder="请输入收货姓名" className="min-w-0 flex-1 bg-transparent text-right outline-none placeholder:text-muted-foreground" />
+            <input name="name" defaultValue={address?.name ?? ""} maxLength={25} placeholder="请输入收货姓名" className="min-w-0 flex-1 bg-transparent text-right outline-none lg:text-left placeholder:text-muted-foreground" />
           </label>
           <label className="flex min-h-12 items-center gap-3 border-b text-sm">
             <span className="w-28 shrink-0">联系方式</span>
-            <input name="phone" defaultValue={address?.phone ?? ""} inputMode="numeric" maxLength={11} placeholder="请输入联系方式" className="min-w-0 flex-1 bg-transparent text-right outline-none placeholder:text-muted-foreground" />
+            <input name="phone" defaultValue={address?.phone ?? ""} inputMode="numeric" maxLength={11} placeholder="请输入联系方式" className="min-w-0 flex-1 bg-transparent text-right outline-none lg:text-left placeholder:text-muted-foreground" />
           </label>
           <RegionField province={address?.province ?? ""} city={address?.city ?? ""} district={address?.district ?? ""} />
           <label className="flex items-start gap-3 border-b py-3 text-sm">
             <span className="w-28 shrink-0 pt-1">详细地址</span>
-            <textarea name="detail" defaultValue={address?.detail ?? ""} maxLength={50} rows={3} placeholder="请输入详细地址" className="min-h-16 min-w-0 flex-1 resize-none bg-transparent text-right outline-none placeholder:text-muted-foreground" />
+            <textarea name="detail" defaultValue={address?.detail ?? ""} maxLength={50} rows={3} placeholder="请输入详细地址" className="min-h-16 min-w-0 flex-1 resize-none bg-transparent text-right outline-none lg:text-left placeholder:text-muted-foreground" />
           </label>
           <label className="flex min-h-12 items-center justify-between gap-3 text-sm">
             <span>是否设为默认地址</span>
@@ -45,12 +46,12 @@ export function AddressForm({
           </label>
         </div>
         {state?.error ? <div className="px-4"><Alert variant="destructive"><AlertDescription>{state.error}</AlertDescription></Alert></div> : null}
-        <div className="mt-auto p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
-          <Button type="submit" className="w-full" size="lg" disabled={pending}>{pending ? "保存中" : "保存"}</Button>
+        <div className="mt-auto p-4 pb-[max(1rem,env(safe-area-inset-bottom))] lg:mt-6 lg:flex lg:justify-end lg:p-0">
+          <Button type="submit" className="w-full lg:w-40" size="lg" disabled={pending}>{pending ? "保存中" : "保存"}</Button>
         </div>
       </form>
       {address ? (
-        <form action={deleteAddress} className="px-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+        <form action={deleteAddress} className="px-4 pb-[max(1rem,env(safe-area-inset-bottom))] lg:mt-4 lg:self-start lg:p-0">
           <input type="hidden" name="slug" value={slug} />
           <input type="hidden" name="next" value={next} />
           <input type="hidden" name="id" value={address.id} />

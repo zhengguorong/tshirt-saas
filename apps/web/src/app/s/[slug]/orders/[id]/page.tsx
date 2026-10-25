@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { formatYuan } from "@tshirt/design";
 import { prisma } from "@tshirt/db";
@@ -22,27 +23,31 @@ export default async function OrderDetailPage({ params }: { params: Promise<{ sl
   });
   if (!order || order.tenant.slug !== slug) notFound();
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col gap-5 bg-[#f5f3f0] p-4 lg:p-10">
-      <div className="flex items-center justify-between gap-3 rounded-2xl bg-white p-6 shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
+    <div className="mx-auto flex w-full max-w-5xl flex-col gap-5 bg-[#f5f3f0] p-4 lg:grid lg:max-w-none lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start lg:p-0">
+      <div className="hidden lg:col-span-2 lg:block"><Link href={`/s/${slug}/orders`} className="text-sm text-muted-foreground hover:text-foreground">← 返回我的订单</Link></div>
+      <div className="lg:col-span-2 flex items-center justify-between gap-3 rounded-2xl bg-white p-6 shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
         <div className="flex flex-col gap-1">
           <h1 className="text-2xl font-semibold tracking-tight">{order.code}</h1>
           <p className="text-sm text-muted-foreground tabular-nums">应付 {formatYuan(order.totalCents)}</p>
         </div>
         <OrderStatusBadge status={order.status} />
       </div>
+      <section className="flex min-w-0 flex-col gap-5 lg:col-start-1">
       {order.items.map((item) => (
         <Card key={item.id} size="sm" className="rounded-2xl border-0 bg-white shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
           <CardHeader>
             <CardTitle>{item.productName}</CardTitle>
             <CardDescription>{item.colorName} / {item.sizeName} × {item.quantity} · {formatYuan((item.unitBaseCents + item.unitPrintCents) * item.quantity)}</CardDescription>
           </CardHeader>
-          <CardContent className="flex gap-2">
+          <CardContent className="flex flex-wrap gap-2">
             {item.files.filter((file) => file.kind === "preview" && file.objectKey).map((file) => (
               <img key={file.id} src={mediaUrl(file.objectKey || "")} alt="" className="h-28 rounded-lg border bg-muted object-contain" />
             ))}
           </CardContent>
         </Card>
       ))}
+      </section>
+      <aside className="flex min-w-0 flex-col gap-5 lg:sticky lg:top-24 lg:col-start-2 lg:row-span-2 lg:row-start-3">
       <Card size="sm" className="rounded-2xl border-0 bg-white shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
         <CardHeader>
           <CardTitle>收货与费用</CardTitle>
@@ -69,7 +74,8 @@ export default async function OrderDetailPage({ params }: { params: Promise<{ sl
           <Button type="submit" className="w-full">确认收货</Button>
         </form>
       ) : null}
-      <Card size="sm" className="rounded-2xl border-0 bg-white shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
+      </aside>
+      <Card size="sm" className="lg:col-start-1 rounded-2xl border-0 bg-white shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
         <CardHeader>
           <CardTitle>进度</CardTitle>
         </CardHeader>
@@ -78,7 +84,7 @@ export default async function OrderDetailPage({ params }: { params: Promise<{ sl
         </CardContent>
       </Card>
       {order.status === "CLOSE" ? (
-        <Alert>
+        <Alert className="lg:col-start-1">
           <AlertDescription>这笔订单已关闭。</AlertDescription>
         </Alert>
       ) : null}

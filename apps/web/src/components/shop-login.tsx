@@ -52,7 +52,7 @@ export function LoginWall({ next, title }: { next: string; title: string }) {
     openLogin(next);
   }, [next, openLogin]);
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-3 px-8 text-center">
+    <div className="flex h-full flex-col items-center justify-center gap-3 px-8 text-center lg:mx-auto lg:my-16 lg:h-auto lg:min-h-80 lg:max-w-2xl lg:rounded-2xl lg:bg-white lg:py-12">
       <p className="text-base font-medium">{title}</p>
       <p className="text-sm text-muted-foreground">验证手机号即可继续，不用设置密码。</p>
       <Button type="button" onClick={() => openLogin(next)}>登录</Button>
@@ -111,9 +111,9 @@ function LoginDialog({
         role="dialog"
         aria-modal="true"
         aria-labelledby="shop-login-title"
-        className="sheet-up fixed inset-x-0 bottom-0 z-50 mx-auto flex w-full max-w-[430px] flex-col gap-4 rounded-t-3xl bg-background px-5 pt-3 pb-[max(20px,env(safe-area-inset-bottom))] shadow-[0_-16px_40px_rgba(0,0,0,0.16)] lg:inset-y-1/2 lg:bottom-auto lg:max-w-md lg:-translate-y-1/2 lg:rounded-2xl lg:p-8 lg:shadow-[0_8px_28px_rgba(30,24,18,0.14)]"
+        className="store-login-dialog sheet-up fixed inset-x-0 bottom-0 z-50 mx-auto flex w-full max-w-[430px] flex-col gap-4 rounded-t-3xl bg-background px-5 pt-3 pb-[max(20px,env(safe-area-inset-bottom))] shadow-[0_-16px_40px_rgba(0,0,0,0.16)] lg:inset-y-1/2 lg:bottom-auto lg:max-w-md lg:-translate-y-1/2 lg:rounded-2xl lg:p-8 lg:shadow-[0_8px_28px_rgba(30,24,18,0.14)]"
       >
-        <div className="mx-auto h-1 w-10 rounded-full bg-muted" />
+        <div className="mx-auto h-1 w-10 rounded-full bg-muted lg:hidden" />
         <div className="flex items-start justify-between gap-3">
           <div className="flex flex-col gap-1">
             <h2 id="shop-login-title" className="text-xl font-semibold tracking-tight">登录</h2>
