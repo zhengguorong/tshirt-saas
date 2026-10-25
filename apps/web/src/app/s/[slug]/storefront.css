@@ -1,0 +1,56 @@
+/* Storefront only: mobile keeps the App shell and its route animations. */
+@media (min-width: 1024px) {
+  /* Two large views, with the existing swipe gallery retained below lg. */
+  .store-product-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .store-product-gallery > img:only-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Scope OrderLine overrides to the cart; checkout/orders keep their layout. */
+  .store-cart-lines > div {
+    align-items: center;
+    gap: 24px;
+    padding-block: 40px;
+  }
+
+  .store-cart-lines > div + div {
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .store-cart-lines > div > img,
+  .store-cart-lines > div > .size-16 {
+    width: clamp(140px, 18vw, 280px);
+    height: auto;
+    aspect-ratio: 4 / 5;
+    border-radius: 0;
+  }
+
+  .store-cart-lines > div > .flex-1 {
+    gap: 24px;
+  }
+
+  .store-cart-lines > div > .flex-1 > div:first-child > p {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .store-cart-lines > div > .flex-1 > div {
+    flex-wrap: wrap;
+    row-gap: 12px;
+  }
+
+  .store-document.store-fade,
+  .store-document.page-push,
+  .store-login-dialog.sheet-up {
+    animation: none;
+  }
+}

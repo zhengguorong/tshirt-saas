@@ -437,7 +437,7 @@ export default function EditorCanvas({ slug, loggedIn, product, materials, initi
 
   return (
     <div className="fixed inset-y-0 left-1/2 z-40 flex h-dvh w-full max-w-[430px] -translate-x-1/2 flex-col bg-[#f3efe6] text-neutral-900 lg:left-0 lg:max-w-none lg:translate-x-0">
-      <header className="bg-white px-3 pt-[max(8px,env(safe-area-inset-top))] pb-2">
+      <header className="bg-white px-3 pt-[max(8px,env(safe-area-inset-top))] pb-2 lg:border-b lg:px-10 lg:py-3">
         <div className="flex items-center gap-2">
           <Link href={`/s/${slug}/products/${product.id}`} aria-label="返回" className="flex size-8 items-center justify-center rounded-full">
             <ChevronLeftIcon className="size-5" />
@@ -446,11 +446,14 @@ export default function EditorCanvas({ slug, loggedIn, product, materials, initi
             <p className="truncate text-sm font-semibold">{product.name}</p>
             <p className="text-xs text-neutral-500 tabular-nums">{formatYuan(price.goodsCents)}</p>
           </div>
-          <button type="button" disabled={!hasArt} className="rounded-full bg-neutral-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-40" onClick={() => { closeFontSession(); setPanel("buy"); }}>
+          <button type="button" disabled={!hasArt} className="rounded-full bg-neutral-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-40 lg:hidden" onClick={() => { closeFontSession(); setPanel("buy"); }}>
             立即购买
           </button>
+          <button type="button" className="hidden rounded-lg border border-neutral-200 px-4 py-2 text-sm font-medium lg:inline-flex" onClick={() => void saveDesign()}>
+            保存草稿
+          </button>
         </div>
-        <div className="mt-2 flex gap-2 overflow-x-auto px-2">
+        <div className="mt-2 flex gap-2 overflow-x-auto px-2 lg:hidden">
           {product.colors.map((item) => (
             <button
               key={item.id}
@@ -466,7 +469,17 @@ export default function EditorCanvas({ slug, loggedIn, product, materials, initi
         </div>
       </header>
 
-      <div className="relative min-h-0 flex-1 lg:mx-auto lg:w-full lg:max-w-5xl">
+      <aside className="absolute inset-y-[74px] left-0 z-20 hidden w-[92px] flex-col items-center gap-2 border-r border-black/5 bg-white py-8 lg:flex">
+        <RailButton label="素材" active={panel === "material"} onClick={() => { closeFontSession(); setPanel(panel === "material" ? "none" : "material"); }}><StickerIcon /></RailButton>
+        <RailButton label="文字" active={panel === "font"} onClick={() => { if (selected?.type === "text") { openFontSession(); setPanel("font"); } else addText(); }}><TypeIcon /></RailButton>
+        <RailButton label="上传" active={panel === "photo"} onClick={() => albumRef.current?.click()}><ImagePlusIcon /></RailButton>
+        <RailButton label="图层" active={panel === "tools"} onClick={() => setPanel(panel === "tools" ? "none" : "tools")}><CropIcon /></RailButton>
+        <div className="my-3 h-px w-12 bg-neutral-200" />
+        <RailButton label="撤销" disabled={!past.length} onClick={undo}><Undo2Icon /></RailButton>
+        <RailButton label="重做" disabled={!future.length} onClick={redo}><Redo2Icon /></RailButton>
+      </aside>
+
+      <div className="relative min-h-0 flex-1 lg:ml-[92px] lg:mr-[390px] lg:bg-[#edf0f4]">
         {area && mockup ? (
           <EditorStage
             design={design}
@@ -501,8 +514,17 @@ export default function EditorCanvas({ slug, loggedIn, product, materials, initi
         {message ? <p className="absolute top-3 left-1/2 z-20 max-w-[80%] -translate-x-1/2 rounded-full bg-neutral-900 px-3 py-1.5 text-center text-xs text-white">{message}</p> : null}
       </div>
 
+      <aside className="absolute inset-y-[74px] right-4 z-20 hidden w-[360px] overflow-y-auto rounded-2xl bg-white p-5 shadow-[0_8px_30px_rgba(30,35,45,0.08)] lg:block">
+        <div className="flex border-b border-neutral-200"><button className="border-b-2 border-neutral-900 px-3 pb-3 text-base font-semibold">设计</button><span className="px-3 pb-3 text-base text-neutral-400">商品信息</span></div>
+        <div className="mt-5 grid grid-cols-2 gap-2"><button type="button" className={`rounded-xl border p-3 text-sm ${surface === "front" ? "border-neutral-900 bg-neutral-950 text-white" : "border-neutral-200"}`} onClick={() => setSurface("front")}>正面</button>{hasBack ? <button type="button" className={`rounded-xl border p-3 text-sm ${surface === "back" ? "border-neutral-900 bg-neutral-950 text-white" : "border-neutral-200"}`} onClick={() => setSurface("back")}>背面</button> : null}</div>
+        <InspectorSection title="颜色"><div className="flex flex-wrap gap-3">{product.colors.map((item) => <button key={item.id} type="button" aria-label={item.name} className={`size-9 rounded-full border-2 ${item.id === design.colorId ? "border-neutral-900 ring-2 ring-neutral-200" : "border-white"}`} style={{ backgroundColor: item.hex }} onClick={() => commit({ ...designRef.current, colorId: item.id })}>{item.id === design.colorId ? <CheckIcon className="mx-auto size-4" style={{ color: inkOn(item.hex) }} /> : null}</button>)}</div></InspectorSection>
+        <InspectorSection title="尺码"><div className="grid grid-cols-5 gap-2">{product.sizes.map((item) => <button key={item.id} type="button" className={`rounded-lg border py-2 text-sm ${item.id === sizeId ? "border-neutral-900 font-semibold" : "border-neutral-200"}`} onClick={() => setSizeId(item.id)}>{item.name}</button>)}</div></InspectorSection>
+        <InspectorSection title="数量"><div className="flex w-40 items-center rounded-lg border border-neutral-200"><button type="button" className="w-12 py-2 text-lg" onClick={() => setQuantity((value) => Math.max(1, value - 1))}>−</button><span className="flex-1 border-x border-neutral-200 py-2 text-center tabular-nums">{quantity}</span><button type="button" className="w-12 py-2 text-lg" onClick={() => setQuantity((value) => Math.min(20, value + 1))}>＋</button></div></InspectorSection>
+        <div className="mt-8 flex items-end justify-between border-t border-neutral-200 pt-5"><div><p className="text-sm text-neutral-500">单价</p><p className="text-3xl font-semibold">{formatYuan(price.goodsCents)}</p></div><button type="button" disabled={!hasArt} className="rounded-xl bg-neutral-950 px-6 py-3.5 text-sm font-medium text-white disabled:opacity-40" onClick={() => { closeFontSession(); void checkout(false); }}>加入购物车</button></div>
+      </aside>
+
       {panel === "material" ? (
-        <section className="sheet-up max-h-52 overflow-y-auto rounded-t-2xl bg-white px-3 py-3 shadow-[0_-8px_24px_rgba(0,0,0,0.08)]">
+        <section className="sheet-up max-h-52 overflow-y-auto rounded-t-2xl bg-white px-3 py-3 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] lg:absolute lg:bottom-6 lg:left-[calc(92px+1.5rem)] lg:right-[calc(390px+2rem)] lg:z-30 lg:max-h-64 lg:rounded-2xl lg:shadow-lg">
           {library.length === 0 ? <p className="py-6 text-center text-sm text-neutral-500">还没有印花素材</p> : (
             <div className="grid grid-cols-4 gap-2">
               {library.map((item) => (
@@ -516,7 +538,7 @@ export default function EditorCanvas({ slug, loggedIn, product, materials, initi
       ) : null}
 
       {panel === "font" && selected?.type === "text" ? (
-        <section className="sheet-up flex max-h-[50%] flex-col gap-3 overflow-y-auto rounded-t-2xl bg-white px-4 py-3 shadow-[0_-8px_24px_rgba(0,0,0,0.08)]">
+        <section className="sheet-up flex max-h-[50%] flex-col gap-3 overflow-y-auto rounded-t-2xl bg-white px-4 py-3 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] lg:absolute lg:bottom-6 lg:left-[calc(92px+1.5rem)] lg:right-[calc(390px+2rem)] lg:z-30 lg:max-h-64 lg:rounded-2xl lg:shadow-lg">
           <div className="flex items-center justify-between">
             <p className="text-sm font-medium">文字</p>
             <button type="button" className="text-sm font-medium" onClick={closeFont}>完成</button>
@@ -549,14 +571,14 @@ export default function EditorCanvas({ slug, loggedIn, product, materials, initi
       ) : null}
 
       {panel === "photo" ? (
-        <section className="sheet-up grid grid-cols-2 gap-3 rounded-t-2xl bg-white px-4 py-4 shadow-[0_-8px_24px_rgba(0,0,0,0.08)]">
+        <section className="sheet-up grid grid-cols-2 gap-3 rounded-t-2xl bg-white px-4 py-4 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] lg:hidden">
           <button type="button" className="rounded-xl bg-neutral-100 py-4 text-sm" onClick={() => albumRef.current?.click()}>打开相册</button>
           <button type="button" className="rounded-xl bg-neutral-100 py-4 text-sm" onClick={() => cameraRef.current?.click()}>拍照</button>
         </section>
       ) : null}
 
       {panel === "tools" && imageTarget ? (
-        <section className="sheet-up flex items-center justify-around rounded-t-2xl bg-white px-2 py-2 shadow-[0_-8px_24px_rgba(0,0,0,0.08)]">
+        <section className="sheet-up flex items-center justify-around rounded-t-2xl bg-white px-2 py-2 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] lg:absolute lg:bottom-6 lg:left-1/2 lg:z-30 lg:w-[360px] lg:-translate-x-1/2 lg:rounded-2xl lg:shadow-lg">
           <ToolButton label="收起" onClick={() => { suppressTools.current = imageTarget.id; setPanel("none"); }}><ChevronDownIcon className="size-5" /></ToolButton>
           <ToolButton label="去背景" onClick={() => {
             if (!selectedImage) return;
@@ -572,7 +594,7 @@ export default function EditorCanvas({ slug, loggedIn, product, materials, initi
       ) : null}
 
       {panel === "buy" ? (
-        <section className="sheet-up flex max-h-[50%] flex-col gap-3 overflow-y-auto rounded-t-2xl bg-white px-4 py-4 shadow-[0_-8px_24px_rgba(0,0,0,0.08)]">
+        <section className="sheet-up flex max-h-[50%] flex-col gap-3 overflow-y-auto rounded-t-2xl bg-white px-4 py-4 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] lg:hidden">
           <p className="text-sm font-medium">尺码</p>
           <div className="flex flex-wrap gap-2">
             {product.sizes.map((size) => (
@@ -597,7 +619,7 @@ export default function EditorCanvas({ slug, loggedIn, product, materials, initi
         </section>
       ) : null}
 
-      <footer className="grid grid-cols-3 border-t border-black/5 bg-white pb-[max(8px,env(safe-area-inset-bottom))]">
+      <footer className="grid grid-cols-3 border-t border-black/5 bg-white pb-[max(8px,env(safe-area-inset-bottom))] lg:hidden">
         <DockButton label="印花素材" active={panel === "material"} onClick={() => { if (panel !== "material") closeFontSession(); setPanel(panel === "material" ? "none" : "material"); }}><StickerIcon className="size-5" /></DockButton>
         <DockButton label="文字" active={panel === "font"} onClick={() => { if (panel === "font") { closeFont(); return; } if (selected?.type === "text") { openFontSession(); setPanel("font"); return; } addText(); }}><TypeIcon className="size-5" /></DockButton>
         <DockButton label="来图定制" active={panel === "photo"} onClick={() => { if (panel !== "photo") closeFontSession(); setPanel(panel === "photo" ? "none" : "photo"); }}><ImagePlusIcon className="size-5" /></DockButton>
@@ -646,4 +668,12 @@ function ToolButton({ label, onClick, children }: { label: string; onClick: () =
       {label}
     </button>
   );
+}
+
+function RailButton({ label, active, disabled, onClick, children }: { label: string; active?: boolean; disabled?: boolean; onClick: () => void; children: React.ReactNode }) {
+  return <button type="button" disabled={disabled} onClick={onClick} className={`flex w-16 flex-col items-center gap-1 rounded-xl py-2 text-xs ${active ? "bg-neutral-950 text-white" : "text-neutral-700 hover:bg-neutral-100"} disabled:opacity-30`}><span className="[&>svg]:size-5">{children}</span>{label}</button>;
+}
+
+function InspectorSection({ title, children }: { title: string; children: React.ReactNode }) {
+  return <section className="mt-6 border-t border-neutral-100 pt-5"><h3 className="mb-3 text-sm font-semibold">{title}</h3>{children}</section>;
 }

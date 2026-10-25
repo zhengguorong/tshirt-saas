@@ -55,21 +55,21 @@ export function ProductView({
     router.push(`/s/${slug}/design/${productId}?${query.toString()}`);
   }
   return (
-    <div className="flex h-full min-h-0 flex-col">
-      <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-4 overflow-y-auto lg:mx-auto lg:grid lg:max-w-6xl lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)] lg:gap-10 lg:px-8 lg:py-8">
+    <div className="flex h-full min-h-0 flex-col bg-[#f5f3f0] lg:h-auto lg:bg-white">
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-4 overflow-y-auto lg:mx-auto lg:grid lg:w-full lg:max-w-[1600px] lg:overflow-visible lg:items-start lg:grid-cols-[minmax(0,1.9fr)_minmax(300px,1fr)] lg:gap-x-16 lg:gap-y-20 lg:px-8 lg:pb-28 lg:pt-8">
         <Gallery images={images} label={name} />
-        <div className="flex flex-col gap-4 px-4 pb-4 lg:px-0">
-          <div className="flex flex-col gap-1">
-            <p className="text-2xl font-semibold tabular-nums">{price}</p>
+        <div className="flex flex-col gap-5 px-4 pb-4 lg:sticky lg:top-28 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:gap-8 lg:px-0 lg:pb-0 lg:pt-3">
+          <div className="flex flex-col gap-2 border-b pb-5 lg:gap-6 lg:border-0 lg:pb-0">
+            <h1 className="text-2xl font-semibold tracking-tight lg:font-serif lg:text-[40px] lg:font-normal lg:leading-[1.25] lg:tracking-[0.02em]">{name}</h1>
+            <p className="text-2xl font-semibold tabular-nums lg:text-[28px] lg:font-normal">{price}</p>
             <p className="text-xs text-muted-foreground">底衫价格，有图案的印面另加价{printNote ? ` · ${printNote}` : ""}</p>
           </div>
-          <h1 className="text-base leading-snug font-medium">{name}</h1>
           {colors.length > 0 ? (
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 lg:gap-4">
               <p className="text-sm text-muted-foreground">颜色{color ? ` · ${color.name}` : ""}</p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 lg:gap-3">
                 {colors.map((item) => (
-                  <Button key={item.id} type="button" size="sm" variant={item.id === color?.id ? "default" : "outline"} onClick={() => setColorId(item.id)}>
+                  <Button key={item.id} type="button" size="sm" className="lg:h-10 lg:min-w-12 lg:rounded-none lg:px-4" variant={item.id === color?.id ? "default" : "outline"} onClick={() => setColorId(item.id)}>
                     <span className="size-3 rounded-full border border-black/10" style={{ backgroundColor: item.hex }} />
                     {item.name}
                   </Button>
@@ -78,19 +78,24 @@ export function ProductView({
             </div>
           ) : null}
           {sizes.length > 0 ? (
-            <div ref={sizeRef} className={cn("flex flex-col gap-2", shakeSize && "shake")}>
+            <div ref={sizeRef} className={cn("flex flex-col gap-2 lg:gap-4", shakeSize && "shake")}>
               <p className={cn("text-sm", shakeSize ? "text-destructive" : "text-muted-foreground")}>{shakeSize ? "请先选择尺码" : `尺码${size ? ` · ${size.name}` : " · 请选择"}`}</p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 lg:gap-3">
                 {sizes.map((item) => (
-                  <Button key={item.id} type="button" size="sm" variant={item.id === sizeId ? "default" : "outline"} onClick={() => setSizeId(item.id)}>
+                  <Button key={item.id} type="button" size="sm" className="lg:h-10 lg:min-w-12 lg:rounded-none lg:px-4" variant={item.id === sizeId ? "default" : "outline"} onClick={() => setSizeId(item.id)}>
                     {item.name}
                   </Button>
                 ))}
               </div>
             </div>
           ) : null}
+          <div className="hidden flex-col gap-3 border-t pt-5 lg:mt-3 lg:flex lg:gap-6 lg:border-0 lg:pt-0">
+            <p className="text-sm text-muted-foreground">选好颜色和尺码，下一步上传图案，预览定制效果。</p>
+            <Button size="lg" className="w-full bg-neutral-950 lg:h-14 lg:rounded-none lg:text-base" type="button" onClick={customize}>去定制</Button>
+          </div>
+        </div>
           {description.length > 0 ? (
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 px-4 pb-4 lg:col-start-1 lg:gap-8 lg:px-0 lg:pb-0">
               <div className="flex items-center gap-3">
                 <Separator className="flex-1" />
                 <span className="text-xs text-muted-foreground">详情</span>
@@ -107,9 +112,8 @@ export function ProductView({
               </div>
             </div>
           ) : null}
-        </div>
       </div>
-      <div className="flex shrink-0 items-center gap-3 border-t bg-background px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] lg:mx-auto lg:w-full lg:max-w-6xl lg:justify-end lg:gap-4 lg:border-t-0 lg:px-8 lg:py-4">
+      <div className="flex shrink-0 items-center gap-3 border-t bg-background px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] lg:hidden">
         <Link href={`/s/${slug}`} className="pressable flex w-10 flex-col items-center gap-0.5 text-[10px] text-muted-foreground lg:hidden">
           <HouseIcon className="size-5" />
           首页
@@ -118,19 +122,17 @@ export function ProductView({
           <ShoppingBagIcon className="size-5" />
           购物车
         </Link>
-        <Button className="pressable flex-1 lg:w-auto lg:min-w-56 lg:flex-none" size="lg" type="button" onClick={customize}>去定制</Button>
+        <Button className="pressable flex-1 bg-neutral-950 lg:w-auto lg:min-w-56 lg:flex-none" size="lg" type="button" onClick={customize}>去定制</Button>
       </div>
     </div>
   );
 }
 
-const garment = "aspect-square w-full shrink-0 snap-center object-contain p-6 drop-shadow-[0_16px_14px_rgba(40,32,24,0.22)]";
+const garment = "aspect-square w-full shrink-0 snap-center object-contain p-6 drop-shadow-[0_16px_14px_rgba(40,32,24,0.22)] lg:aspect-[2/3] lg:p-4 lg:drop-shadow-[0_8px_8px_rgba(40,32,24,0.12)]";
 
 function Gallery({ images, label }: { images: string[]; label: string }) {
   const scroller = useRef<HTMLDivElement>(null);
   const frameRef = useRef(images);
-  const imagesRef = useRef(images);
-  imagesRef.current = images;
   const [frame, setFrame] = useState(images);
   const [incoming, setIncoming] = useState<string[] | null>(null);
   const [index, setIndex] = useState(0);
@@ -146,7 +148,7 @@ function Gallery({ images, label }: { images: string[]; label: string }) {
     return () => el.removeEventListener("scroll", onScroll);
   }, []);
   useEffect(() => {
-    const next = imagesRef.current;
+    const next = images;
     if (next.join("\n") === frameRef.current.join("\n")) return;
     const apply = () => {
       frameRef.current = next;
@@ -168,12 +170,12 @@ function Gallery({ images, label }: { images: string[]; label: string }) {
     if (!el) return;
     el.scrollTo({ left: next * el.clientWidth, behavior: "smooth" });
   }
-  if (frame.length === 0 && !incoming) return <div className="aspect-square w-full shrink-0 bg-[#e8e4dc]" />;
+  if (frame.length === 0 && !incoming) return <div className="aspect-square w-full shrink-0 bg-[#e8e4dc] lg:aspect-[4/3] lg:bg-[#f5f5f3]" />;
   const dots = incoming ?? frame;
   const dotIndex = incoming ? 0 : index;
   return (
-    <div className="relative shrink-0 bg-[#e8e4dc] lg:rounded-2xl lg:shadow-sm">
-      <div ref={scroller} className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <div className="relative min-w-0 shrink-0 bg-[#e8e4dc] lg:col-start-1 lg:row-start-1 lg:overflow-hidden lg:bg-[#f5f5f3]">
+      <div ref={scroller} className="store-product-gallery flex snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {frame.map((url, imageIndex) => (
           <img key={`${url}-${imageIndex}`} src={url} alt={imageIndex === 0 ? label : ""} className={garment} />
         ))}
@@ -184,16 +186,18 @@ function Gallery({ images, label }: { images: string[]; label: string }) {
         </div>
       ) : null}
       {dots.length > 1 ? (
-        <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
+        <div className="absolute bottom-3 left-1/2 z-10 flex max-w-full -translate-x-1/2 gap-1.5 lg:hidden">
           {dots.map((url, dot) => (
             <button
               key={`${url}-${dot}`}
               type="button"
               aria-label={`第 ${dot + 1} 张`}
-              className="flex size-4 items-center justify-center"
+              aria-pressed={dot === dotIndex}
+              className="flex size-4 items-center justify-center lg:size-14 lg:overflow-hidden lg:rounded-lg lg:border lg:bg-white/70"
               onClick={() => go(dot)}
             >
-              <span className={cn("size-1.5 rounded-full", dot === dotIndex ? "bg-neutral-900" : "bg-neutral-900/25")} />
+              <span className={cn("size-1.5 rounded-full lg:hidden", dot === dotIndex ? "bg-neutral-900" : "bg-neutral-900/25")} />
+              <img src={url} alt="" className={cn("hidden size-full object-contain p-1 lg:block", dot === dotIndex && "ring-2 ring-inset ring-neutral-900")} />
             </button>
           ))}
         </div>
