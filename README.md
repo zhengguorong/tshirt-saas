@@ -35,3 +35,7 @@ pnpm worker
 没有 Redis 时，模拟支付会在 API 进程里直接渲染。
 
 数据库端口是 54329，Redis 端口是 63799，避免和本机已有服务冲突。
+
+## 界面组件
+
+店铺前台与注册页面的基础组件位于 `apps/web/src/components/ui`，源码由项目自行维护，不依赖 shadcn CLI。交互组件继续使用 Base UI，样式使用 Tailwind CSS；组件所需的状态变体定义在 `apps/web/src/app/globals.css`。商家与平台后台继续使用 Ant Design。
