@@ -1,0 +1,1355 @@
+[
+  {
+    "slug": "demo",
+    "name": "示例工作室",
+    "description": "一件白坯，正反两面印刷。",
+    "contact": "13800000001",
+    "shippingType": "FLAT",
+    "flatShippingCents": 800,
+    "freeShippingThresholdCents": null,
+    "staff": [
+      {
+        "phone": "13800000001",
+        "name": "店主",
+        "role": "OWNER"
+      },
+      {
+        "phone": "13800000003",
+        "name": "店员",
+        "role": "STAFF"
+      }
+    ],
+    "categories": [
+      {
+        "name": "基础图形",
+        "sort": 0
+      },
+      {
+        "name": "印花素材",
+        "sort": 1
+      }
+    ],
+    "assets": [
+      {
+        "name": "圆章",
+        "width": 512,
+        "height": 512,
+        "sort": 0,
+        "status": "ON",
+        "objectKey": "demo-catalog/a9bdbb9e9e9c62010d2f6206cb4fc08ba1c50899c949e0a84b13ba3c15841118.svg",
+        "category": "基础图形"
+      },
+      {
+        "name": "三只猫",
+        "width": 1589,
+        "height": 1600,
+        "sort": 1,
+        "status": "ON",
+        "objectKey": "demo-catalog/05cfcdb1c40c52d598416912f0f982ba5aeeb5ae80bff4cebd5d12bdaeac288b.png",
+        "category": "印花素材"
+      },
+      {
+        "name": "水杯猫",
+        "width": 1134,
+        "height": 1600,
+        "sort": 2,
+        "status": "ON",
+        "objectKey": "demo-catalog/516a611454215f669b298a51602be8cbcdbbe1d2edb7fd349e220b40623879ec.png",
+        "category": "印花素材"
+      },
+      {
+        "name": "水灵灵",
+        "width": 1600,
+        "height": 1464,
+        "sort": 3,
+        "status": "ON",
+        "objectKey": "demo-catalog/e86b19b9553194aa11fcdc3eb0602a24d256338a55a04fa294b873485115dd5f.png",
+        "category": "印花素材"
+      },
+      {
+        "name": "汗流浃背了",
+        "width": 1600,
+        "height": 1372,
+        "sort": 4,
+        "status": "ON",
+        "objectKey": "demo-catalog/284486c259627b06d0c9c3467738012154d9707069b51e38167c5a53df113331.png",
+        "category": "印花素材"
+      },
+      {
+        "name": "网球",
+        "width": 1477,
+        "height": 1600,
+        "sort": 5,
+        "status": "ON",
+        "objectKey": "demo-catalog/6e8e2db4e1aba07f5ecacadb8ad4e64d12687bc3db106b5cb89a4fcfa88f9d07.png",
+        "category": "印花素材"
+      },
+      {
+        "name": "网球二",
+        "width": 963,
+        "height": 1600,
+        "sort": 6,
+        "status": "ON",
+        "objectKey": "demo-catalog/b1979589001086c6f81047287f505d8d2254007b5043e4120e6fe4fc26aa7415.png",
+        "category": "印花素材"
+      },
+      {
+        "name": "想睡觉",
+        "width": 1600,
+        "height": 1600,
+        "sort": 7,
+        "status": "ON",
+        "objectKey": "demo-catalog/b43c5b82cce3a040d83de5195d91aa4d18ddc4b04f9fda5789fcc054bf3d4d64.png",
+        "category": "印花素材"
+      },
+      {
+        "name": "小猫",
+        "width": 1600,
+        "height": 980,
+        "sort": 8,
+        "status": "ON",
+        "objectKey": "demo-catalog/08b38ca65fba54c5a4f2c8e4fb24d013edb7fec8bddf4f774151d185b062e5b7.png",
+        "category": "印花素材"
+      },
+      {
+        "name": "猫咪",
+        "width": 1600,
+        "height": 1131,
+        "sort": 9,
+        "status": "ON",
+        "objectKey": "demo-catalog/00607fa20e211f3adcdc89e91d527ca60f29687ead17b401f806c7ba62fa9fe5.png",
+        "category": "印花素材"
+      }
+    ],
+    "products": [
+      {
+        "name": "白坯短袖",
+        "detail": "180g 棉，正面印刷区不加价，背面加价 20 元。",
+        "priceCents": 7900,
+        "status": "ON",
+        "galleryKeys": [],
+        "detailBlocks": [],
+        "colors": [
+          {
+            "name": "白色",
+            "hex": "#F7F7F5",
+            "sort": 0,
+            "frontMockupKey": "mockup/F7F7F5/front.png",
+            "backMockupKey": "mockup/F7F7F5/back.png"
+          },
+          {
+            "name": "黑色",
+            "hex": "#1A1A1A",
+            "sort": 1,
+            "frontMockupKey": "mockup/1A1A1A/front.png",
+            "backMockupKey": "mockup/1A1A1A/back.png"
+          }
+        ],
+        "sizes": [
+          {
+            "name": "S",
+            "available": true,
+            "sort": 0
+          },
+          {
+            "name": "M",
+            "available": true,
+            "sort": 1
+          },
+          {
+            "name": "L",
+            "available": true,
+            "sort": 2
+          },
+          {
+            "name": "XL",
+            "available": true,
+            "sort": 3
+          }
+        ],
+        "printAreas": [
+          {
+            "surface": "FRONT",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 0
+          },
+          {
+            "surface": "BACK",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 2000
+          }
+        ]
+      },
+      {
+        "name": "圆领纯棉卫衣BYBY330【男女同款，女士拍小一码】",
+        "detail": "",
+        "priceCents": 7900,
+        "status": "ON",
+        "galleryKeys": [
+          "demo-catalog/8592e329c67803de9bd7cb56a185f89ba48e992fd6cadb6bfe4772879f8a603d.jpg",
+          "demo-catalog/23133b9fa3a86a10714d1a9f369744059190a3ed29b0812d934461a004b8f901.jpg",
+          "demo-catalog/3af54f3c4590b13db6d1680b1b952b1abedd0e5dec4ffbb3dc46af88e04f961c.jpg"
+        ],
+        "detailBlocks": [
+          {
+            "type": "image",
+            "content": "demo-catalog/3ecf10031ba5a312d529c61c0baba132f78cba7e46610e338a531f52d99abb4b.jpg"
+          },
+          {
+            "type": "image",
+            "content": "demo-catalog/e29f28baf6b688ecede10b0821a2caf179541f69bbed3295c821023c51c67a0a.jpg"
+          },
+          {
+            "type": "image",
+            "content": "demo-catalog/98bde8c4c9137f3b67e26fc1680af56329e8a7603875922ca82137f720c8a490.jpg"
+          },
+          {
+            "type": "image",
+            "content": "demo-catalog/055893d911552d5f45b6d783907605cf09829dfac0af44925dfd17649da08460.jpg"
+          },
+          {
+            "type": "image",
+            "content": "demo-catalog/bcb6a52f79eaa15f0c6baa4f33e05a50c0ce636a9e0856b80a63b082ab33fd3c.jpg"
+          }
+        ],
+        "colors": [
+          {
+            "name": "军绿色",
+            "hex": "#046D33",
+            "sort": 0,
+            "frontMockupKey": "demo-catalog/84db8bd7132fd7297d600b7d6c35edd603a3c08e3b6f475ca1bb6aa8b6b844b5.png",
+            "backMockupKey": "demo-catalog/583bf908e4dbbb28cd2e31719ff3b313169793c5410b4990f10e65faed38ff23.png"
+          },
+          {
+            "name": "黑色",
+            "hex": "#040404",
+            "sort": 1,
+            "frontMockupKey": "demo-catalog/5574ca351cd03d9ab148e072786c51cbe8534f6d0c3aa86ded1e72ffba879ceb.png",
+            "backMockupKey": "demo-catalog/371dcc54c43e4bc97f3e505fa1f8f7d0e8039c24393267e2e2a4347f5c8ec3d4.png"
+          },
+          {
+            "name": "绿色",
+            "hex": "#88CD8B",
+            "sort": 2,
+            "frontMockupKey": "demo-catalog/ed49368774b40891bee5bf6dec3d1fbdc85ae18a472177fb255d06eba5104545.png",
+            "backMockupKey": "demo-catalog/7b6b4b7f148bdf43a49741056bae0e5039310936cff08fd2b8f715d1468c1181.png"
+          },
+          {
+            "name": "浅蓝色",
+            "hex": "#95D5DE",
+            "sort": 3,
+            "frontMockupKey": "demo-catalog/2e4d384cc8a5214147a48b2d928451702345e360264f93c6634b186e892e11aa.png",
+            "backMockupKey": "demo-catalog/084dfe52f1aadbfe5e8b80810c8a26f3a5a50475b8136ea4fbf75da1f27c71ea.png"
+          },
+          {
+            "name": "象牙白",
+            "hex": "#F5F2F2",
+            "sort": 4,
+            "frontMockupKey": "demo-catalog/0550281701daad4d9f7495e7cc5964be9774b4c89df1ada270da3cc51477ad20.png",
+            "backMockupKey": "demo-catalog/06619914a7d9e5e59256bc1d0763daa12c2d6a8a1ce6f96778bf38d923132e95.png"
+          }
+        ],
+        "sizes": [
+          {
+            "name": "S",
+            "available": false,
+            "sort": 0
+          },
+          {
+            "name": "M",
+            "available": true,
+            "sort": 1
+          },
+          {
+            "name": "L",
+            "available": true,
+            "sort": 2
+          },
+          {
+            "name": "XL",
+            "available": true,
+            "sort": 3
+          },
+          {
+            "name": "2XL",
+            "available": true,
+            "sort": 4
+          },
+          {
+            "name": "3XL",
+            "available": true,
+            "sort": 5
+          },
+          {
+            "name": "5XL",
+            "available": true,
+            "sort": 6
+          }
+        ],
+        "printAreas": [
+          {
+            "surface": "FRONT",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 0
+          },
+          {
+            "surface": "BACK",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 2000
+          }
+        ]
+      },
+      {
+        "name": "【活动款】男女同款纯棉多巴胺穿搭色系圆领卫衣",
+        "detail": "",
+        "priceCents": 6900,
+        "status": "ON",
+        "galleryKeys": [
+          "demo-catalog/ec64e9a615fcf6b39f0c91a8a223b2bb32327dade8e90645746626c70ae1a916.jpg",
+          "demo-catalog/54659e5195858aa53d5662d149be5613e77833a93fff10e9f19194b471e7f323.jpg",
+          "demo-catalog/e6ae599c3316ecad02ae876911e64be43fd104a5f72c0671e7ef040563b0f00f.jpg"
+        ],
+        "detailBlocks": [
+          {
+            "type": "image",
+            "content": "demo-catalog/4a555e4c71424c12a6d62e40cc0e18ce8b2150d8c4ae76f30c6914e1f2d23b5e.jpg"
+          }
+        ],
+        "colors": [
+          {
+            "name": "白色",
+            "hex": "#F6F6F2",
+            "sort": 0,
+            "frontMockupKey": "demo-catalog/c1512c9fe70d7d1ff90e5235738537a72b03bd2e1cb2aa48050a35e4141e54d6.png",
+            "backMockupKey": "demo-catalog/d941b4b6f014da39832609f356b0289d26b87a5581b2ab6d4c4dd8d574a5ee6f.png"
+          },
+          {
+            "name": "黑色",
+            "hex": "#000000",
+            "sort": 1,
+            "frontMockupKey": "demo-catalog/0bbf2a526ebf560f2aa14f8ccc55973bdfe10f8ab91682a6dfb3e691016abfb0.png",
+            "backMockupKey": "demo-catalog/1641d8cb44202c19282b8534b00f9cbc2e1dc3f6fec61c126d63d2f2b1471c4e.png"
+          },
+          {
+            "name": "粉色",
+            "hex": "#DAA7AB",
+            "sort": 2,
+            "frontMockupKey": "demo-catalog/cb777929bd6e7d7f67cc798ba006ea5cc09e5f38eb35a6007ea8d5a2e833d452.png",
+            "backMockupKey": "demo-catalog/ac7e79f8e9fe1b57a7420223cb7f98495c09e590cc145777cc7da4295e71e063.png"
+          }
+        ],
+        "sizes": [
+          {
+            "name": "S",
+            "available": true,
+            "sort": 0
+          },
+          {
+            "name": "M",
+            "available": true,
+            "sort": 1
+          },
+          {
+            "name": "L",
+            "available": true,
+            "sort": 2
+          },
+          {
+            "name": "XL",
+            "available": true,
+            "sort": 3
+          },
+          {
+            "name": "2XL",
+            "available": true,
+            "sort": 4
+          },
+          {
+            "name": "3XL",
+            "available": true,
+            "sort": 5
+          }
+        ],
+        "printAreas": [
+          {
+            "surface": "FRONT",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 0
+          },
+          {
+            "surface": "BACK",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 2000
+          }
+        ]
+      },
+      {
+        "name": "童装秋冬款卫衣圆领套头卫衣",
+        "detail": "",
+        "priceCents": 5900,
+        "status": "ON",
+        "galleryKeys": [
+          "demo-catalog/f105326440ad54b88e07f91ea415da0588447c907c83b530e67610afcd99e756.jpg",
+          "demo-catalog/7d32829c584d6655e833bff727b3931d34884080f1e0a65b7fe3d25bb84c088e.jpg",
+          "demo-catalog/e3a25c0dded4902a03313c81d1be2d8d4d98b0a92a62f0fa75b9719b7ffbe837.jpg"
+        ],
+        "detailBlocks": [
+          {
+            "type": "image",
+            "content": "demo-catalog/8c4d8c2d3f14130c7584750cd40f21064eb5013fd66de47a80fcaa94998bb690.jpg"
+          }
+        ],
+        "colors": [
+          {
+            "name": "粉色",
+            "hex": "#E8B4B6",
+            "sort": 0,
+            "frontMockupKey": "demo-catalog/986dc20ca1792d1d775b63c7bb1174923388830a20406d320fe5dd5a4d7d1fca.png",
+            "backMockupKey": "demo-catalog/7fae4148dc0551e69dcac4c1b4c0ffd832622763cdecdf2f3c9d7d57f29b13ce.png"
+          },
+          {
+            "name": "黑色",
+            "hex": "#000000",
+            "sort": 1,
+            "frontMockupKey": "demo-catalog/fcaed0252e44995131d49a043657c9465afb38a73fbe51ff89d66c7cd5201e46.png",
+            "backMockupKey": "demo-catalog/733db032b068a1d71b7bc73131eecc8818b4123441dcc28f5caf3d3351c002bc.png"
+          },
+          {
+            "name": "白色",
+            "hex": "#FFFEFE",
+            "sort": 2,
+            "frontMockupKey": "demo-catalog/19822ad46bc009820afbd337884f49779d60f1ba08f3a611f79073f50cfd5cbb.png",
+            "backMockupKey": "demo-catalog/fc854a017e046c5bf689fca546293bba2e255944bbf760c28a81055736ba407e.png"
+          }
+        ],
+        "sizes": [
+          {
+            "name": "110",
+            "available": true,
+            "sort": 0
+          },
+          {
+            "name": "120",
+            "available": true,
+            "sort": 1
+          },
+          {
+            "name": "130",
+            "available": true,
+            "sort": 2
+          },
+          {
+            "name": "140",
+            "available": true,
+            "sort": 3
+          },
+          {
+            "name": "150",
+            "available": true,
+            "sort": 4
+          }
+        ],
+        "printAreas": [
+          {
+            "surface": "FRONT",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 0
+          },
+          {
+            "surface": "BACK",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 2000
+          }
+        ]
+      },
+      {
+        "name": "【活动款】男女同款轻奢重磅圆领卫衣 简约时尚",
+        "detail": "",
+        "priceCents": 8900,
+        "status": "ON",
+        "galleryKeys": [
+          "demo-catalog/067410a93add61ff58e1feedb66427eeef8b0f4fc2f9e58aa7f63ba81fa80e36.jpg",
+          "demo-catalog/9e8010e851de610fab71d6f71c3bb7b9c153287b9a38befd515edd6707400109.jpg"
+        ],
+        "detailBlocks": [
+          {
+            "type": "image",
+            "content": "demo-catalog/ed6f24774ef9a589ceeac17f0a872418d217f45cb92612569927fa20a3b53b40.jpg"
+          },
+          {
+            "type": "image",
+            "content": "demo-catalog/b043ef01b59af50a08df545f9423ff2fd2243dc59be5dcac863f961e09ad878f.jpg"
+          },
+          {
+            "type": "image",
+            "content": "demo-catalog/a0c4b70cbccbaadc6bbe93c341dee82611ab1897a9d150a8e10267cfb142e19d.jpg"
+          }
+        ],
+        "colors": [
+          {
+            "name": "深橙色",
+            "hex": "#EA917F",
+            "sort": 0,
+            "frontMockupKey": "demo-catalog/4afeb53f4655b1a73b4a2e46e8a1c5a8bca7da210fb986fa3fb9344ae88ce5d1.png",
+            "backMockupKey": "demo-catalog/be46abac7285036a416d1cf1cafd608f63860b1429bc54ce2d44a4baa9b0a79e.png"
+          },
+          {
+            "name": "白色",
+            "hex": "#F2F2EF",
+            "sort": 1,
+            "frontMockupKey": "demo-catalog/e6538a0f614ffe134a9d54150506cba3386c1a072c3224f4d8c3f6b333b9c34a.png",
+            "backMockupKey": "demo-catalog/b150f16733033a91859064fb72f68066efadd86a40a2f4c9a0267e69f7eb3f51.png"
+          },
+          {
+            "name": "粉色",
+            "hex": "#E4C0B8",
+            "sort": 2,
+            "frontMockupKey": "demo-catalog/e41d0869855352b27dd7fd864247a49909b69849797c51a3134f16524a87f95d.png",
+            "backMockupKey": "demo-catalog/45202c4df4dbf9b58f8a53bd1b0f49e0ef5cb58afd0778ea9e906dfcdc9394cb.png"
+          },
+          {
+            "name": "枣红色",
+            "hex": "#491D24",
+            "sort": 3,
+            "frontMockupKey": "demo-catalog/25290a6b4d5054c1d047f030869085ce2f20caabcc5b9a2f96974e9d535af76f.png",
+            "backMockupKey": "demo-catalog/1e2f1f3a8fd024ae8ba61050d020ce31e4650023993835b3793d77770acefc69.png"
+          }
+        ],
+        "sizes": [
+          {
+            "name": "S",
+            "available": true,
+            "sort": 0
+          },
+          {
+            "name": "M",
+            "available": true,
+            "sort": 1
+          },
+          {
+            "name": "L",
+            "available": true,
+            "sort": 2
+          },
+          {
+            "name": "XL",
+            "available": true,
+            "sort": 3
+          },
+          {
+            "name": "2XL",
+            "available": true,
+            "sort": 4
+          },
+          {
+            "name": "3XL",
+            "available": true,
+            "sort": 5
+          }
+        ],
+        "printAreas": [
+          {
+            "surface": "FRONT",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 0
+          },
+          {
+            "surface": "BACK",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 2000
+          }
+        ]
+      },
+      {
+        "name": "运动透气吸汗纯棉服装（男女同款）",
+        "detail": "",
+        "priceCents": 6900,
+        "status": "ON",
+        "galleryKeys": [
+          "demo-catalog/9a4d60d063c0d1aedb14565d97e47355f61e42fe6a161c7ee87b0e6d3c239adb.jpg",
+          "demo-catalog/d4b6339b525a11055b51f8c68802216a573f5fc7bc8ef16cdc335ad3401e2148.jpg"
+        ],
+        "detailBlocks": [],
+        "colors": [
+          {
+            "name": "杏色",
+            "hex": "#F7F0F0",
+            "sort": 0,
+            "frontMockupKey": "demo-catalog/9eadf255a2098978e918ba7942ea22737af525422e302b81c3bfeade54e6d3af.png",
+            "backMockupKey": "demo-catalog/50a43772d0cc052e8adb945a845f6d6c2b52750f2f3ca78831d6f235b196f695.png"
+          },
+          {
+            "name": "荧光绿",
+            "hex": "#111111",
+            "sort": 1,
+            "frontMockupKey": "demo-catalog/5f3e6deeb4ed43584c0abca10d05d8a128af87bc32f215e177e3c8b743095d1c.png",
+            "backMockupKey": "demo-catalog/220c5e3a22bb8d561a23aae69fe1f785b7fc6a129fe5cda9daaa62a068069b1a.png"
+          }
+        ],
+        "sizes": [
+          {
+            "name": "S",
+            "available": true,
+            "sort": 0
+          },
+          {
+            "name": "M",
+            "available": true,
+            "sort": 1
+          },
+          {
+            "name": "L",
+            "available": true,
+            "sort": 2
+          }
+        ],
+        "printAreas": [
+          {
+            "surface": "FRONT",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 0
+          },
+          {
+            "surface": "BACK",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 2000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "nanfeng",
+    "name": "南风印社",
+    "description": "",
+    "contact": "",
+    "shippingType": "FLAT",
+    "flatShippingCents": 800,
+    "freeShippingThresholdCents": null,
+    "staff": [
+      {
+        "phone": "13700000011",
+        "name": "林南",
+        "role": "OWNER"
+      }
+    ],
+    "categories": [
+      {
+        "name": "基础图形",
+        "sort": 0
+      },
+      {
+        "name": "印花素材",
+        "sort": 1
+      }
+    ],
+    "assets": [
+      {
+        "name": "圆章",
+        "width": 512,
+        "height": 512,
+        "sort": 0,
+        "status": "ON",
+        "objectKey": "demo-catalog/a9bdbb9e9e9c62010d2f6206cb4fc08ba1c50899c949e0a84b13ba3c15841118.svg",
+        "category": "基础图形"
+      },
+      {
+        "name": "三只猫",
+        "width": 1589,
+        "height": 1600,
+        "sort": 1,
+        "status": "ON",
+        "objectKey": "demo-catalog/05cfcdb1c40c52d598416912f0f982ba5aeeb5ae80bff4cebd5d12bdaeac288b.png",
+        "category": "印花素材"
+      },
+      {
+        "name": "水杯猫",
+        "width": 1134,
+        "height": 1600,
+        "sort": 2,
+        "status": "ON",
+        "objectKey": "demo-catalog/516a611454215f669b298a51602be8cbcdbbe1d2edb7fd349e220b40623879ec.png",
+        "category": "印花素材"
+      },
+      {
+        "name": "水灵灵",
+        "width": 1600,
+        "height": 1464,
+        "sort": 3,
+        "status": "ON",
+        "objectKey": "demo-catalog/e86b19b9553194aa11fcdc3eb0602a24d256338a55a04fa294b873485115dd5f.png",
+        "category": "印花素材"
+      },
+      {
+        "name": "汗流浃背了",
+        "width": 1600,
+        "height": 1372,
+        "sort": 4,
+        "status": "ON",
+        "objectKey": "demo-catalog/284486c259627b06d0c9c3467738012154d9707069b51e38167c5a53df113331.png",
+        "category": "印花素材"
+      },
+      {
+        "name": "网球",
+        "width": 1477,
+        "height": 1600,
+        "sort": 5,
+        "status": "ON",
+        "objectKey": "demo-catalog/6e8e2db4e1aba07f5ecacadb8ad4e64d12687bc3db106b5cb89a4fcfa88f9d07.png",
+        "category": "印花素材"
+      },
+      {
+        "name": "网球二",
+        "width": 963,
+        "height": 1600,
+        "sort": 6,
+        "status": "ON",
+        "objectKey": "demo-catalog/b1979589001086c6f81047287f505d8d2254007b5043e4120e6fe4fc26aa7415.png",
+        "category": "印花素材"
+      },
+      {
+        "name": "想睡觉",
+        "width": 1600,
+        "height": 1600,
+        "sort": 7,
+        "status": "ON",
+        "objectKey": "demo-catalog/b43c5b82cce3a040d83de5195d91aa4d18ddc4b04f9fda5789fcc054bf3d4d64.png",
+        "category": "印花素材"
+      },
+      {
+        "name": "小猫",
+        "width": 1600,
+        "height": 980,
+        "sort": 8,
+        "status": "ON",
+        "objectKey": "demo-catalog/08b38ca65fba54c5a4f2c8e4fb24d013edb7fec8bddf4f774151d185b062e5b7.png",
+        "category": "印花素材"
+      },
+      {
+        "name": "猫咪",
+        "width": 1600,
+        "height": 1131,
+        "sort": 9,
+        "status": "ON",
+        "objectKey": "demo-catalog/00607fa20e211f3adcdc89e91d527ca60f29687ead17b401f806c7ba62fa9fe5.png",
+        "category": "印花素材"
+      }
+    ],
+    "products": [
+      {
+        "name": "白坯短袖",
+        "detail": "180g 棉，正面印刷区不加价，背面加价 20 元。",
+        "priceCents": 7900,
+        "status": "ON",
+        "galleryKeys": [],
+        "detailBlocks": [],
+        "colors": [
+          {
+            "name": "白色",
+            "hex": "#F7F7F5",
+            "sort": 0,
+            "frontMockupKey": "mockup/F7F7F5/front.png",
+            "backMockupKey": "mockup/F7F7F5/back.png"
+          },
+          {
+            "name": "黑色",
+            "hex": "#1A1A1A",
+            "sort": 1,
+            "frontMockupKey": "mockup/1A1A1A/front.png",
+            "backMockupKey": "mockup/1A1A1A/back.png"
+          }
+        ],
+        "sizes": [
+          {
+            "name": "S",
+            "available": true,
+            "sort": 0
+          },
+          {
+            "name": "M",
+            "available": true,
+            "sort": 1
+          },
+          {
+            "name": "L",
+            "available": true,
+            "sort": 2
+          },
+          {
+            "name": "XL",
+            "available": true,
+            "sort": 3
+          }
+        ],
+        "printAreas": [
+          {
+            "surface": "FRONT",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 0
+          },
+          {
+            "surface": "BACK",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 2000
+          }
+        ]
+      },
+      {
+        "name": "圆领纯棉卫衣BYBY330【男女同款，女士拍小一码】",
+        "detail": "",
+        "priceCents": 7900,
+        "status": "ON",
+        "galleryKeys": [
+          "demo-catalog/8592e329c67803de9bd7cb56a185f89ba48e992fd6cadb6bfe4772879f8a603d.jpg",
+          "demo-catalog/23133b9fa3a86a10714d1a9f369744059190a3ed29b0812d934461a004b8f901.jpg",
+          "demo-catalog/3af54f3c4590b13db6d1680b1b952b1abedd0e5dec4ffbb3dc46af88e04f961c.jpg"
+        ],
+        "detailBlocks": [
+          {
+            "type": "image",
+            "content": "demo-catalog/3ecf10031ba5a312d529c61c0baba132f78cba7e46610e338a531f52d99abb4b.jpg"
+          },
+          {
+            "type": "image",
+            "content": "demo-catalog/e29f28baf6b688ecede10b0821a2caf179541f69bbed3295c821023c51c67a0a.jpg"
+          },
+          {
+            "type": "image",
+            "content": "demo-catalog/98bde8c4c9137f3b67e26fc1680af56329e8a7603875922ca82137f720c8a490.jpg"
+          },
+          {
+            "type": "image",
+            "content": "demo-catalog/055893d911552d5f45b6d783907605cf09829dfac0af44925dfd17649da08460.jpg"
+          },
+          {
+            "type": "image",
+            "content": "demo-catalog/bcb6a52f79eaa15f0c6baa4f33e05a50c0ce636a9e0856b80a63b082ab33fd3c.jpg"
+          }
+        ],
+        "colors": [
+          {
+            "name": "军绿色",
+            "hex": "#046D33",
+            "sort": 0,
+            "frontMockupKey": "demo-catalog/84db8bd7132fd7297d600b7d6c35edd603a3c08e3b6f475ca1bb6aa8b6b844b5.png",
+            "backMockupKey": "demo-catalog/583bf908e4dbbb28cd2e31719ff3b313169793c5410b4990f10e65faed38ff23.png"
+          },
+          {
+            "name": "黑色",
+            "hex": "#040404",
+            "sort": 1,
+            "frontMockupKey": "demo-catalog/5574ca351cd03d9ab148e072786c51cbe8534f6d0c3aa86ded1e72ffba879ceb.png",
+            "backMockupKey": "demo-catalog/371dcc54c43e4bc97f3e505fa1f8f7d0e8039c24393267e2e2a4347f5c8ec3d4.png"
+          },
+          {
+            "name": "绿色",
+            "hex": "#88CD8B",
+            "sort": 2,
+            "frontMockupKey": "demo-catalog/ed49368774b40891bee5bf6dec3d1fbdc85ae18a472177fb255d06eba5104545.png",
+            "backMockupKey": "demo-catalog/7b6b4b7f148bdf43a49741056bae0e5039310936cff08fd2b8f715d1468c1181.png"
+          },
+          {
+            "name": "浅蓝色",
+            "hex": "#95D5DE",
+            "sort": 3,
+            "frontMockupKey": "demo-catalog/2e4d384cc8a5214147a48b2d928451702345e360264f93c6634b186e892e11aa.png",
+            "backMockupKey": "demo-catalog/084dfe52f1aadbfe5e8b80810c8a26f3a5a50475b8136ea4fbf75da1f27c71ea.png"
+          },
+          {
+            "name": "象牙白",
+            "hex": "#F5F2F2",
+            "sort": 4,
+            "frontMockupKey": "demo-catalog/0550281701daad4d9f7495e7cc5964be9774b4c89df1ada270da3cc51477ad20.png",
+            "backMockupKey": "demo-catalog/06619914a7d9e5e59256bc1d0763daa12c2d6a8a1ce6f96778bf38d923132e95.png"
+          }
+        ],
+        "sizes": [
+          {
+            "name": "S",
+            "available": false,
+            "sort": 0
+          },
+          {
+            "name": "M",
+            "available": true,
+            "sort": 1
+          },
+          {
+            "name": "L",
+            "available": true,
+            "sort": 2
+          },
+          {
+            "name": "XL",
+            "available": true,
+            "sort": 3
+          },
+          {
+            "name": "2XL",
+            "available": true,
+            "sort": 4
+          },
+          {
+            "name": "3XL",
+            "available": true,
+            "sort": 5
+          },
+          {
+            "name": "5XL",
+            "available": true,
+            "sort": 6
+          }
+        ],
+        "printAreas": [
+          {
+            "surface": "FRONT",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 0
+          },
+          {
+            "surface": "BACK",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 2000
+          }
+        ]
+      },
+      {
+        "name": "【活动款】男女同款纯棉多巴胺穿搭色系圆领卫衣",
+        "detail": "",
+        "priceCents": 6900,
+        "status": "ON",
+        "galleryKeys": [
+          "demo-catalog/ec64e9a615fcf6b39f0c91a8a223b2bb32327dade8e90645746626c70ae1a916.jpg",
+          "demo-catalog/54659e5195858aa53d5662d149be5613e77833a93fff10e9f19194b471e7f323.jpg",
+          "demo-catalog/e6ae599c3316ecad02ae876911e64be43fd104a5f72c0671e7ef040563b0f00f.jpg"
+        ],
+        "detailBlocks": [
+          {
+            "type": "image",
+            "content": "demo-catalog/4a555e4c71424c12a6d62e40cc0e18ce8b2150d8c4ae76f30c6914e1f2d23b5e.jpg"
+          }
+        ],
+        "colors": [
+          {
+            "name": "白色",
+            "hex": "#F6F6F2",
+            "sort": 0,
+            "frontMockupKey": "demo-catalog/c1512c9fe70d7d1ff90e5235738537a72b03bd2e1cb2aa48050a35e4141e54d6.png",
+            "backMockupKey": "demo-catalog/d941b4b6f014da39832609f356b0289d26b87a5581b2ab6d4c4dd8d574a5ee6f.png"
+          },
+          {
+            "name": "黑色",
+            "hex": "#000000",
+            "sort": 1,
+            "frontMockupKey": "demo-catalog/0bbf2a526ebf560f2aa14f8ccc55973bdfe10f8ab91682a6dfb3e691016abfb0.png",
+            "backMockupKey": "demo-catalog/1641d8cb44202c19282b8534b00f9cbc2e1dc3f6fec61c126d63d2f2b1471c4e.png"
+          },
+          {
+            "name": "粉色",
+            "hex": "#DAA7AB",
+            "sort": 2,
+            "frontMockupKey": "demo-catalog/cb777929bd6e7d7f67cc798ba006ea5cc09e5f38eb35a6007ea8d5a2e833d452.png",
+            "backMockupKey": "demo-catalog/ac7e79f8e9fe1b57a7420223cb7f98495c09e590cc145777cc7da4295e71e063.png"
+          }
+        ],
+        "sizes": [
+          {
+            "name": "S",
+            "available": true,
+            "sort": 0
+          },
+          {
+            "name": "M",
+            "available": true,
+            "sort": 1
+          },
+          {
+            "name": "L",
+            "available": true,
+            "sort": 2
+          },
+          {
+            "name": "XL",
+            "available": true,
+            "sort": 3
+          },
+          {
+            "name": "2XL",
+            "available": true,
+            "sort": 4
+          },
+          {
+            "name": "3XL",
+            "available": true,
+            "sort": 5
+          }
+        ],
+        "printAreas": [
+          {
+            "surface": "FRONT",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 0
+          },
+          {
+            "surface": "BACK",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 2000
+          }
+        ]
+      },
+      {
+        "name": "童装秋冬款卫衣圆领套头卫衣",
+        "detail": "",
+        "priceCents": 5900,
+        "status": "ON",
+        "galleryKeys": [
+          "demo-catalog/f105326440ad54b88e07f91ea415da0588447c907c83b530e67610afcd99e756.jpg",
+          "demo-catalog/7d32829c584d6655e833bff727b3931d34884080f1e0a65b7fe3d25bb84c088e.jpg",
+          "demo-catalog/e3a25c0dded4902a03313c81d1be2d8d4d98b0a92a62f0fa75b9719b7ffbe837.jpg"
+        ],
+        "detailBlocks": [
+          {
+            "type": "image",
+            "content": "demo-catalog/8c4d8c2d3f14130c7584750cd40f21064eb5013fd66de47a80fcaa94998bb690.jpg"
+          }
+        ],
+        "colors": [
+          {
+            "name": "粉色",
+            "hex": "#E8B4B6",
+            "sort": 0,
+            "frontMockupKey": "demo-catalog/986dc20ca1792d1d775b63c7bb1174923388830a20406d320fe5dd5a4d7d1fca.png",
+            "backMockupKey": "demo-catalog/7fae4148dc0551e69dcac4c1b4c0ffd832622763cdecdf2f3c9d7d57f29b13ce.png"
+          },
+          {
+            "name": "黑色",
+            "hex": "#000000",
+            "sort": 1,
+            "frontMockupKey": "demo-catalog/fcaed0252e44995131d49a043657c9465afb38a73fbe51ff89d66c7cd5201e46.png",
+            "backMockupKey": "demo-catalog/733db032b068a1d71b7bc73131eecc8818b4123441dcc28f5caf3d3351c002bc.png"
+          },
+          {
+            "name": "白色",
+            "hex": "#FFFEFE",
+            "sort": 2,
+            "frontMockupKey": "demo-catalog/19822ad46bc009820afbd337884f49779d60f1ba08f3a611f79073f50cfd5cbb.png",
+            "backMockupKey": "demo-catalog/fc854a017e046c5bf689fca546293bba2e255944bbf760c28a81055736ba407e.png"
+          }
+        ],
+        "sizes": [
+          {
+            "name": "110",
+            "available": true,
+            "sort": 0
+          },
+          {
+            "name": "120",
+            "available": true,
+            "sort": 1
+          },
+          {
+            "name": "130",
+            "available": true,
+            "sort": 2
+          },
+          {
+            "name": "140",
+            "available": true,
+            "sort": 3
+          },
+          {
+            "name": "150",
+            "available": true,
+            "sort": 4
+          }
+        ],
+        "printAreas": [
+          {
+            "surface": "FRONT",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 0
+          },
+          {
+            "surface": "BACK",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 2000
+          }
+        ]
+      },
+      {
+        "name": "【活动款】男女同款轻奢重磅圆领卫衣 简约时尚",
+        "detail": "",
+        "priceCents": 8900,
+        "status": "ON",
+        "galleryKeys": [
+          "demo-catalog/067410a93add61ff58e1feedb66427eeef8b0f4fc2f9e58aa7f63ba81fa80e36.jpg",
+          "demo-catalog/9e8010e851de610fab71d6f71c3bb7b9c153287b9a38befd515edd6707400109.jpg"
+        ],
+        "detailBlocks": [
+          {
+            "type": "image",
+            "content": "demo-catalog/ed6f24774ef9a589ceeac17f0a872418d217f45cb92612569927fa20a3b53b40.jpg"
+          },
+          {
+            "type": "image",
+            "content": "demo-catalog/b043ef01b59af50a08df545f9423ff2fd2243dc59be5dcac863f961e09ad878f.jpg"
+          },
+          {
+            "type": "image",
+            "content": "demo-catalog/a0c4b70cbccbaadc6bbe93c341dee82611ab1897a9d150a8e10267cfb142e19d.jpg"
+          }
+        ],
+        "colors": [
+          {
+            "name": "深橙色",
+            "hex": "#EA917F",
+            "sort": 0,
+            "frontMockupKey": "demo-catalog/4afeb53f4655b1a73b4a2e46e8a1c5a8bca7da210fb986fa3fb9344ae88ce5d1.png",
+            "backMockupKey": "demo-catalog/be46abac7285036a416d1cf1cafd608f63860b1429bc54ce2d44a4baa9b0a79e.png"
+          },
+          {
+            "name": "白色",
+            "hex": "#F2F2EF",
+            "sort": 1,
+            "frontMockupKey": "demo-catalog/e6538a0f614ffe134a9d54150506cba3386c1a072c3224f4d8c3f6b333b9c34a.png",
+            "backMockupKey": "demo-catalog/b150f16733033a91859064fb72f68066efadd86a40a2f4c9a0267e69f7eb3f51.png"
+          },
+          {
+            "name": "粉色",
+            "hex": "#E4C0B8",
+            "sort": 2,
+            "frontMockupKey": "demo-catalog/e41d0869855352b27dd7fd864247a49909b69849797c51a3134f16524a87f95d.png",
+            "backMockupKey": "demo-catalog/45202c4df4dbf9b58f8a53bd1b0f49e0ef5cb58afd0778ea9e906dfcdc9394cb.png"
+          },
+          {
+            "name": "枣红色",
+            "hex": "#491D24",
+            "sort": 3,
+            "frontMockupKey": "demo-catalog/25290a6b4d5054c1d047f030869085ce2f20caabcc5b9a2f96974e9d535af76f.png",
+            "backMockupKey": "demo-catalog/1e2f1f3a8fd024ae8ba61050d020ce31e4650023993835b3793d77770acefc69.png"
+          }
+        ],
+        "sizes": [
+          {
+            "name": "S",
+            "available": true,
+            "sort": 0
+          },
+          {
+            "name": "M",
+            "available": true,
+            "sort": 1
+          },
+          {
+            "name": "L",
+            "available": true,
+            "sort": 2
+          },
+          {
+            "name": "XL",
+            "available": true,
+            "sort": 3
+          },
+          {
+            "name": "2XL",
+            "available": true,
+            "sort": 4
+          },
+          {
+            "name": "3XL",
+            "available": true,
+            "sort": 5
+          }
+        ],
+        "printAreas": [
+          {
+            "surface": "FRONT",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 0
+          },
+          {
+            "surface": "BACK",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 2000
+          }
+        ]
+      },
+      {
+        "name": "运动透气吸汗纯棉服装（男女同款）",
+        "detail": "",
+        "priceCents": 6900,
+        "status": "ON",
+        "galleryKeys": [
+          "demo-catalog/9a4d60d063c0d1aedb14565d97e47355f61e42fe6a161c7ee87b0e6d3c239adb.jpg",
+          "demo-catalog/d4b6339b525a11055b51f8c68802216a573f5fc7bc8ef16cdc335ad3401e2148.jpg"
+        ],
+        "detailBlocks": [],
+        "colors": [
+          {
+            "name": "杏色",
+            "hex": "#F7F0F0",
+            "sort": 0,
+            "frontMockupKey": "demo-catalog/9eadf255a2098978e918ba7942ea22737af525422e302b81c3bfeade54e6d3af.png",
+            "backMockupKey": "demo-catalog/50a43772d0cc052e8adb945a845f6d6c2b52750f2f3ca78831d6f235b196f695.png"
+          },
+          {
+            "name": "荧光绿",
+            "hex": "#111111",
+            "sort": 1,
+            "frontMockupKey": "demo-catalog/5f3e6deeb4ed43584c0abca10d05d8a128af87bc32f215e177e3c8b743095d1c.png",
+            "backMockupKey": "demo-catalog/220c5e3a22bb8d561a23aae69fe1f785b7fc6a129fe5cda9daaa62a068069b1a.png"
+          }
+        ],
+        "sizes": [
+          {
+            "name": "S",
+            "available": true,
+            "sort": 0
+          },
+          {
+            "name": "M",
+            "available": true,
+            "sort": 1
+          },
+          {
+            "name": "L",
+            "available": true,
+            "sort": 2
+          }
+        ],
+        "printAreas": [
+          {
+            "surface": "FRONT",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 0
+          },
+          {
+            "surface": "BACK",
+            "x": 0.2373333333333333,
+            "y": 0.1786666666666667,
+            "w": 0.5266666666666666,
+            "h": 0.6933333333333334,
+            "exportWidth": 2000,
+            "exportHeight": 2400,
+            "surchargeCents": 2000
+          }
+        ]
+      }
+    ]
+  }
+]

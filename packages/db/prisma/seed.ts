@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { seedCatalog } from "./seed-catalog";
 
 const prisma = new PrismaClient();
 const configured = process.env.STORAGE_DIR || "data/uploads";
@@ -98,6 +99,7 @@ async function main() {
     console.log("seeded product", product.id);
   }
 
+  await seedCatalog(prisma, storage);
   console.log("ready", { admin: admin.phone, shop: tenant.slug, other: other.slug });
 }
 
