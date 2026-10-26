@@ -23,7 +23,7 @@ export default async function OrderDetailPage({ params }: { params: Promise<{ sl
   });
   if (!order || order.tenant.slug !== slug) notFound();
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col gap-5 bg-[#f5f3f0] p-4 lg:grid lg:max-w-none lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start lg:p-0">
+    <div className="store-member-page store-order-detail mx-auto flex w-full max-w-5xl flex-col gap-5 bg-[#f5f3f0] p-4 lg:grid lg:max-w-none lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start lg:p-0">
       <div className="hidden lg:col-span-2 lg:block"><Link href={`/s/${slug}/orders`} className="text-sm text-muted-foreground hover:text-foreground">← 返回我的订单</Link></div>
       <div className="lg:col-span-2 flex items-center justify-between gap-3 rounded-2xl bg-white p-6 shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
         <div className="flex flex-col gap-1">

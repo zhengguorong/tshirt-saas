@@ -17,12 +17,13 @@ export default async function CartPage({ params }: { params: Promise<{ slug: str
   const items = await getCart(shop.id, consumer.id);
   if (items.length === 0) {
     return (
-      <div className="mx-auto flex h-full w-full max-w-6xl flex-col gap-3 bg-[#f5f3f0] p-4 lg:h-auto lg:min-h-[calc(100svh-200px)] lg:max-w-[1600px] lg:bg-white lg:px-12 lg:py-24">
+      <div className="store-empty-cart mx-auto flex h-full w-full max-w-6xl flex-col gap-3 bg-[#f5f3f0] p-4 lg:h-auto lg:min-h-[calc(100svh-200px)] lg:max-w-[1600px] lg:bg-white lg:px-12 lg:py-24">
+        <h1 className="hidden lg:mb-12 lg:block lg:font-serif lg:text-5xl lg:tracking-[0.08em]">购物车</h1>
         <Empty className="rounded-2xl border-0 bg-white shadow-[0_8px_28px_rgba(30,24,18,0.06)] lg:rounded-none lg:shadow-none">
           <EmptyHeader>
             <EmptyTitle>购物车是空的</EmptyTitle>
             <EmptyDescription>选一件底衫，加上图案后再来结算。</EmptyDescription>
-            <Link href={`/s/${slug}#products`} className="hidden text-sm underline underline-offset-4 lg:block">浏览底衫 →</Link>
+            <Link href={`/s/${slug}#products`} className="store-desktop-cta hidden lg:mt-6 lg:inline-flex">浏览底衫 →</Link>
           </EmptyHeader>
         </Empty>
       </div>

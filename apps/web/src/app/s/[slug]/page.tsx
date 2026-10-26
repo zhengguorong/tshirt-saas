@@ -30,6 +30,7 @@ export default async function ShopPage({ params }: { params: Promise<{ slug: str
       </section>
       <section id="products" className="store-collection flex scroll-mt-24 flex-col gap-4 lg:mx-auto lg:w-full lg:max-w-[1600px] lg:gap-24 lg:px-12 lg:pb-32 lg:pt-[104px]">
         <div className="flex items-end justify-between lg:flex-col lg:items-center lg:gap-5 lg:text-center"><div><h2 className="text-2xl font-semibold tracking-tight lg:font-normal lg:tracking-[0.16em]">精选底衫</h2><p className="mt-1 text-sm text-neutral-500">优质面料与版型，适合各种印刷工艺，让你的创意更出彩。</p></div><span className="hidden text-sm text-neutral-500 sm:block lg:hidden">共 {products.length} 款底衫</span></div>
+        <div className="hidden lg:-mt-10 lg:flex lg:items-center lg:justify-between lg:border-y lg:border-neutral-200 lg:py-5 lg:text-xs lg:tracking-wider lg:text-neutral-500"><span>全部底衫</span><span>共 {products.length} 款 · 选择底衫，开始定制</span></div>
       {products.length === 0 ? (
         <Empty className="border">
           <EmptyHeader>

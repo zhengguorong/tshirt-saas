@@ -22,7 +22,7 @@ export default async function AddressListPage({
   const addresses = await prisma.address.findMany({ where: { consumerId: consumer.id }, orderBy: [{ isDefault: "desc" }, { createdAt: "desc" }] });
   const adding = `/s/${slug}/addresses/new${next ? `?next=${encodeURIComponent(next)}` : ""}`;
   return (
-    <div className="mx-auto flex h-full min-h-0 w-full max-w-5xl flex-col bg-[#f5f3f0] p-4 lg:h-auto lg:max-w-none lg:p-0">
+    <div className="store-member-page store-addresses mx-auto flex h-full min-h-0 w-full max-w-5xl flex-col bg-[#f5f3f0] p-4 lg:h-auto lg:max-w-none lg:p-0">
       <div className="mb-5 flex items-center justify-between"><div><h1 className="text-2xl font-semibold tracking-tight">{next ? "选择收货地址" : "收货地址"}</h1><p className="mt-1 text-sm text-muted-foreground">{next ? "选择地址后返回订单确认" : "管理你的常用收货信息"}</p></div><Button className="hidden bg-neutral-950 lg:inline-flex" size="lg" nativeButton={false} render={<Link href={adding} />}>添加地址</Button></div>
       <div className="min-h-0 flex-1 overflow-y-auto lg:overflow-visible lg:rounded-2xl lg:bg-white lg:p-2 lg:shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
         {addresses.length === 0 ? (
@@ -30,6 +30,7 @@ export default async function AddressListPage({
             <EmptyHeader>
               <EmptyTitle>暂无地址</EmptyTitle>
               <EmptyDescription>添加一个收货地址后就可以提交订单。</EmptyDescription>
+              <Link href={adding} className="store-desktop-cta hidden lg:mt-6 lg:inline-flex">添加收货地址</Link>
             </EmptyHeader>
           </Empty>
         ) : (
@@ -38,7 +39,7 @@ export default async function AddressListPage({
               const edit = `/s/${slug}/addresses/${item.id}${next ? `?next=${encodeURIComponent(next)}` : ""}`;
               const select = next ? withAddress(next, item.id) : edit;
               return (
-                <div key={item.id} className="relative rounded-xl border bg-white">
+                <div key={item.id} className="store-address-card relative rounded-xl border bg-white">
                   <Link href={select} className="flex flex-col gap-1 px-4 py-4 pr-14">
                     <span className="flex items-center gap-2 text-sm font-medium">
                       {item.isDefault ? <Badge>默认</Badge> : null}

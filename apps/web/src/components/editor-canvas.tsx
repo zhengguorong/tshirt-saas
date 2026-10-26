@@ -436,7 +436,7 @@ export default function EditorCanvas({ slug, loggedIn, product, materials, initi
   const selectedImage = imageTarget ? library.find((item) => item.id === imageTarget.assetId) : undefined;
 
   return (
-    <div className="fixed inset-y-0 left-1/2 z-40 flex h-dvh w-full max-w-[430px] -translate-x-1/2 flex-col bg-[#f3efe6] text-neutral-900 lg:left-0 lg:max-w-none lg:translate-x-0">
+    <div className="store-editor fixed inset-y-0 left-1/2 z-40 flex h-dvh w-full max-w-[430px] -translate-x-1/2 flex-col bg-[#f3efe6] text-neutral-900 lg:left-0 lg:max-w-none lg:translate-x-0">
       <header className="bg-white px-3 pt-[max(8px,env(safe-area-inset-top))] pb-2 lg:border-b lg:px-10 lg:py-3">
         <div className="flex items-center gap-2">
           <Link href={`/s/${slug}/products/${product.id}`} aria-label="返回" className="flex size-8 items-center justify-center rounded-full">
@@ -469,7 +469,7 @@ export default function EditorCanvas({ slug, loggedIn, product, materials, initi
         </div>
       </header>
 
-      <aside className="absolute inset-y-[74px] left-0 z-20 hidden w-[92px] flex-col items-center gap-2 border-r border-black/5 bg-white py-8 lg:flex">
+      <aside className="store-editor-toolbar absolute inset-y-[74px] left-0 z-20 hidden w-[92px] flex-col items-center gap-2 border-r border-black/5 bg-white py-8 lg:flex">
         <RailButton label="素材" active={panel === "material"} onClick={() => { closeFontSession(); setPanel(panel === "material" ? "none" : "material"); }}><StickerIcon /></RailButton>
         <RailButton label="文字" active={panel === "font"} onClick={() => { if (selected?.type === "text") { openFontSession(); setPanel("font"); } else addText(); }}><TypeIcon /></RailButton>
         <RailButton label="上传" active={panel === "photo"} onClick={() => albumRef.current?.click()}><ImagePlusIcon /></RailButton>
@@ -479,7 +479,7 @@ export default function EditorCanvas({ slug, loggedIn, product, materials, initi
         <RailButton label="重做" disabled={!future.length} onClick={redo}><Redo2Icon /></RailButton>
       </aside>
 
-      <div className="relative min-h-0 flex-1 lg:ml-[92px] lg:mr-[390px] lg:bg-[#edf0f4]">
+      <div className="store-editor-workspace relative min-h-0 flex-1 lg:ml-[92px] lg:mr-[390px] lg:bg-[#edf0f4]">
         {area && mockup ? (
           <EditorStage
             design={design}
@@ -514,7 +514,7 @@ export default function EditorCanvas({ slug, loggedIn, product, materials, initi
         {message ? <p className="absolute top-3 left-1/2 z-20 max-w-[80%] -translate-x-1/2 rounded-full bg-neutral-900 px-3 py-1.5 text-center text-xs text-white">{message}</p> : null}
       </div>
 
-      <aside className="absolute inset-y-[74px] right-4 z-20 hidden w-[360px] overflow-y-auto rounded-2xl bg-white p-5 shadow-[0_8px_30px_rgba(30,35,45,0.08)] lg:block">
+      <aside className="store-editor-inspector absolute inset-y-[74px] right-4 z-20 hidden w-[360px] overflow-y-auto rounded-2xl bg-white p-5 shadow-[0_8px_30px_rgba(30,35,45,0.08)] lg:block">
         <div className="flex border-b border-neutral-200"><button className="border-b-2 border-neutral-900 px-3 pb-3 text-base font-semibold">设计</button><span className="px-3 pb-3 text-base text-neutral-400">商品信息</span></div>
         <div className="mt-5 grid grid-cols-2 gap-2"><button type="button" className={`rounded-xl border p-3 text-sm ${surface === "front" ? "border-neutral-900 bg-neutral-950 text-white" : "border-neutral-200"}`} onClick={() => setSurface("front")}>正面</button>{hasBack ? <button type="button" className={`rounded-xl border p-3 text-sm ${surface === "back" ? "border-neutral-900 bg-neutral-950 text-white" : "border-neutral-200"}`} onClick={() => setSurface("back")}>背面</button> : null}</div>
         <InspectorSection title="颜色"><div className="flex flex-wrap gap-3">{product.colors.map((item) => <button key={item.id} type="button" aria-label={item.name} className={`size-9 rounded-full border-2 ${item.id === design.colorId ? "border-neutral-900 ring-2 ring-neutral-200" : "border-white"}`} style={{ backgroundColor: item.hex }} onClick={() => commit({ ...designRef.current, colorId: item.id })}>{item.id === design.colorId ? <CheckIcon className="mx-auto size-4" style={{ color: inkOn(item.hex) }} /> : null}</button>)}</div></InspectorSection>
@@ -524,7 +524,7 @@ export default function EditorCanvas({ slug, loggedIn, product, materials, initi
       </aside>
 
       {panel === "material" ? (
-        <section className="sheet-up max-h-52 overflow-y-auto rounded-t-2xl bg-white px-3 py-3 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] lg:absolute lg:bottom-6 lg:left-[calc(92px+1.5rem)] lg:right-[calc(390px+2rem)] lg:z-30 lg:max-h-64 lg:rounded-2xl lg:shadow-lg">
+        <section className="store-editor-panel sheet-up max-h-52 overflow-y-auto rounded-t-2xl bg-white px-3 py-3 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] lg:absolute lg:bottom-6 lg:left-[calc(92px+1.5rem)] lg:right-[calc(390px+2rem)] lg:z-30 lg:max-h-64 lg:rounded-2xl lg:shadow-lg">
           {library.length === 0 ? <p className="py-6 text-center text-sm text-neutral-500">还没有印花素材</p> : (
             <div className="grid grid-cols-4 gap-2">
               {library.map((item) => (
@@ -538,7 +538,7 @@ export default function EditorCanvas({ slug, loggedIn, product, materials, initi
       ) : null}
 
       {panel === "font" && selected?.type === "text" ? (
-        <section className="sheet-up flex max-h-[50%] flex-col gap-3 overflow-y-auto rounded-t-2xl bg-white px-4 py-3 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] lg:absolute lg:bottom-6 lg:left-[calc(92px+1.5rem)] lg:right-[calc(390px+2rem)] lg:z-30 lg:max-h-64 lg:rounded-2xl lg:shadow-lg">
+        <section className="store-editor-panel sheet-up flex max-h-[50%] flex-col gap-3 overflow-y-auto rounded-t-2xl bg-white px-4 py-3 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] lg:absolute lg:bottom-6 lg:left-[calc(92px+1.5rem)] lg:right-[calc(390px+2rem)] lg:z-30 lg:max-h-64 lg:rounded-2xl lg:shadow-lg">
           <div className="flex items-center justify-between">
             <p className="text-sm font-medium">文字</p>
             <button type="button" className="text-sm font-medium" onClick={closeFont}>完成</button>
@@ -578,7 +578,7 @@ export default function EditorCanvas({ slug, loggedIn, product, materials, initi
       ) : null}
 
       {panel === "tools" && imageTarget ? (
-        <section className="sheet-up flex items-center justify-around rounded-t-2xl bg-white px-2 py-2 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] lg:absolute lg:bottom-6 lg:left-1/2 lg:z-30 lg:w-[360px] lg:-translate-x-1/2 lg:rounded-2xl lg:shadow-lg">
+        <section className="store-editor-image-tools sheet-up flex items-center justify-around rounded-t-2xl bg-white px-2 py-2 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] lg:absolute lg:bottom-6 lg:left-1/2 lg:z-30 lg:w-[360px] lg:-translate-x-1/2 lg:rounded-2xl lg:shadow-lg">
           <ToolButton label="收起" onClick={() => { suppressTools.current = imageTarget.id; setPanel("none"); }}><ChevronDownIcon className="size-5" /></ToolButton>
           <ToolButton label="去背景" onClick={() => {
             if (!selectedImage) return;

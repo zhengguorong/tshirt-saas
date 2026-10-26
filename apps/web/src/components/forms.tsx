@@ -28,11 +28,11 @@ export function CheckoutForm({
   const [open, setOpen] = useState(true);
   const detail = address ? `${address.province}${address.city}${address.district}${address.detail}` : "";
   return (
-    <form action={action} className="mx-auto flex h-full min-h-0 w-full max-w-6xl flex-col bg-[#f5f3f0] lg:h-auto lg:max-w-7xl lg:px-8 lg:py-10">
+    <form action={action} className="store-checkout mx-auto flex h-full min-h-0 w-full max-w-6xl flex-col bg-[#f5f3f0] lg:h-auto lg:max-w-7xl lg:px-8 lg:py-10">
       <div className="mb-6 hidden lg:block"><h1 className="text-3xl font-semibold">确认订单</h1><p className="mt-2 text-sm text-muted-foreground">确认收货信息与定制商品后提交订单</p></div>
       <input type="hidden" name="slug" value={slug} />
       <input type="hidden" name="ids" value={ids} />
-      <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto p-3 lg:overflow-visible lg:grid lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start lg:gap-6 lg:p-0">
+      <div className="store-checkout-columns flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto p-3 lg:overflow-visible lg:grid lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start lg:gap-6 lg:p-0">
         {address ? (
           <>
             <Link href={addressHref} className="lg:col-start-1 flex w-full items-center gap-3 rounded-2xl bg-white px-5 py-5 shadow-[0_8px_28px_rgba(30,24,18,0.06)]">
@@ -64,7 +64,7 @@ export function CheckoutForm({
             <OrderLine key={line.id} image={line.image} name={line.name} spec={line.spec} quantity={line.quantity} price={line.price} tags={line.tags} />
           ))}
         </div>
-        <div className="flex flex-col gap-3 rounded-2xl bg-white p-6 shadow-[0_8px_28px_rgba(30,24,18,0.06)] lg:sticky lg:top-24 lg:col-start-2 lg:row-span-3 lg:row-start-1">
+        <div className="store-checkout-summary flex flex-col gap-3 rounded-2xl bg-white p-6 shadow-[0_8px_28px_rgba(30,24,18,0.06)] lg:sticky lg:top-24 lg:col-start-2 lg:row-span-3 lg:row-start-1">
           <button type="button" className="flex items-center justify-between gap-3" onClick={() => setOpen((value) => !value)}>
             <span className="text-sm font-medium">实付金额</span>
             <span className="flex items-center gap-1 text-sm font-semibold tabular-nums">

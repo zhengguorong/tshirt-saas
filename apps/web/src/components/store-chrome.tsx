@@ -33,8 +33,8 @@ export function StoreMotion({ slug, children }: { slug: string; children: React.
   const links = [{ path: "/account", label: "账户概览" }, { path: "/orders", label: "我的订单" }, { path: "/addresses", label: "收货地址" }, { path: "/cart", label: "购物车" }];
   return (
     <div key={pathname} className={cn("h-full min-h-0 overflow-y-auto", motion, editor ? "lg:h-[calc(100dvh-4rem)]" : "store-document lg:flex lg:h-auto lg:min-h-[calc(100dvh-5.5rem)] lg:flex-col lg:overflow-visible")}>
-      <div className={cn("h-full lg:h-auto", !editor && "lg:flex-1", editor && "lg:h-full", member && "lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-[200px_minmax(0,1fr)] lg:items-start lg:gap-8 lg:px-8 lg:py-10")}>
-        {member ? <aside className="hidden lg:sticky lg:top-24 lg:flex lg:flex-col lg:gap-1 lg:rounded-2xl lg:bg-white lg:p-4">
+      <div className={cn("h-full lg:h-auto", !editor && "lg:flex-1", editor && "lg:h-full", member && "lg:mx-auto lg:grid lg:w-full lg:max-w-[1600px] lg:grid-cols-[200px_minmax(0,1fr)] lg:items-start lg:gap-12 lg:px-12 lg:pb-28 lg:pt-16 xl:gap-20 xl:px-16")}>
+        {member ? <aside className="store-member-nav hidden lg:sticky lg:top-28 lg:flex lg:flex-col lg:gap-1 lg:border-r lg:pr-8">
           <p className="px-3 py-3 text-xs text-muted-foreground">个人中心</p>
           {links.map(({ path, label }) => <Link key={path} href={`/s/${slug}${path}`} aria-current={rest.startsWith(path) ? "page" : undefined} className={cn("rounded-lg px-3 py-3 text-sm transition hover:bg-muted", rest.startsWith(path) && "bg-muted font-semibold")}>{label}</Link>)}
           <Link href={`/s/${slug}`} className="mt-4 border-t px-3 pt-5 text-sm text-muted-foreground">继续选购 →</Link>
