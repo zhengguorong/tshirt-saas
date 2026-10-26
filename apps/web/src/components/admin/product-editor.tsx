@@ -65,9 +65,11 @@ export function ProductEditor({
           <Button type="primary" htmlType="submit" loading={saving}>保存</Button>
         </Form>
       </Card>
-      <Card title="颜色" extra={<Typography.Text type="secondary">{product.colors.map((color) => `${color.name} ${color.hex}`).join("、")}</Typography.Text>}>
+      <Card title="颜色">
+        <Typography.Paragraph type="secondary" className="admin-color-summary">{product.colors.map((color) => `${color.name} ${color.hex}`).join("、")}</Typography.Paragraph>
         <Form
-          layout="inline"
+          layout="vertical"
+          className="admin-color-form"
           onFinish={async (values) => {
             setAdding(true);
             const data = new FormData();

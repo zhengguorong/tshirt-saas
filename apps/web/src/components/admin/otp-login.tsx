@@ -54,8 +54,8 @@ export function OtpLogin({
   }
 
   return (
-    <div className={purpose === "staff" ? "merchant-login" : undefined} style={{ display: "grid", minHeight: "100vh", placeItems: "center", background: "#f5f5f5", padding: 24 }}>
-      <Card style={{ width: 400, maxWidth: "100%" }} styles={{ body: { padding: 32 } }}>
+    <div className={purpose === "staff" ? "admin-login merchant-login" : "admin-login"}>
+      <Card className="admin-login-card">
         {purpose === "staff" && <Link href="/" className="merchant-login-brand"><span>印</span>印坊<small>商家管理系统</small></Link>}
         <Space orientation="vertical" size={4} style={{ marginBottom: 24 }}>
           <Typography.Title level={3} style={{ margin: 0 }}>{title}</Typography.Title>

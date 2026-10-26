@@ -16,16 +16,18 @@ export type DemoRow = {
 
 export function DemosView({ rows }: { rows: DemoRow[] }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+    <div className="admin-page">
       <div>
         <Typography.Title level={4} style={{ margin: 0 }}>演示申请</Typography.Title>
         <Typography.Text type="secondary">官网提交的演示申请。按时间从新到旧。</Typography.Text>
       </div>
-      <Card styles={{ body: { padding: 0 } }}>
+      <Card className="admin-table-card" styles={{ body: { padding: 0 } }}>
+        <div className="admin-table-scroll-note">左右滑动查看完整表格</div>
         <Table
+          scroll={{ x: 1150 }}
           rowKey="id"
           dataSource={rows}
-          pagination={{ pageSize: 10, showTotal: (total) => `共 ${total} 条` }}
+          pagination={{ pageSize: 10, showSizeChanger: false, showTotal: (total) => `共 ${total} 条` }}
           locale={{ emptyText: "还没有演示申请" }}
           columns={[
             { title: "时间", dataIndex: "when", width: 180 },

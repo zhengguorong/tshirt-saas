@@ -40,23 +40,25 @@ export function PlatformView({
 }) {
   const [pendingId, setPendingId] = useState("");
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+    <div className="admin-page">
       <div>
         <Typography.Title level={4} style={{ margin: 0 }}>商家</Typography.Title>
         <Typography.Text type="secondary">商家可以自行注册。这里仍可代为开通、停用。</Typography.Text>
       </div>
-      <Row gutter={16}>
+      <Row gutter={[16, 20]}>
         <Col xs={24} xl={8}>
           <Card title="开通商家">
             <TenantCreateForm />
           </Card>
         </Col>
         <Col xs={24} xl={16}>
-          <Card styles={{ body: { padding: 0 } }}>
+          <Card className="admin-table-card" styles={{ body: { padding: 0 } }}>
+            <div className="admin-table-scroll-note">左右滑动查看完整表格</div>
             <Table
+              scroll={{ x: 680 }}
               rowKey="id"
               dataSource={tenants}
-              pagination={{ pageSize: 10, showTotal: (total) => `共 ${total} 家` }}
+              pagination={{ pageSize: 10, showSizeChanger: false, showTotal: (total) => `共 ${total} 家` }}
               locale={{ emptyText: "还没有商家" }}
               columns={[
                 {

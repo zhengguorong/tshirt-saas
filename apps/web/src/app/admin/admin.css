@@ -170,3 +170,87 @@
   .detail-more { order: 4; }
 }
 @media (max-width: 600px) { .detail-card-note, .detail-sheet-link div > span { font-size: 10px; } }
+
+/* Keep intrinsic table and form widths inside their own layout containers. */
+.merchant-content, .merchant-content > main, .admin-page, .admin-page > *,
+.admin-form-grid > *, .platform-main, .platform-content { min-width: 0; }
+.admin-page-heading > div, .admin-table-heading > div, .detail-page-heading > div,
+.admin-product-cell > div { min-width: 0; }
+.admin-page-heading h3, .admin-form-page h3, .admin-product-cell a,
+.admin-color-summary, .admin-sheet-heading h4 { overflow-wrap: anywhere; }
+.admin-form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.admin-color-form { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: 16px; align-items: end; }
+.admin-color-form .ant-form-item { min-width: 0; margin-bottom: 0; }
+.admin-color-summary { line-height: 1.8; }
+.admin-table-scroll-note { display: none; }
+.admin-table-card .ant-table-content { overscroll-behavior-x: contain; }
+.admin-table-card .ant-table-pagination { flex-wrap: wrap; row-gap: 8px; }
+.merchant-header .ant-breadcrumb { min-width: 0; }
+.merchant-header-actions { flex-shrink: 0; }
+
+.admin-login { display: grid; grid-template-columns: minmax(0, 1fr); min-height: 100dvh; place-items: center; padding: 24px; background: #f5f5f5; }
+.admin-login-card { width: 400px; max-width: 100%; min-width: 0; }
+.admin-login-card > .ant-card-body { padding: 32px; }
+
+.platform-layout { min-height: 100dvh; }
+.platform-sider { position: sticky !important; top: 0; height: 100dvh; }
+.platform-header { display: flex; align-items: center; gap: 12px; padding-inline: 24px !important; background: #fff !important; border-bottom: 1px solid #f0f0f0; }
+.platform-page-title { min-width: 0; font-size: 14px; }
+.platform-user { margin-left: auto; flex-shrink: 0; }
+.platform-content { padding: 24px; }
+
+.admin-sheet-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.admin-sheet-heading h4 { min-width: 0; }
+.admin-sheet-document .ant-descriptions table { table-layout: fixed; }
+.admin-sheet-document .ant-descriptions-item-content { overflow-wrap: anywhere; }
+.admin-sheet-picture { position: relative; height: 360px; margin-top: 8px; overflow: hidden; border: 1px solid #f0f0f0; border-radius: 8px; background: #fafafa; }
+
+@media screen and (max-width: 991px) {
+  .platform-sider { display: none !important; }
+  .platform-header { height: 62px !important; line-height: normal !important; padding-inline: 16px !important; }
+  .platform-content { padding: 20px; }
+}
+
+@media screen and (max-width: 600px) {
+  .admin-form-grid, .admin-color-form { grid-template-columns: minmax(0, 1fr); }
+  .merchant-root .ant-input, .merchant-root .ant-input-number-input,
+  .platform-content .ant-input, .platform-content .ant-input-number-input,
+  .admin-login .ant-input { font-size: 16px; }
+  .admin-form-page .ant-btn { min-height: 40px; }
+  .admin-metric-top, .admin-metric-hint { font-size: 12px; }
+  .admin-table-heading div > span { font-size: 11px; }
+  .admin-page-heading { flex-wrap: wrap; gap: 14px; }
+  .admin-page-heading > div { flex: 1 1 220px; }
+  .admin-page-heading > .ant-btn { margin-top: 0; }
+  .admin-catalog-summary { flex-wrap: wrap; gap: 10px 18px; }
+  .admin-table-scroll-note { display: block; padding: 10px 16px; color: #65758f; font-size: 12px; border-bottom: 1px solid #edf0f6; }
+  .admin-table-toolbar .ant-select { flex: 1 1 140px; min-width: 0; }
+  .admin-table-toolbar > span:last-child:not(.ant-input-affix-wrapper) { margin-left: 0; }
+  .admin-table-card .ant-pagination-total-text { flex-basis: 100%; height: auto; }
+  .admin-form-page .ant-card-head { padding-inline: 20px; }
+  .admin-material-toolbar .ant-input-affix-wrapper { width: 100%; }
+  .admin-material-card img { padding: 12px; }
+  .merchant-header > .ant-btn, .merchant-user { min-width: 40px; min-height: 40px; }
+  .merchant-header .ant-breadcrumb ol { gap: 3px; flex-wrap: wrap; }
+  .detail-page-heading { flex-wrap: wrap; }
+  .detail-total { text-align: left; }
+  .detail-title-line { flex-wrap: wrap; }
+  .detail-info > div { gap: 12px; }
+  .detail-product-heading div > span { overflow-wrap: anywhere; }
+  .admin-login { padding: 20px 16px; }
+  .admin-login-card > .ant-card-body { padding: 24px; }
+  .merchant-login-brand { flex-wrap: wrap; }
+  .platform-content { padding: 20px 14px; }
+  .platform-user-label { display: none; }
+  .platform-user { min-width: 40px; min-height: 40px; }
+  .admin-sheet-heading .ant-space { flex-wrap: wrap; }
+  .admin-sheet-picture { height: 280px; }
+  .admin-sheet-document .ant-card-body { padding: 16px; }
+}
+
+@media print {
+  .admin-table-scroll-note { display: none !important; }
+  .admin-sheet-document .ant-image-cover { display: none !important; }
+  .admin-sheet-picture-column { flex: 0 0 50% !important; max-width: 50% !important; }
+  .admin-sheet-picture { height: 360px; }
+}
