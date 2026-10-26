@@ -331,8 +331,8 @@
         ],
         "detailBlocks": [
           {
-            "type": "image",
-            "content": "demo-catalog/4a555e4c71424c12a6d62e40cc0e18ce8b2150d8c4ae76f30c6914e1f2d23b5e.jpg"
+            "type": "text",
+            "content": "圆领套头卫衣，多色可选。可选尺码：S、M、L、XL、2XL、3XL。支持正反面印刷，实际可选颜色、尺码和印刷加价以商品选项为准。"
           }
         ],
         "colors": [
@@ -425,8 +425,8 @@
         ],
         "detailBlocks": [
           {
-            "type": "image",
-            "content": "demo-catalog/8c4d8c2d3f14130c7584750cd40f21064eb5013fd66de47a80fcaa94998bb690.jpg"
+            "type": "text",
+            "content": "童装圆领套头卫衣。可选尺码：110、120、130、140、150。支持正反面印刷，实际可选颜色、尺码和印刷加价以商品选项为准。"
           }
         ],
         "colors": [
@@ -513,8 +513,8 @@
         ],
         "detailBlocks": [
           {
-            "type": "image",
-            "content": "demo-catalog/ed6f24774ef9a589ceeac17f0a872418d217f45cb92612569927fa20a3b53b40.jpg"
+            "type": "text",
+            "content": "圆领摇粒绒卫衣，男女同款。面料成分：65%聚酯纤维、35%棉；克重350g。可选尺码：S、M、L、XL、2XL、3XL。实际可选颜色和尺码以商品选项为准。"
           },
           {
             "type": "image",
@@ -1005,8 +1005,8 @@
         ],
         "detailBlocks": [
           {
-            "type": "image",
-            "content": "demo-catalog/4a555e4c71424c12a6d62e40cc0e18ce8b2150d8c4ae76f30c6914e1f2d23b5e.jpg"
+            "type": "text",
+            "content": "圆领套头卫衣，多色可选。可选尺码：S、M、L、XL、2XL、3XL。支持正反面印刷，实际可选颜色、尺码和印刷加价以商品选项为准。"
           }
         ],
         "colors": [
@@ -1099,8 +1099,8 @@
         ],
         "detailBlocks": [
           {
-            "type": "image",
-            "content": "demo-catalog/8c4d8c2d3f14130c7584750cd40f21064eb5013fd66de47a80fcaa94998bb690.jpg"
+            "type": "text",
+            "content": "童装圆领套头卫衣。可选尺码：110、120、130、140、150。支持正反面印刷，实际可选颜色、尺码和印刷加价以商品选项为准。"
           }
         ],
         "colors": [
@@ -1187,8 +1187,8 @@
         ],
         "detailBlocks": [
           {
-            "type": "image",
-            "content": "demo-catalog/ed6f24774ef9a589ceeac17f0a872418d217f45cb92612569927fa20a3b53b40.jpg"
+            "type": "text",
+            "content": "圆领摇粒绒卫衣，男女同款。面料成分：65%聚酯纤维、35%棉；克重350g。可选尺码：S、M、L、XL、2XL、3XL。实际可选颜色和尺码以商品选项为准。"
           },
           {
             "type": "image",

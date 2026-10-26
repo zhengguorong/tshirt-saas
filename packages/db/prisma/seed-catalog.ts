@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { copyFile, mkdir, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { cleanImportedDemoBranding } from "./demo-branding";
 
 const fixtureRoot = fileURLToPath(new URL("./demo-catalog/", import.meta.url));
 
@@ -92,6 +93,8 @@ export async function seedCatalog(prisma: PrismaClient, storage: string) {
       await mkdir(path.dirname(target), { recursive: true });
       await copyFile(path.join(storage, asset.source), target);
     }
+    const tenant = await prisma.tenant.findUniqueOrThrow({ where: { slug: fixture.slug }, select: { id: true } });
+    await cleanImportedDemoBranding(prisma, tenant.id);
     console.log("demo catalog ready", { shop: fixture.slug, products: products.length, materials: assets.length });
   }
 }
