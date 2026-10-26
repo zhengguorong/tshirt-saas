@@ -54,3 +54,166 @@
     animation: none;
   }
 }
+
+/* Secondary storefront pages share the home/PDP's editorial desktop rhythm.
+   These hooks deliberately leave the compact mobile App layouts untouched. */
+@media (min-width: 1024px) {
+  .store-member-page {
+    background: white;
+    gap: 32px;
+  }
+
+  .store-member-page h1,
+  .store-checkout h1 {
+    font-family: var(--font-serif, "Noto Serif SC", "Songti SC", SimSun, serif);
+    font-size: clamp(32px, 3vw, 48px);
+    font-weight: 400;
+    letter-spacing: .08em;
+    line-height: 1.4;
+  }
+
+  .store-member-page h1 + p,
+  .store-checkout h1 + p {
+    margin-top: 16px;
+    line-height: 1.8;
+  }
+
+  .store-member-nav > p { padding: 0 12px 28px; letter-spacing: .16em; }
+  .store-member-nav > a { border-radius: 0; padding-block: 16px; }
+  .store-member-nav > a[aria-current="page"] { background: #f5f4f1; font-weight: 500; }
+
+  .store-member-page [data-slot="card"],
+  .store-checkout .rounded-2xl {
+    border-radius: 0;
+    box-shadow: none;
+    --tw-ring-shadow: 0 0 #0000;
+  }
+
+  .store-desktop-cta {
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    padding: 14px 32px;
+    background: #171717;
+    color: white;
+    font-size: 14px;
+    letter-spacing: .08em;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .store-desktop-cta:hover { background: #404040; }
+  .store-desktop-cta:focus-visible { outline: 2px solid #737373; outline-offset: 4px; }
+
+  .store-member-page [data-slot="empty"],
+  .store-empty-cart [data-slot="empty"] {
+    min-height: 340px;
+    flex: none;
+    margin: 0;
+    padding: 56px 32px;
+    border: 1px solid #e5e3df;
+    border-radius: 0;
+    background: #faf9f7;
+    box-shadow: none;
+  }
+  .store-addresses [data-slot="empty"] { border-style: dashed; }
+  .store-member-page [data-slot="empty-title"],
+  .store-empty-cart [data-slot="empty-title"] {
+    font-family: "Songti SC", SimSun, serif;
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: .06em;
+  }
+  .store-member-page [data-slot="empty-description"],
+  .store-empty-cart [data-slot="empty-description"] { margin-top: 8px; line-height: 1.9; }
+
+  .store-account { grid-template-columns: minmax(220px, .8fr) minmax(0, 1.6fr); gap: 32px 48px; }
+  .store-account > :first-child { padding-bottom: 8px; }
+  .store-account-profile {
+    align-self: stretch;
+    padding: 32px;
+    border-radius: 0;
+    background: #f6f5f2;
+    box-shadow: none;
+  }
+  .store-account-profile > :first-child { width: 64px; height: 64px; background: white; font-size: 18px; font-weight: 400; }
+  .store-account-profile > :nth-child(2) { gap: 10px; }
+  .store-account-section { border-block: 1px solid #e5e5e5; }
+  .store-account-section [data-slot="card-content"] > a,
+  .store-account-section [data-slot="card-content"] > button { padding: 24px 0; }
+  .store-account-section svg { stroke-width: 1.3; }
+  .store-order-counts { padding: 32px 0; }
+  .store-order-counts > * { gap: 12px; padding: 8px 0; }
+  .store-order-counts > * + * { border-left: 1px solid #e5e5e5; }
+  .store-order-counts > * > :first-child { font-size: 28px; font-weight: 400; }
+
+  .store-orders { gap: 0; }
+  .store-orders > :first-child { margin-bottom: 40px; }
+  .store-orders-heading { padding: 20px 24px; border-block: 1px solid #e5e5e5; background: #faf9f7; letter-spacing: .04em; }
+  .store-orders > [data-slot="empty"] { border-top: 0; }
+  .store-order-row { min-height: 128px; border-bottom: 1px solid #e5e5e5; padding-block: 32px; gap: 12px 16px; }
+  .store-orders > a:hover .store-order-row { transform: none; background: #faf9f7; }
+
+  .store-addresses > :nth-child(2) { padding: 0; border-radius: 0; box-shadow: none; }
+  .store-addresses > :nth-child(2) > .grid { padding: 0; gap: 24px; background: white; }
+  .store-addresses > :first-child { gap: 24px; margin-bottom: 8px; }
+  .store-address-card { border-radius: 0; transition: border-color .2s; }
+  .store-address-card:hover { border-color: #737373; }
+  .store-address-card > a:first-child { min-height: 164px; padding: 32px 56px 32px 28px; gap: 20px; }
+  .store-address-card > a:first-child > span { white-space: normal; overflow: visible; }
+  .store-address-card > a:first-child > span:first-child { flex-wrap: wrap; row-gap: 8px; }
+  .store-address-card > a:first-child > span:last-child { line-height: 1.8; overflow-wrap: anywhere; }
+
+  .store-addresses [data-slot="button"],
+  .store-address-form [data-slot="button"],
+  .store-order-detail [data-slot="button"] { border-radius: 0; min-height: 48px; }
+  .store-address-form > form:first-of-type { border-radius: 0; border-top: 1px solid #e5e5e5; box-shadow: none; padding: 32px 0; }
+  .store-address-form > form:first-of-type > .rounded-xl { border-radius: 0; }
+  .store-address-form label { min-height: 72px; }
+  .store-address-form input:focus-visible,
+  .store-address-form textarea:focus-visible { outline: 1px solid #a3a3a3; outline-offset: 5px; }
+
+  .store-order-detail { grid-template-columns: minmax(0, 1fr) minmax(240px, .65fr); gap: 32px; }
+  .store-order-detail > .rounded-2xl { border-radius: 0; padding: 24px 0; border-bottom: 1px solid #e5e5e5; box-shadow: none; }
+  .store-order-detail h1 { font-size: clamp(24px, 2vw, 36px); overflow-wrap: anywhere; }
+  .store-order-detail [data-slot="card"] { padding-block: 24px; border-bottom: 1px solid #e5e5e5; }
+  .store-order-detail [data-slot="card-header"],
+  .store-order-detail [data-slot="card-content"] { padding-inline: 0; }
+  .store-order-detail [data-slot="card-content"] { gap: 16px; line-height: 1.9; }
+  .store-order-detail img { height: 180px; border-radius: 0; }
+  .store-order-detail aside { border-left: 1px solid #e5e5e5; padding-left: 24px; }
+
+  .store-empty-cart { min-height: auto; padding-top: 56px; padding-bottom: 96px; }
+  .store-empty-cart [data-slot="empty"] { min-height: 380px; }
+  .store-cart-lines > div > img,
+  .store-cart-lines > div > .size-16 { width: clamp(140px, 15vw, 240px); }
+
+  .store-checkout { max-width: 1600px; padding: 56px 48px 112px; background: white; }
+  .store-checkout > :first-child { margin-bottom: 48px; }
+  .store-checkout-columns { grid-template-columns: minmax(0, 1fr) minmax(300px, .55fr); gap: 32px 64px; }
+  .store-checkout .rounded-2xl { border-block: 1px solid #e5e5e5; padding: 28px 0; }
+  .store-checkout .store-checkout-summary { border: 0; border-left: 1px solid #e5e5e5; padding-left: 32px; gap: 28px; }
+  .store-checkout [data-slot="button"] { border-radius: 0; min-height: 54px; }
+  .store-checkout img { width: 100px; height: 125px; border-radius: 0; }
+
+  .store-login-wall { max-width: 720px; margin: 64px auto 96px; min-height: 360px; border: 1px solid #e5e3df; border-radius: 0; background: #faf9f7; gap: 24px; }
+  .store-login-wall > p:first-child { font-family: "Songti SC", SimSun, serif; font-size: 28px; font-weight: 400; letter-spacing: .06em; }
+  .store-login-wall [data-slot="button"] { border-radius: 0; min-width: 160px; min-height: 48px; }
+
+  .store-editor { background: #f4f3f0; }
+  .store-editor > header { height: 74px; display: flex; align-items: center; }
+  .store-editor > header > div { width: 100%; }
+  .store-editor > header button { border-radius: 0; }
+  .store-editor-toolbar { bottom: 0; padding-top: 24px; }
+  .store-editor-toolbar button { border-radius: 0; padding-block: 14px; }
+  .store-editor-workspace { margin-right: 360px; background: #e4e3de; border: 24px solid #f4f3f0; }
+  .store-editor-inspector { right: 0; bottom: 0; width: 360px; border-radius: 0; box-shadow: none; padding: 28px; border-left: 1px solid #e5e5e5; }
+  .store-editor-inspector button { border-radius: 0; }
+  .store-editor-inspector button[aria-label] { border-radius: 50%; }
+  .store-editor-inspector section { margin-top: 28px; padding-top: 24px; }
+  .store-editor-inspector h3 { font-weight: 400; letter-spacing: .08em; }
+  .store-editor-inspector > :last-child { flex-direction: column; align-items: stretch; gap: 24px; }
+  .store-editor-inspector > :last-child > button { width: 100%; }
+  .store-editor-image-tools { left: calc(50% - 134px); border-radius: 0; }
+  .store-editor-panel { right: calc(360px + 2rem); border-radius: 0; border: 1px solid #e5e5e5; }
+  .store-collection [data-slot="empty"] { min-height: 300px; border-radius: 0; background: #faf9f7; }
+}

@@ -52,7 +52,7 @@ export function LoginWall({ next, title }: { next: string; title: string }) {
     openLogin(next);
   }, [next, openLogin]);
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-3 px-8 text-center lg:mx-auto lg:my-16 lg:h-auto lg:min-h-80 lg:max-w-2xl lg:rounded-2xl lg:bg-white lg:py-12">
+    <div className="store-login-wall flex h-full flex-col items-center justify-center gap-3 px-8 text-center lg:mx-auto lg:my-16 lg:h-auto lg:min-h-80 lg:max-w-2xl lg:rounded-2xl lg:bg-white lg:py-12">
       <p className="text-base font-medium">{title}</p>
       <p className="text-sm text-muted-foreground">验证手机号即可继续，不用设置密码。</p>
       <Button type="button" onClick={() => openLogin(next)}>登录</Button>

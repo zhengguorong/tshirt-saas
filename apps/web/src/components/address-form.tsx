@@ -20,7 +20,7 @@ export function AddressForm({
 }) {
   const [state, action, pending] = useActionState(saveAddress, null);
   return (
-    <div className="mx-auto flex h-full min-h-0 w-full max-w-3xl flex-col bg-[#f5f3f0] p-4 lg:h-auto lg:max-w-none lg:p-0">
+    <div className="store-member-page store-address-form mx-auto flex h-full min-h-0 w-full max-w-3xl flex-col bg-[#f5f3f0] p-4 lg:h-auto lg:max-w-none lg:p-0">
       <div className="mb-6 hidden lg:block"><h1 className="text-3xl font-semibold">{address ? "编辑收货地址" : "添加收货地址"}</h1><p className="mt-2 text-sm text-muted-foreground">请填写准确的联系方式和收货地址</p></div>
       <form action={action} className="flex min-h-0 flex-1 flex-col rounded-2xl bg-white p-5 shadow-[0_8px_28px_rgba(30,24,18,0.06)] lg:p-8">
         <input type="hidden" name="slug" value={slug} />
